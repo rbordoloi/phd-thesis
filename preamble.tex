@@ -1,0 +1,46 @@
+\usepackage{calc}
+
+\newlength{\bibmaxlabelwidth}
+
+\AtDataInput{%
+    \settowidth{\bibmaxlabelwidth}{[\printnames{labelname}, \printfield{labelyear}]}%
+    \ifdimgreater{\bibmaxlabelwidth}{\labelwidth}
+        {\setlength{\labelwidth}{\bibmaxlabelwidth}}
+        {}%
+}
+
+\defbibenvironment{bibliography}
+    {\list
+        {[\printnames{labelname} \printfield{labelyear}]}
+        {\setlength{\leftmargin}{\labelwidth}%
+        \setlength{\labelsep}{\biblabelsep}%
+        \addtolength{\leftmargin}{\labelsep}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}%
+        \renewcommand*{\makelabel}[1]{\hss##1}}
+    {\endlist}
+    {\item}
+
+% Square brackets instead of round brackets
+\renewcommand{\bibopenparen}{\bibopenbracket}
+\renewcommand{\bibcloseparen}{\bibclosebracket}
+% \renewcommand{\nameyeardelim}{\addcomma\addspace}
+
+% Hyperlink covers entire citation, not just the year
+\renewbibmacro*{cite}{%
+    \printtext[bibhyperref]{%
+        \printnames{labelname}%
+        \setunit{\nameyeardelim}%
+        \printfield{labelyear}%
+        \printfield{extrayear}}}
+
+\renewbibmacro*{parencite}{%
+    \printtext[bibhyperref]{%
+        \printnames{labelname}%
+        \setunit{\nameyeardelim}%
+        \printfield{labelyear}%
+        \printfield{extrayear}}}
+
+\renewcommand{\maketitle}{}
+\newcommand{\ttitle}{Handling Missing Data for Downstream Tasks}
+\newcommand{\tauthor}{Rahul Bordoloi}

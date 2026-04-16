@@ -1,0 +1,64 @@
+project:
+  type: book
+
+filters:
+  - acronyms
+
+acronyms:
+  loa_title: ""
+  insert_loa: false
+  keys:
+    - shortname: MUDRA
+      longname: Multivariate Functional Linear Discriminant Analysis
+    - shortname: F3I
+      longname: Fast Iterative Improvement for Imputation
+    - shortname: FUSE
+      longname: Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization
+
+book:
+  title: "Handling Missing Data for Downstream Tasks"
+  author: "Rahul Bordoloi"
+  date: "4/10/2026"
+  chapters:
+    - index.qmd
+    - preface/abstract.qmd
+    - preface/zusammenfassung.qmd
+    - preface/theses.qmd
+    - preface/loa.qmd
+    - main/summary.qmd
+    - main/introduction.qmd
+    - main/background.qmd
+    - main/mudra.qmd
+    - main/f3i.qmd
+    - main/fuse.qmd
+    - main/conclusion.qmd
+    - references.qmd
+  appendices:
+    - appendix/technicalProofs.qmd
+
+bibliography: references.bib
+csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
+
+format:
+  pdf:
+    documentclass: MastersDoctoralThesis
+    classoption: 
+      - openany
+      - 11pt
+      - english
+      - singlespacing
+      - headsepline
+    title-page: false
+    toc: false
+    cite-method: biblatex
+    biblatexoptions:
+      - style=authoryear
+      - backend=biber
+    include-in-header: preamble.tex
+    include-before-body: titlepage.tex
+  html:
+    theme:
+      - cosmo
+      - brand
+
+

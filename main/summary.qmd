@@ -1,0 +1,12 @@
+# Summary and Outline of Thesis {.unnumbered}
+
+## Summary
+
+## Outline
+
+* [Chapter -@sec-intro] introduces missingness in the literature, the different types of missingnes and contexts in which it may arise. It also introduces how different types of missingness might arise in time series data from different sources and contexts. Additionally, it talk about how semi-supervised learning can be viewed as methods for dealing with label missingness in the training data, and thus can be incorporated into the overall missingness framework.
+* [Chapter -@sec-background] introduces the standard models in the literature and the types of missingness that they were developed to address. It makes a distinction between independent imputation, and imputation with a downstream task in mind, and makes an argument for why the latter is more useful in realistic scenarios. It also introduces multi-task learning, and how its methods can be used to desing imputation methods that optimise a downstream task.
+* [Chapter -@sec-mudra] introduces \acr{MUDRA}, a functional data analysis methodology to perform feature extraction when missingness is regular. It introduces how regular missingness might look like in time series data, and how class labels can be used to derive useful features. These features can then be used both for reconstructing the full unobserved trajectories, as well as other downstream tasks like clustering and classification.
+* [Chapter -@sec-f3i] introduces \acr{F3I}, a method to impute missing values when the missingnes is irregular. It also proposes a version of \acr{F3I} that optimises the imputation procedure for downstream tasks.
+* [Chapter -@sec-fuse] introduces the case of semi-supervised learning, which deals with missing labels in the training data, and demonstrates an example on simple graphs. It also introduces a new method to perform semi-supervised learning on graphs using the community structure, called \acr{FUSE}.
+* [Chapter -@sec-conclusion] concludes the thesis and summarises the main contributions. It also proposes future work and directions for handling missingness with the objective to optimise a downstream task.

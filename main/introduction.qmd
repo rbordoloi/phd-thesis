@@ -1,0 +1,11 @@
+# Introduction {#sec-intro}
+
+In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.
+
+In this chapter, we will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. We will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework. Throughout this thesis, we will denote missing values as `NaN`.
+
+## Sources of missingness
+
+## Types of missingness
+
+Classical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data [@typesOfMissingness].
