@@ -27,3 +27,18 @@ url={https://doi.org/10.1007/s10994-025-06741-0}
   year={1976},
   publisher={Oxford University Press}
 }
+@InProceedings{hyperimpute,
+  title = 	 {{H}yper{I}mpute: Generalized Iterative Imputation with Automatic Model Selection},
+  author =       {Jarrett, Daniel and Cebere, Bogdan C and Liu, Tennison and Curth, Alicia and van der Schaar, Mihaela},
+  booktitle = 	 {Proceedings of the 39th International Conference on Machine Learning},
+  pages = 	 {9916--9937},
+  year = 	 {2022},
+  editor = 	 {Chaudhuri, Kamalika and Jegelka, Stefanie and Song, Le and Szepesvari, Csaba and Niu, Gang and Sabato, Sivan},
+  volume = 	 {162},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {17--23 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v162/jarrett22a/jarrett22a.pdf},
+  url = 	 {https://proceedings.mlr.press/v162/jarrett22a.html},
+  abstract = 	 {Consider the problem of imputing missing values in a dataset. One the one hand, conventional approaches using iterative imputation benefit from the simplicity and customizability of learning conditional distributions directly, but suffer from the practical requirement for appropriate model specification of each and every variable. On the other hand, recent methods using deep generative modeling benefit from the capacity and efficiency of learning with neural network function approximators, but are often difficult to optimize and rely on stronger data assumptions. In this work, we study an approach that marries the advantages of both: We propose *HyperImpute*, a generalized iterative imputation framework for adaptively and automatically configuring column-wise models and their hyperparameters. Practically, we provide a concrete implementation with out-of-the-box learners, optimizers, simulators, and extensible interfaces. Empirically, we investigate this framework via comprehensive experiments and sensitivities on a variety of public datasets, and demonstrate its ability to generate accurate imputations relative to a strong suite of benchmarks. Contrary to recent work, we believe our findings constitute a strong defense of the iterative imputation paradigm.}
+}

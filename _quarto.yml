@@ -14,6 +14,14 @@ acronyms:
       longname: Fast Iterative Improvement for Imputation
     - shortname: FUSE
       longname: Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization
+    - shortname: MCAR
+      longname: Missing Completely at Random
+    - shortname: MAR
+      longname: Missing At Random
+    - shortname: MNAR
+      longname: Missing Not at Random
+    - shortname: kNN
+      longname: K-Nearest Neighbours
 
 book:
   title: "Handling Missing Data for Downstream Tasks"
@@ -28,8 +36,8 @@ book:
     - main/summary.qmd
     - main/introduction.qmd
     - main/background.qmd
+    - main/kNNTheory.qmd
     - main/mudra.qmd
-    - main/f3i.qmd
     - main/fuse.qmd
     - main/conclusion.qmd
     - references.qmd
@@ -60,5 +68,4 @@ format:
     theme:
       - cosmo
       - brand
-
-
+  docx: default
