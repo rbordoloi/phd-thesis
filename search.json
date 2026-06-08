@@ -1,0 +1,133 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Handling Missing Data for Downstream Tasks",
+    "section": "",
+    "text": "Acknowledgements\nThese are the acknowledgements.",
+    "crumbs": [
+      "Acknowledgements"
+    ]
+  },
+  {
+    "objectID": "preface/abstract.html",
+    "href": "preface/abstract.html",
+    "title": "Abstract",
+    "section": "",
+    "text": "This the abstract in English.",
+    "crumbs": [
+      "Abstract"
+    ]
+  },
+  {
+    "objectID": "preface/zusammenfassung.html",
+    "href": "preface/zusammenfassung.html",
+    "title": "Zusammenfassung",
+    "section": "",
+    "text": "Diese ist die Zusammenfassung auf Deutsch.",
+    "crumbs": [
+      "Zusammenfassung"
+    ]
+  },
+  {
+    "objectID": "preface/theses.html",
+    "href": "preface/theses.html",
+    "title": "Theses",
+    "section": "",
+    "text": "These are the theses.",
+    "crumbs": [
+      "Theses"
+    ]
+  },
+  {
+    "objectID": "preface/loa.html",
+    "href": "preface/loa.html",
+    "title": "List of Acronyms",
+    "section": "",
+    "text": "F3I\n\nFast Iterative Improvement for Imputation\n\nFUSE\n\nFast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization\n\nMAR\n\nMissing At Random\n\nMCAR\n\nMissing Completely at Random\n\nMNAR\n\nMissing Not at Random\n\nMUDRA\n\nMultivariate Functional Linear Discriminant Analysis\n\nkNN\n\nK-Nearest Neighbours",
+    "crumbs": [
+      "List of Acronyms"
+    ]
+  },
+  {
+    "objectID": "main/summary.html",
+    "href": "main/summary.html",
+    "title": "Summary and Outline of Thesis",
+    "section": "",
+    "text": "Summary",
+    "crumbs": [
+      "Summary and Outline of Thesis"
+    ]
+  },
+  {
+    "objectID": "main/summary.html#outline",
+    "href": "main/summary.html#outline",
+    "title": "Summary and Outline of Thesis",
+    "section": "Outline",
+    "text": "Outline\n\nChapter 1  Challenges with Missing Data\n\nNotation used\nSources of missingness: improper data collection, malfunctioning equipment, privacy issues\nTypes of missingness: Missing Completely at Random (MCAR), Missing At Random (MAR), Missing Not at Random (MNAR)\n\nModels of these missigness mechanisms: Bernoulli, logistic, Gaussian self-masking, logistic self-masking\n\nImputation: advantages & disadvantages\n\nChapter 2  State-of-the Art in Imputation\n\nConstant imputation: constant value, measures of central tendency\nMultivariate Imputation: Amelia, mi, MICE, missForest\nGenerative methods: GAN-based models, diffusion-based models, transformer-based models\nBayesian methods: MIWAE, not-MIWAE.\n\nDesigned to optimize for downstream tasks\nAligns poorly with noisy ground truth missing values\n[1] shows that higher quality imputation does not necessarily improve downstream task performance\n\nNearest neighbour imputation: looking at closer observed values gives a better idea of the missing value\nEnsemble methods: HyperImpute\nCan nearest neighbour imputation be modified to optimize for downstream tasks like MIWAE, while maintaining alignment with the data?\n\nChapter 3  Error Guarantees for Nearest-Neighbor Imputation\n\nReintroduce nearest neighbour imputation, and state objective to modify it for downstream task\nArgue why it is better than Bayesian methods in maintaing alignment with data, show high probability concentration bounds for imputed values.\nIntroduce Fast Iterative Improvement for Imputation (F3I) and the novel objective function. Argue why a differentiable function makes it easier to modify and optimise for downstream task.\nPresent PCGradF3I.\nConclusion: reiterate that better imputation does not necessarily mean better downstream task performance. Argue for the need of methods to perform downstream tasks without imputation.\n\nChapter 4  Multivariate Functional Linear Discriminant Analysis for Partially-Observed Time Series\n\nRestate problem with imputation according to [1]\nIntroduce the multivariate time-series classification problem.\nPresent Multivariate Functional Linear Discriminant Analysis (MUDRA) [2] to perform dimension reduction and classification without imputation.\nShow how classification performance is improved over LOCF imputation\nShow how imputed values closely align with ground truth\nConclusion: We talked about missing values on tables, and missing values on multivariate time series. Now we introduce missing values on graph clustering, a more complicated data structure.\n\nChapter 5  Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization\n\nState the semi-supervised learning problem on graphclustering: learning when labels are missing, which means modularity cannot be directly calculated\nShow how to use the graph structure to generate representations even with missing modularity, by imputing labels so as to increase the modularity of the remaing graph\nShow how the labels can then be reconstructed time-efficiently.\n\nChapter 6  Conclusion\n\nConclude that missing values are best dealt with without imputation\nThe more complicated the underlying data structure, the more information to be gleaned to bypass imputation.\nMArginal gains in imputation are not worth it, instead imputation should be moderated by downstream task performance in order to get the best results.\n\n\n\n\n\n\n\n[1] M. L. Morvan and G. Varoquaux, “Imputation for prediction: Beware of diminishing returns.” in The thirteenth international conference on learning representations, 2025. Available: https://openreview.net/forum?id=D1Y2XFgsPI\n\n\n[2] R. Bordoloi, C. Réda, O. Trautmann, S. Bej, and O. Wolkenhauer, “Multivariate functional linear discriminant analysis for partially-observed time series,” Machine Learning, vol. 114, no. 3, p. 80, Feb. 2025, doi: 10.1007/s10994-025-06741-0.",
+    "crumbs": [
+      "Summary and Outline of Thesis"
+    ]
+  },
+  {
+    "objectID": "main/introduction.html",
+    "href": "main/introduction.html",
+    "title": "1  Challenges with Missing Data",
+    "section": "",
+    "text": "1.1 Notation\nIn most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.\nIn this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.\nThroughout this thesis, I will use the standardised notation encouraged by most machine learning conference. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers (\\(x,y,t\\)), bold small letters indicate vectors (\\(\\vx,\\vy,\\vt\\)), bold capital letters indicate matrices (\\(\\mX,\\mY,\\mT\\)), capital letters in sans-serif fonts indicate tensors \\((\\tX,\\tY,\\tT)\\) and blackboard bold capital letters indicate sets (\\(\\sX,\\sY,\\sT\\)). The non-italicized versions of these indicate random quatities; random variables are \\(\\rx,\\ry,\\rt\\), random vectors are \\(\\rvx,\\rvy,\\rvt\\) and random matrices are \\(\\rmX,\\rmY,\\rmT\\). Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: \\(\\evx_1,\\emX_{11},\\etX_{111},\\ervx_1,\\ermX_{11}\\), etc. For a matrix \\(\\mX\\), \\(\\mX_{i,:}\\) and \\(\\mX_{:,i}\\) will denote the \\(i^{th}\\) row and column respectively.\nI will denote the vectorization of a matrix \\(\\mX\\), which means stacking the columns of the matrix sequentially, as \\[\\vec(\\mX)=[\\mX_{:,1}^\\trans\\quad\\mX_{:,2}^\\trans\\quad\\cdots\\quad\\mX_{:,n}^\\trans]^\\trans\\] The determinant of a matrix \\(\\mA\\) will be denoted by \\(|\\mA|\\), and Kronecker product of two matrices \\(\\mA_{m\\times n}\\) and \\(\\mB_{p\\times q}\\) is an \\(mp\\times nq\\) matrix defined as \\[\n\\mA\\kron\\mB\\deff\\begin{bmatrix}\n\\emA_{11}\\mB &\\emA_{12}\\mB&\\cdots\\emA_{1n}\\mB\\\\\n\\emA_{21}\\mB &\\emA_{22}\\mB&\\cdots\\emA_{2n}\\mB\\\\\n\\vdots&\\vdots&\\ddots&\\vdots\\\\\n\\emA_{m1}\\mB &\\emA_{m2}\\mB&\\cdots\\emA_{mn}\\mB\\\\\n\\end{bmatrix}\n\\] The generalized psedo-inverse [1, p. 20] of a matrix \\(\\mA\\) will be denoted by \\(\\mA^-\\), which simply indicates that \\(\\mA\\mA^-\\mA=\\mA\\). It should be clear that the choice of \\(\\mA^-\\) is not unique for a singular matrix \\(\\mA\\), i.e. if \\(|\\mA|=0\\). In cases where a unique choice is necessary, I will use the Moore-Penrose pseudo-inverse [2] \\(\\mA^+\\), which is defined by the following properties: \\[\\mA\\mA^+\\mA=\\mA\\qquad\\mA^+\\mA\\mA^+=\\mA^+\\qquad(\\mA\\mA^+)^*=\\mA\\mA^+\\qquad(\\mA^+\\mA)^*=\\mA^+\\mA\\]\nI will denote the probability of an event \\(E\\) as \\(\\P(E)\\), expectation of a random variable \\(\\rx\\) as \\(\\E[\\rx]\\), its variance as \\(\\Var(\\rx)\\), and its covariance with another random variable \\(\\ry\\) as \\(\\Cov(\\rx,\\ry)\\). I will denote the variance-covariance matrix of a random vector \\(\\rvx\\) as \\(\\Var(\\rvx)\\). For a matrix \\(\\mSigma\\), \\(\\norm{\\rvx}_\\mSigma\\) will denote the Mahalanobis norm [3] of \\(\\rvx\\) with covariance \\(\\mSigma\\), defined as \\(\\norm{\\rvx}_\\mSigma\\deff\\rvx^\\trans\\mSigma^-\\rvx\\).\nI will also denote the KL divergence of 2 distributions \\(P\\) and \\(Q\\) over the support \\(\\sX\\) as \\[\\KL(P||Q)\\deff\\int_{x\\in\\sX}P(x)\\log\\frac{P(x)}{Q(x)}dx\\] The Cartesian product of two sets \\(\\sA\\) and \\(\\sB\\) will be denoted by \\(\\sA\\times\\sB\\).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Challenges with Missing Data</span>"
+    ]
+  },
+  {
+    "objectID": "main/introduction.html#problem-formulation",
+    "href": "main/introduction.html#problem-formulation",
+    "title": "1  Challenges with Missing Data",
+    "section": "1.2 Problem Formulation",
+    "text": "1.2 Problem Formulation\nI will adopt notation similar to [4] for the problem formulation and denote missing values as NaN. Let \\(\\rvx\\in \\sX=(\\sX_1\\times\\ldots\\sX_D)\\) be a D-dimensional random vector. The entries of this random vector can be continuous (\\(\\sX_d=\\R\\)) or categorical (\\(\\sX_d=\\{1,\\ldots,K_d\\}\\)) random variables, for \\(d\\in\\{1,\\ldots,D\\}\\). We do not have complete observational access to \\(\\rvx\\); instead our observation is mediated by a random masking vector \\(\\rvm\\in\\{0,1\\}^D\\). If \\(\\ervm_d=1\\), then \\(\\ervx_d\\) is observed. Assume that \\(\\rvm\\) follows a distribution \\(\\pmask\\), and the data \\(\\rvx\\) follows a distribution \\(\\pdata\\).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Challenges with Missing Data</span>"
+    ]
+  },
+  {
+    "objectID": "main/introduction.html#types-of-missingness",
+    "href": "main/introduction.html#types-of-missingness",
+    "title": "1  Challenges with Missing Data",
+    "section": "1.3 Types of missingness",
+    "text": "1.3 Types of missingness\nClassical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data [5]. These can be distinguished based on the form and properties of \\(\\pmask\\).\n\n1.3.1 Missing Completely at Random (MCAR)\nMCAR is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data. This is equivalent to the statement that \\(\\rvx\\independent\\rvm\\). This also indicates that each component of \\(\\vm, m_i\\), is an independent Bernoulli random variable with probability \\(p_i\\) independent of \\(\\vx\\).\n\n\n1.3.2 Missing At Random (MAR)\nThe missigness mechanism MAR indicates that the probability of missingness depends only on the observed values. In more techinicality, let \\(\\rvx\\) and \\(\\rvm\\) be partitoned as \\(\\{\\rvx_1,\\rvx_2\\}\\) and \\(\\{\\rvm_1,\\rvm_2\\}\\) respectively, such that \\(\\rvx_1\\) is always observed, that is, \\(\\rvm_1=\\mathbf{1}\\). Then, \\(\\rvx\\) is said to be MAR if \\(\\pmask\\) depends only on \\(\\rvx_1\\).\n\n\n1.3.3 Missing Not at Random (MNAR)\nIf data is missing by the MNAR mechanism\n\n\n\n\n[1] C. R. Rao and S. K. Mitra, Generalized inverse of matrices and its applications. in Wiley series in probability and mathematical statistics. New York: Wiley, 1971.\n\n\n[2] R. Penrose, “A generalized inverse for matrices,” Mathematical Proceedings of the Cambridge Philosophical Society, vol. 51, no. 3, pp. 406–413, 1955, doi: 10.1017/S0305004100030401.\n\n\n[3] P. C. Mahalanobis, “Reprint of: Mahalanobis, p.c. (1936) \"on the generalised distance in statistics.\",” Sankhya A, vol. 80, no. 1, pp. 1–7, Dec. 2018, doi: 10.1007/s13171-019-00164-5.\n\n\n[4] D. Jarrett, B. C. Cebere, T. Liu, A. Curth, and M. van der Schaar, “HyperImpute: Generalized iterative imputation with automatic model selection,” in Proceedings of the 39th international conference on machine learning, K. Chaudhuri, S. Jegelka, L. Song, C. Szepesvari, G. Niu, and S. Sabato, Eds., in Proceedings of machine learning research, vol. 162. PMLR, Jun. 2022, pp. 9916–9937. Available: https://proceedings.mlr.press/v162/jarrett22a.html\n\n\n[5] D. B. Rubin, “Inference and missing data,” Biometrika, vol. 63, no. 3, pp. 581–592, 1976.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Challenges with Missing Data</span>"
+    ]
+  },
+  {
+    "objectID": "main/conclusion.html",
+    "href": "main/conclusion.html",
+    "title": "6  Conclusion",
+    "section": "",
+    "text": "This is the conclusion of the thesis.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "[1] R.\nBordoloi, C. Réda, O. Trautmann, S. Bej, and O. Wolkenhauer,\n“Multivariate functional linear discriminant analysis for\npartially-observed time series,” Machine Learning, vol.\n114, no. 3, p. 80, Feb. 2025, doi: 10.1007/s10994-025-06741-0.\n\n\n[2] D.\nB. Rubin, “Inference and missing data,”\nBiometrika, vol. 63, no. 3, pp. 581–592, 1976.\n\n\n[3] D.\nJarrett, B. C. Cebere, T. Liu, A. Curth, and M. van der Schaar,\n“HyperImpute: Generalized iterative\nimputation with automatic model selection,” in Proceedings of\nthe 39th international conference on machine learning, K.\nChaudhuri, S. Jegelka, L. Song, C. Szepesvari, G. Niu, and S. Sabato,\nEds., in Proceedings of machine learning research, vol. 162. PMLR, Jun.\n2022, pp. 9916–9937. Available: https://proceedings.mlr.press/v162/jarrett22a.html\n\n\n[4] P.\nC. Mahalanobis, “Reprint of: Mahalanobis, p.c. (1936) \"on the\ngeneralised distance in statistics.\",” Sankhya A, vol.\n80, no. 1, pp. 1–7, Dec. 2018, doi: 10.1007/s13171-019-00164-5.\n\n\n[5] C.\nR. Rao and S. K. Mitra, Generalized inverse of matrices and its\napplications. in Wiley series in probability and mathematical\nstatistics. New York: Wiley, 1971.\n\n\n[6] R.\nPenrose, “A generalized inverse for matrices,”\nMathematical Proceedings of the Cambridge Philosophical\nSociety, vol. 51, no. 3, pp. 406–413, 1955, doi: 10.1017/S0305004100030401.\n\n\n[7] M.\nL. Morvan and G. Varoquaux, “Imputation for prediction: Beware of\ndiminishing returns.” in The thirteenth international\nconference on learning representations, 2025. Available: https://openreview.net/forum?id=D1Y2XFgsPI",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "appendix/technicalProofs.html",
+    "href": "appendix/technicalProofs.html",
+    "title": "Appendix A — Technical Proofs",
+    "section": "",
+    "text": "This is the appendix of the thesis.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Technical Proofs</span>"
+    ]
+  }
+]
