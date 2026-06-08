@@ -1,19 +1,49 @@
-# Introduction {#sec-intro}
+# Challenges with Missing Data {#sec-intro}
 
 In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.
 
-In this chapter, we will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. We will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.
+In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.
+
+## Notation
+
+Throughout this thesis, I will use the standardised notation encouraged by most machine learning conference. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
+
+I will denote the vectorization of a matrix $\mX$, which means stacking the columns of the matrix sequentially, as
+$$\vec(\mX)=[\mX_{:,1}^\trans\quad\mX_{:,2}^\trans\quad\cdots\quad\mX_{:,n}^\trans]^\trans$$
+The determinant of a matrix $\mA$ will be denoted by $|\mA|$, and Kronecker product of two matrices $\mA_{m\times n}$ and $\mB_{p\times q}$ is an $mp\times nq$ matrix defined as
+$$
+\mA\kron\mB\deff\begin{bmatrix}
+\emA_{11}\mB &\emA_{12}\mB&\cdots\emA_{1n}\mB\\
+\emA_{21}\mB &\emA_{22}\mB&\cdots\emA_{2n}\mB\\
+\vdots&\vdots&\ddots&\vdots\\
+\emA_{m1}\mB &\emA_{m2}\mB&\cdots\emA_{mn}\mB\\
+\end{bmatrix}
+$$
+The generalized psedo-inverse [@pseudoinverse, pp. 20] of a matrix $\mA$ will be denoted by $\mA^-$, which simply indicates that $\mA\mA^-\mA=\mA$. It should be clear that the choice of $\mA^-$ is not unique for a singular matrix $\mA$, *i.e.* if $|\mA|=0$. In cases where a unique choice is necessary, I will use the Moore-Penrose pseudo-inverse [@penrosePseudoinverse] $\mA^+$, which is defined by the following properties:
+$$\mA\mA^+\mA=\mA\qquad\mA^+\mA\mA^+=\mA^+\qquad(\mA\mA^+)^*=\mA\mA^+\qquad(\mA^+\mA)^*=\mA^+\mA$$
+
+I will denote the probability of an event $E$ as $\P(E)$, expectation of a random variable $\rx$ as $\E[\rx]$, its variance as $\Var(\rx)$, and its covariance with another random variable $\ry$ as $\Cov(\rx,\ry)$. I will denote the variance-covariance matrix of a random vector $\rvx$ as $\Var(\rvx)$. For a matrix $\mSigma$, $\norm{\rvx}_\mSigma$ will denote the Mahalanobis norm [@mahalanobisDistance] of $\rvx$ with covariance $\mSigma$, defined as $\norm{\rvx}_\mSigma\deff\rvx^\trans\mSigma^-\rvx$.
+
+I will also denote the KL divergence of 2 distributions $P$ and $Q$ over the support $\sX$ as
+$$\KL(P||Q)\deff\int_{x\in\sX}P(x)\log\frac{P(x)}{Q(x)}dx$$
+The Cartesian product of two sets $\sA$ and $\sB$ will be denoted by $\sA\times\sB$.
 
 ## Problem Formulation
 
-Throughout this thesis I will adopt notation similar to @hyperimpute for the problem formulation and denote missing values as `NaN`. Let $\bm{X}\in\mathbb{R}^D$ be a D-dimensional random vector.
-
-## Sources of missingness
+I will adopt notation similar to @hyperimpute for the problem formulation and denote missing values as `NaN`. Let $\rvx\in \sX=(\sX_1\times\ldots\sX_D)$ be a D-dimensional random vector. The entries of this random vector can be continuous ($\sX_d=\R$) or categorical ($\sX_d=\{1,\ldots,K_d\}$) random variables, for $d\in\{1,\ldots,D\}$. We do not have complete observational access to $\rvx$; instead our observation is mediated by a random masking vector $\rvm\in\{0,1\}^D$. If $\ervm_d=1$, then $\ervx_d$ is observed. Assume that $\rvm$ follows a distribution $\pmask$, and the data $\rvx$ follows a distribution $\pdata$.
 
 ## Types of missingness
 
-Classical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data [@typesOfMissingness]. 
+Classical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data [@typesOfMissingness]. These can be distinguished based on the form and properties of $\pmask$.
 
 ### \acr{MCAR}
 
-\acr{MCAR} is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data.
+\acr{MCAR} is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data. This is equivalent to the statement that $\rvx\independent\rvm$. This also indicates that each component of $\vm, m_i$, is an independent Bernoulli random variable with probability $p_i$ independent of $\vx$.
+
+### \acr{MAR}
+
+The missigness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more techinicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$.
+
+### \acr{MNAR}
+
+If data is missing by the \acr{MNAR} mechanism 

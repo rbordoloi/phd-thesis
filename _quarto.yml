@@ -29,6 +29,7 @@ book:
   date: "4/10/2026"
   chapters:
     - index.qmd
+    # - mathCommands.qmd
     - preface/abstract.qmd
     - preface/zusammenfassung.qmd
     - preface/theses.qmd
@@ -62,9 +63,14 @@ format:
     biblatexoptions:
       - style=authoryear
       - backend=biber
-    include-in-header: preamble.tex
+    include-in-header: 
+      - preamble.tex
+      # - mathCommands.tex
     include-before-body: titlepage.tex
   html:
+    include-in-header:
+      - text: "<script>window.MathJax = {tex: {macros: {symbf: ['\\\\boldsymbol{#1}', 1]}}}</script>"
+      - mathCommands.html
     theme:
       - cosmo
       - brand

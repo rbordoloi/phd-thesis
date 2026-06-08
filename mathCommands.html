@@ -1,52 +1,5 @@
-\usepackage{calc}
-\usepackage{unicode-math}
-\usepackage{amsmath,amssymb,amsfonts}
-
-\newlength{\bibmaxlabelwidth}
-
-\AtDataInput{%
-    \settowidth{\bibmaxlabelwidth}{[\printnames{labelname}, \printfield{labelyear}]}%
-    \ifdimgreater{\bibmaxlabelwidth}{\labelwidth}
-        {\setlength{\labelwidth}{\bibmaxlabelwidth}}
-        {}%
-}
-
-\defbibenvironment{bibliography}
-    {\list
-        {[\printnames{labelname} \printfield{labelyear}]}
-        {\setlength{\leftmargin}{\labelwidth}%
-        \setlength{\labelsep}{\biblabelsep}%
-        \addtolength{\leftmargin}{\labelsep}%
-        \setlength{\itemsep}{\bibitemsep}%
-        \setlength{\parsep}{\bibparsep}}%
-        \renewcommand*{\makelabel}[1]{\hss##1}}
-    {\endlist}
-    {\item}
-
-% Square brackets instead of round brackets
-\renewcommand{\bibopenparen}{\bibopenbracket}
-\renewcommand{\bibcloseparen}{\bibclosebracket}
-% \renewcommand{\nameyeardelim}{\addcomma\addspace}
-
-% Hyperlink covers entire citation, not just the year
-\renewbibmacro*{cite}{%
-    \printtext[bibhyperref]{%
-        \printnames{labelname}%
-        \setunit{\nameyeardelim}%
-        \printfield{labelyear}%
-        \printfield{extrayear}}}
-
-\renewbibmacro*{parencite}{%
-    \printtext[bibhyperref]{%
-        \printnames{labelname}%
-        \setunit{\nameyeardelim}%
-        \printfield{labelyear}%
-        \printfield{extrayear}}}
-
-\renewcommand{\maketitle}{}
-\newcommand{\ttitle}{Handling Missing Data for Downstream Tasks}
-\newcommand{\tauthor}{Rahul Bordoloi}
-
+<div style="display: none">
+    $$
 \def\ceil#1{\lceil #1 \rceil}
 \def\floor#1{\lfloor #1 \rfloor}
 \def\1{\symbf{1}}
@@ -303,8 +256,8 @@
 \def\mPsi{{\symbf{\Psi}}}
 
 % Tensor
-% \DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
-% \SetMathAlphabet{\mathsfit}{bold}{\encodingdefault}{\sfdefault}{bx}{n}
+%\DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
+%\SetMathAlphabet{\mathsfit}{bold}{\encodingdefault}{\sfdefault}{bx}{n}
 \newcommand{\tens}[1]{\symbf{\mathsfit{#1}}}
 \def\tA{{\tens{A}}}
 \def\tB{{\tens{B}}}
@@ -449,7 +402,8 @@
 \def\etW{{\etens{W}}}
 \def\etX{{\etens{X}}}
 \def\etY{{\etens{Y}}}
-\def\etZ{{\etens{Z}}}
+\def\etZ{{\eteI want more money—much more money. My goal is to earn at least €200,000 per year, not just as a distant dream but as a realistic financial target that I can work toward over time. I want the level of income that provides genuine financial security, greater freedom of choice, the ability to invest and build wealth, and access to opportunities that are difficult to reach with an average salary.
+    ns{Z}}}
 
 % The true underlying data generating distribution
 \newcommand{\pdata}{p_{\rm{data}}}
@@ -469,7 +423,7 @@
 \newcommand{\laplace}{\mathrm{Laplace}} % Laplace distribution
 
 \newcommand{\E}{\mathbb{E}}
-\renewcommand{\P}{\mathbb{P}}
+\newcommand{\P}{\mathbb{P}}
 \newcommand{\Ls}{\mathcal{L}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\emp}{\tilde{p}}
@@ -506,3 +460,5 @@
 
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\Tr}{Tr}
+$$
+</div>
