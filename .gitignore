@@ -1,5 +1,5 @@
 _book/
-_extensions/
+# _extensions/
 .quarto/
 /.quarto/
 **/*.quarto_ipynb
