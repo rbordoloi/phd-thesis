@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Summary and Outline of Thesis – Handling Missing Data for Downstream Tasks</title>
+<title>Summary and Outline of Thesis – Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -585,7 +585,7 @@ $$
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Handling Missing Data for Downstream Tasks</a> 
+      <a href="../">Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -745,8 +745,9 @@ $$
 </ul></li>
 <li><a href="background.html" class="quarto-xref">Chapter&nbsp;<span>2&nbsp; State-of-the Art in Imputation</span></a>
 <ul>
-<li>Constant imputation: constant value, measures of central tendency</li>
+<li>Constant imputation: constant value, measures of central tendency, LOCF for time-series</li>
 <li>Multivariate Imputation: Amelia, mi, MICE, missForest</li>
+<li>Nearest neighbour imputation: looking only at closer observed values gives a better idea of the missing value</li>
 <li>Generative methods: GAN-based models, diffusion-based models, transformer-based models</li>
 <li>Bayesian methods: MIWAE, not-MIWAE.
 <ul>
@@ -754,8 +755,8 @@ $$
 <li>Aligns poorly with noisy ground truth missing values</li>
 <li><span class="citation" data-cites="imputationDimRet"><a href="../references.html#ref-imputationDimRet" role="doc-biblioref">[1]</a></span> shows that higher quality imputation does not necessarily improve downstream task performance</li>
 </ul></li>
-<li>Nearest neighbour imputation: looking at closer observed values gives a better idea of the missing value</li>
 <li>Ensemble methods: HyperImpute</li>
+<li>How and why nearest neighbour imputation still outperforms most non-ensemble methods.</li>
 <li>Can nearest neighbour imputation be modified to optimize for downstream tasks like MIWAE, while maintaining alignment with the data?</li>
 </ul></li>
 <li><a href="kNNTheory.html" class="quarto-xref">Chapter&nbsp;<span>3&nbsp; Error Guarantees for Nearest-Neighbor Imputation</span></a>
