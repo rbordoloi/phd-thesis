@@ -13,15 +13,16 @@
         * Models of these missigness mechanisms: Bernoulli, logistic, Gaussian self-masking, logistic self-masking
     * Imputation: advantages & disadvantages
 * [Chapter -@sec-background]
-    * Constant imputation: constant value, measures of central tendency
+    * Constant imputation: constant value, measures of central tendency, LOCF for time-series
     * Multivariate Imputation: Amelia, mi, MICE, missForest
+    * Nearest neighbour imputation: looking only at closer observed values gives a better idea of the missing value
     * Generative methods: GAN-based models, diffusion-based models, transformer-based models
     * Bayesian methods: MIWAE, not-MIWAE.
         * Designed to optimize for downstream tasks
         * Aligns poorly with noisy ground truth missing values
         * @imputationDimRet shows that higher quality imputation does not necessarily improve downstream task performance
-    * Nearest neighbour imputation: looking at closer observed values gives a better idea of the missing value
     * Ensemble methods: HyperImpute
+    * How and why nearest neighbour imputation still outperforms most non-ensemble methods.
     * Can nearest neighbour imputation be modified to optimize for downstream tasks like MIWAE, while maintaining alignment with the data?
 * [Chapter -@sec-knnTheory]
     * Reintroduce nearest neighbour imputation, and state objective to modify it for downstream task

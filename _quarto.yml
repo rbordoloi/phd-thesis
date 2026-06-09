@@ -24,7 +24,7 @@ acronyms:
       longname: K-Nearest Neighbours
 
 book:
-  title: "Handling Missing Data for Downstream Tasks"
+  title: "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks"
   author: "Rahul Bordoloi"
   date: "4/10/2026"
   chapters:
