@@ -42,8 +42,24 @@ Classical literature mainly distinguishes three main missingness mechanisms depe
 
 ### \acr{MAR}
 
-The missigness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more techinicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$.
+The missigness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more techinicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$. A simple model of this, and one I will use to demonstrate and evaluate imputation methods on the \acr{MAR} scenario, is
+$$
+\pmask(\rvm_2\mid\rvx_1)=\frac{1}{1+\exp(-\rmW\rvx_1)},
+$${#eq-MAR}
+where $\rmW$ is a random matrix.
+
 
 ### \acr{MNAR}
 
-If data is missing by the \acr{MNAR} mechanism 
+If data is missing by the \acr{MNAR} mechanism, the probability of missingness depends both on the observed and the unobserved data. Mathematically, $\pmask$ depends on all elements of $\rvx$. A model similar to @eq-MAR can be developed for this scenario, but a much simpler model that still allows us to evaluate methods and derive theoretical guarantees is Gaussian self-masking
+$$
+\pmask(\ervm_i\mid\ervx_i) = K_i\exp(-\frac{(\ervx_i-\tilde{\mu}_i)^2}{2\tilde{\sigma}_i^2})
+$$
+where $\tilde{\mu}_i$ and $\tilde{\sigma}_i^2$ are the mean and variance of the observed values of the $i^\text{th}$ components of $\rvx$, and $0<K_i\leq 1$ is a scaling factor.
+
+::: {#rem-gaussianSelfMasking}
+## Gaussian Self-Masking
+This model encodes dependence only on the (possibly) missing value. However, since dependence on the available values can be modeled using @eq-MAR, this is considered sufficient to evaluate models for the \acr{MNAR} scenario.
+:::
+
+## Semi-Supervised Learning as a Missing Value Problem

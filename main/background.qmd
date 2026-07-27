@@ -1,1 +1,11 @@
 # State-of-the Art in Imputation {#sec-background}
+
+* History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.
+* Multivariate Imputation by Chained Equations and its variants
+* Ensemble methods - HyperImpute, RF-GAP
+* Modern deep learning-based / generative supervised imputation methods - GAIN, MIRACLE, ReMasker, etc.
+* Imputation in time-series: LOCF, CSDI, DISK, etc.
+* kNN imputation: History and controversies (IQ and the Wealth of Nations, 2005)
+* (Morvan and Varoquaux, 2025) - why better imputation doesn't necessarily imply better downstream task performance.
+* Models for joint imputation-downstream task: NeuMiss, GRAPE, etc. (Relate to [Chapter -@sec-knnTheory])
+* Models that perform downstream tasks without imputation - FLDA (Relate to [Chapter -@sec-mudra])
