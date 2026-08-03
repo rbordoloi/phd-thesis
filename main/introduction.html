@@ -732,15 +732,28 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#notation" id="toc-notation" class="nav-link active" data-scroll-target="#notation"><span class="header-section-number">1.1</span> Notation</a></li>
-  <li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation"><span class="header-section-number">1.2</span> Problem Formulation</a></li>
-  <li><a href="#types-of-missingness" id="toc-types-of-missingness" class="nav-link" data-scroll-target="#types-of-missingness"><span class="header-section-number">1.3</span> Types of missingness</a>
+  <li><a href="#motivation-for-dealing-with-missingness" id="toc-motivation-for-dealing-with-missingness" class="nav-link active" data-scroll-target="#motivation-for-dealing-with-missingness"><span class="header-section-number">1.1</span> Motivation for dealing with missingness</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.3.1</span> Missing Completely at Random (MCAR)</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">1.3.2</span> Missing At Random (MAR)</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">1.3.3</span> Missing Not at Random (MNAR)</a></li>
+  <li><a href="#missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" id="toc-missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" class="nav-link" data-scroll-target="#missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes, privacy issues</a></li>
+  <li><a href="#history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." id="toc-history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." class="nav-link" data-scroll-target="#history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc."><span class="header-section-number">1.1.2</span> History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.</a></li>
+  <li><a href="#imputation-controversies-iq-and-the-wealth-of-nations-2005" id="toc-imputation-controversies-iq-and-the-wealth-of-nations-2005" class="nav-link" data-scroll-target="#imputation-controversies-iq-and-the-wealth-of-nations-2005"><span class="header-section-number">1.1.3</span> Imputation controversies (IQ and the Wealth of Nations, 2005)</a></li>
+  <li><a href="#longitudinal-data-and-missing-data" id="toc-longitudinal-data-and-missing-data" class="nav-link" data-scroll-target="#longitudinal-data-and-missing-data"><span class="header-section-number">1.1.4</span> Longitudinal data and missing data</a></li>
+  <li><a href="#focus-on-small-high-dimensional-datasets-heterogenous-sampling" id="toc-focus-on-small-high-dimensional-datasets-heterogenous-sampling" class="nav-link" data-scroll-target="#focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling</a></li>
   </ul></li>
-  <li><a href="#semi-supervised-learning-as-a-missing-value-problem" id="toc-semi-supervised-learning-as-a-missing-value-problem" class="nav-link" data-scroll-target="#semi-supervised-learning-as-a-missing-value-problem"><span class="header-section-number">1.4</span> Semi-Supervised Learning as a Missing Value Problem</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="header-section-number">1.2</span> Notation</a>
+  <ul class="collapse">
+  <li><a href="#terminology---augmentation-generative-ai-missing-value-imputation-etc." id="toc-terminology---augmentation-generative-ai-missing-value-imputation-etc." class="nav-link" data-scroll-target="#terminology---augmentation-generative-ai-missing-value-imputation-etc."><span class="header-section-number">1.2.1</span> Terminology - Augmentation, Generative AI, Missing value imputation, etc.</a></li>
+  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link" data-scroll-target="#mathematical-formulation"><span class="header-section-number">1.2.2</span> Mathematical formulation</a></li>
+  </ul></li>
+  <li><a href="#problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts" id="toc-problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts" class="nav-link" data-scroll-target="#problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts"><span class="header-section-number">1.3</span> Problem Formulation (Add more discussion about the definitions, to motivate to non-experts)</a></li>
+  <li><a href="#types-of-missingness" id="toc-types-of-missingness" class="nav-link" data-scroll-target="#types-of-missingness"><span class="header-section-number">1.4</span> Types of missingness</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.4.1</span> Missing Completely at Random (MCAR)</a></li>
+  </ul></li>
+  <li><a href="#missing-completely-at-random" id="toc-missing-completely-at-random" class="nav-link" data-scroll-target="#missing-completely-at-random"><span class="header-section-number">1.5</span> Missing Completely at Random</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">1.5.1</span> Missing At Random (MAR)</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">1.5.2</span> Missing Not at Random (MNAR)</a></li>
+  <li><a href="#semi-supervised-learning-as-a-missing-value-problem" id="toc-semi-supervised-learning-as-a-missing-value-problem" class="nav-link" data-scroll-target="#semi-supervised-learning-as-a-missing-value-problem"><span class="header-section-number">1.6</span> Semi-Supervised Learning as a Missing Value Problem</a></li>
   </ul>
 </nav>
     </div>
@@ -768,9 +781,33 @@ window.Quarto = {
 
 <p>In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.</p>
 <p>In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.</p>
-<section id="notation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="notation"><span class="header-section-number">1.1</span> Notation</h2>
+<section id="motivation-for-dealing-with-missingness" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="motivation-for-dealing-with-missingness"><span class="header-section-number">1.1</span> Motivation for dealing with missingness</h2>
+<section id="missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes, privacy issues</h3>
+</section>
+<section id="history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc."><span class="header-section-number">1.1.2</span> History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.</h3>
+</section>
+<section id="imputation-controversies-iq-and-the-wealth-of-nations-2005" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="imputation-controversies-iq-and-the-wealth-of-nations-2005"><span class="header-section-number">1.1.3</span> Imputation controversies (IQ and the Wealth of Nations, 2005)</h3>
+</section>
+<section id="longitudinal-data-and-missing-data" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="longitudinal-data-and-missing-data"><span class="header-section-number">1.1.4</span> Longitudinal data and missing data</h3>
+</section>
+<section id="focus-on-small-high-dimensional-datasets-heterogenous-sampling" class="level3" data-number="1.1.5">
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling</h3>
+</section>
+</section>
+<section id="notation" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="notation"><span class="header-section-number">1.2</span> Notation</h2>
+<section id="terminology---augmentation-generative-ai-missing-value-imputation-etc." class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="terminology---augmentation-generative-ai-missing-value-imputation-etc."><span class="header-section-number">1.2.1</span> Terminology - Augmentation, Generative AI, Missing value imputation, etc.</h3>
+</section>
+<section id="mathematical-formulation" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="mathematical-formulation"><span class="header-section-number">1.2.2</span> Mathematical formulation</h3>
 <p>Throughout this thesis, I will use the standardised notation encouraged by most machine learning conference. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers (<span class="math inline">\(x,y,t\)</span>), bold small letters indicate vectors (<span class="math inline">\(\vx,\vy,\vt\)</span>), bold capital letters indicate matrices (<span class="math inline">\(\mX,\mY,\mT\)</span>), capital letters in sans-serif fonts indicate tensors <span class="math inline">\((\tX,\tY,\tT)\)</span> and blackboard bold capital letters indicate sets (<span class="math inline">\(\sX,\sY,\sT\)</span>). The non-italicized versions of these indicate random quatities; random variables are <span class="math inline">\(\rx,\ry,\rt\)</span>, random vectors are <span class="math inline">\(\rvx,\rvy,\rvt\)</span> and random matrices are <span class="math inline">\(\rmX,\rmY,\rmT\)</span>. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: <span class="math inline">\(\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}\)</span>, etc. For a matrix <span class="math inline">\(\mX\)</span>, <span class="math inline">\(\mX_{i,:}\)</span> and <span class="math inline">\(\mX_{:,i}\)</span> will denote the <span class="math inline">\(i^{th}\)</span> row and column respectively.</p>
+<p>When two random variables <span class="math inline">\(\rx\)</span> and <span class="math inline">\(\ry\)</span> are independent, I will denote that as <span class="math inline">\(\rx\independent\ry\)</span>.</p>
 <p>I will denote the vectorization of a matrix <span class="math inline">\(\mX\)</span>, which means stacking the columns of the matrix sequentially, as <span class="math display">\[\vec(\mX)=[\mX_{:,1}^\trans\quad\mX_{:,2}^\trans\quad\cdots\quad\mX_{:,n}^\trans]^\trans\]</span> The determinant of a matrix <span class="math inline">\(\mA\)</span> will be denoted by <span class="math inline">\(|\mA|\)</span>, and Kronecker product of two matrices <span class="math inline">\(\mA_{m\times n}\)</span> and <span class="math inline">\(\mB_{p\times q}\)</span> is an <span class="math inline">\(mp\times nq\)</span> matrix defined as <span class="math display">\[
 \mA\kron\mB\deff\begin{bmatrix}
 \emA_{11}\mB &amp;\emA_{12}\mB&amp;\cdots\emA_{1n}\mB\\
@@ -778,39 +815,46 @@ window.Quarto = {
 \vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
 \emA_{m1}\mB &amp;\emA_{m2}\mB&amp;\cdots\emA_{mn}\mB\\
 \end{bmatrix}
-\]</span> The generalized psedo-inverse <span class="citation" data-cites="pseudoinverse"><a href="../references.html#ref-pseudoinverse" role="doc-biblioref">[1, p. 20]</a></span> of a matrix <span class="math inline">\(\mA\)</span> will be denoted by <span class="math inline">\(\mA^-\)</span>, which simply indicates that <span class="math inline">\(\mA\mA^-\mA=\mA\)</span>. It should be clear that the choice of <span class="math inline">\(\mA^-\)</span> is not unique for a singular matrix <span class="math inline">\(\mA\)</span>, <em>i.e.</em> if <span class="math inline">\(|\mA|=0\)</span>. In cases where a unique choice is necessary, I will use the Moore-Penrose pseudo-inverse <span class="citation" data-cites="penrosePseudoinverse"><a href="../references.html#ref-penrosePseudoinverse" role="doc-biblioref">[2]</a></span> <span class="math inline">\(\mA^+\)</span>, which is defined by the following properties: <span class="math display">\[\mA\mA^+\mA=\mA\qquad\mA^+\mA\mA^+=\mA^+\qquad(\mA\mA^+)^*=\mA\mA^+\qquad(\mA^+\mA)^*=\mA^+\mA\]</span></p>
+\]</span> The generalized psedo-inverse <span class="citation" data-cites="pseudoinverse"><a href="../references.html#ref-pseudoinverse" role="doc-biblioref">[1, p. 20]</a></span> of a matrix <span class="math inline">\(\mA\)</span> will be denoted by <span class="math inline">\(\mA^-\)</span>, which simply indicates that <span class="math inline">\(\mA\mA^-\mA=\mA\)</span>. It should be clear that the choice of <span class="math inline">\(\mA^-\)</span> is not unique for a singular matrix <span class="math inline">\(\mA\)</span>, <em>i.e.</em> if <span class="math inline">\(|\mA|=0\)</span>. In cases where a unique choice is necessary, I will use the Moore-Penrose pseudo-inverse <span class="citation" data-cites="penrosePseudoinverse"><a href="../references.html#ref-penrosePseudoinverse" role="doc-biblioref">[2]</a></span> <span class="math inline">\(\mA^+\)</span>, which is defined by the following properties: <span class="math display">\[\mA\mA^+\mA=\mA\qquad\mA^+\mA\mA^+=\mA^+\qquad(\mA\mA^+)^*=\mA\mA^+\qquad(\mA^+\mA)^*=\mA^+\mA\]</span>.</p>
 <p>I will denote the probability of an event <span class="math inline">\(E\)</span> as <span class="math inline">\(\P(E)\)</span>, expectation of a random variable <span class="math inline">\(\rx\)</span> as <span class="math inline">\(\E[\rx]\)</span>, its variance as <span class="math inline">\(\Var(\rx)\)</span>, and its covariance with another random variable <span class="math inline">\(\ry\)</span> as <span class="math inline">\(\Cov(\rx,\ry)\)</span>. I will denote the variance-covariance matrix of a random vector <span class="math inline">\(\rvx\)</span> as <span class="math inline">\(\Var(\rvx)\)</span>. For a matrix <span class="math inline">\(\mSigma\)</span>, <span class="math inline">\(\norm{\rvx}_\mSigma\)</span> will denote the Mahalanobis norm <span class="citation" data-cites="mahalanobisDistance"><a href="../references.html#ref-mahalanobisDistance" role="doc-biblioref">[3]</a></span> of <span class="math inline">\(\rvx\)</span> with covariance <span class="math inline">\(\mSigma\)</span>, defined as <span class="math inline">\(\norm{\rvx}_\mSigma\deff\rvx^\trans\mSigma^-\rvx\)</span>.</p>
 <p>I will also denote the KL divergence of 2 distributions <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> over the support <span class="math inline">\(\sX\)</span> as <span class="math display">\[\KL(P||Q)\deff\int_{x\in\sX}P(x)\log\frac{P(x)}{Q(x)}dx\]</span> The Cartesian product of two sets <span class="math inline">\(\sA\)</span> and <span class="math inline">\(\sB\)</span> will be denoted by <span class="math inline">\(\sA\times\sB\)</span>.</p>
+<ul>
+<li>Add table of notation</li>
+</ul>
 </section>
-<section id="problem-formulation" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="problem-formulation"><span class="header-section-number">1.2</span> Problem Formulation</h2>
+</section>
+<section id="problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts"><span class="header-section-number">1.3</span> Problem Formulation (Add more discussion about the definitions, to motivate to non-experts)</h2>
 <p>I will adopt notation similar to <span class="citation" data-cites="hyperimpute"><a href="../references.html#ref-hyperimpute" role="doc-biblioref">[4]</a></span> for the problem formulation and denote missing values as <code>NaN</code>. Let <span class="math inline">\(\rvx\in \sX=(\sX_1\times\ldots\sX_D)\)</span> be a D-dimensional random vector. The entries of this random vector can be continuous (<span class="math inline">\(\sX_d=\R\)</span>) or categorical (<span class="math inline">\(\sX_d=\{1,\ldots,K_d\}\)</span>) random variables, for <span class="math inline">\(d\in\{1,\ldots,D\}\)</span>. We do not have complete observational access to <span class="math inline">\(\rvx\)</span>; instead our observation is mediated by a random masking vector <span class="math inline">\(\rvm\in\{0,1\}^D\)</span>. If <span class="math inline">\(\ervm_d=1\)</span>, then <span class="math inline">\(\ervx_d\)</span> is observed. Assume that <span class="math inline">\(\rvm\)</span> follows a distribution <span class="math inline">\(\pmask\)</span>, and the data <span class="math inline">\(\rvx\)</span> follows a distribution <span class="math inline">\(\pdata\)</span>.</p>
 </section>
-<section id="types-of-missingness" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="types-of-missingness"><span class="header-section-number">1.3</span> Types of missingness</h2>
+<section id="types-of-missingness" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="types-of-missingness"><span class="header-section-number">1.4</span> Types of missingness</h2>
 <p>Classical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data <span class="citation" data-cites="typesOfMissingness"><a href="../references.html#ref-typesOfMissingness" role="doc-biblioref">[5]</a></span>. These can be distinguished based on the form and properties of <span class="math inline">\(\pmask\)</span>.</p>
-<section id="section" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.3.1</span> <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a></h3>
+<section id="section" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.4.1</span> <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a></h3>
 <p><a href="#acronyms_MCAR">MCAR</a> is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data. This is equivalent to the statement that <span class="math inline">\(\rvx\independent\rvm\)</span>. This also indicates that each component of <span class="math inline">\(\vm, m_i\)</span>, is an independent Bernoulli random variable with probability <span class="math inline">\(p_i\)</span> independent of <span class="math inline">\(\vx\)</span>.</p>
 </section>
-<section id="section-1" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.3.2</span> <a href="#acronyms_MAR">Missing At Random (MAR)</a></h3>
+</section>
+<section id="missing-completely-at-random" class="level2 {exm-MCAR}" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="missing-completely-at-random"><span class="header-section-number">1.5</span> Missing Completely at Random</h2>
+</section>
+<section id="section-1" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.5.1</span> <a href="#acronyms_MAR">Missing At Random (MAR)</a></h3>
 <p>The missigness mechanism <a href="#acronyms_MAR">MAR</a> indicates that the probability of missingness depends only on the observed values. In more techinicality, let <span class="math inline">\(\rvx\)</span> and <span class="math inline">\(\rvm\)</span> be partitoned as <span class="math inline">\(\{\rvx_1,\rvx_2\}\)</span> and <span class="math inline">\(\{\rvm_1,\rvm_2\}\)</span> respectively, such that <span class="math inline">\(\rvx_1\)</span> is always observed, that is, <span class="math inline">\(\rvm_1=\mathbf{1}\)</span>. Then, <span class="math inline">\(\rvx\)</span> is said to be <a href="#acronyms_MAR">MAR</a> if <span class="math inline">\(\pmask\)</span> depends only on <span class="math inline">\(\rvx_1\)</span>. A simple model of this, and one I will use to demonstrate and evaluate imputation methods on the <a href="#acronyms_MAR">MAR</a> scenario, is <span id="eq-MAR"><span class="math display">\[
 \pmask(\rvm_2\mid\rvx_1)=\frac{1}{1+\exp(-\rmW\rvx_1)},
 \tag{1.1}\]</span></span> where <span class="math inline">\(\rmW\)</span> is a random matrix.</p>
 </section>
-<section id="section-2" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">1.3.3</span> <a href="#acronyms_MNAR">Missing Not at Random (MNAR)</a></h3>
+<section id="section-2" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="section-2"><span class="header-section-number">1.5.2</span> <a href="#acronyms_MNAR">Missing Not at Random (MNAR)</a></h3>
 <p>If data is missing by the <a href="#acronyms_MNAR">MNAR</a> mechanism, the probability of missingness depends both on the observed and the unobserved data. Mathematically, <span class="math inline">\(\pmask\)</span> depends on all elements of <span class="math inline">\(\rvx\)</span>. A model similar to <a href="#eq-MAR" class="quarto-xref">Equation&nbsp;<span>1.1</span></a> can be developed for this scenario, but a much simpler model that still allows us to evaluate methods and derive theoretical guarantees is Gaussian self-masking <span class="math display">\[
 \pmask(\ervm_i\mid\ervx_i) = K_i\exp(-\frac{(\ervx_i-\tilde{\mu}_i)^2}{2\tilde{\sigma}_i^2})
 \]</span> where <span class="math inline">\(\tilde{\mu}_i\)</span> and <span class="math inline">\(\tilde{\sigma}_i^2\)</span> are the mean and variance of the observed values of the <span class="math inline">\(i^\text{th}\)</span> components of <span class="math inline">\(\rvx\)</span>, and <span class="math inline">\(0&lt;K_i\leq 1\)</span> is a scaling factor.</p>
 <div id="rem-gaussianSelfMasking" class="proof remark">
-<p><span class="proof-title"><em>Remark 1.1</em> (Gaussian Self-Masking). </span>This model encodes dependence only on the (possibly) missing value. However, since dependence on the available values can be modeled using <a href="#eq-MAR" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>, this is considered sufficient to evaluate models for the <a href="#acronyms_MNAR">MNAR</a> scenario.</p>
+<p><span class="proof-title"><em>Remark 1.1</em> (Gaussian Self-Masking). </span>This model encodes dependence only on the (possibly) missing value. However, dependence on the observed values is covered under the <a href="#acronyms_MAR">MAR</a> scenario, so I chose to model the <a href="#acronyms_MNAR">MNAR</a> scenario by only explicitly encoding dependence on the missing values. <!--(Explain this more, say "I chose this because the other case is covered in MNAR")--></p>
 </div>
 </section>
-</section>
-<section id="semi-supervised-learning-as-a-missing-value-problem" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="semi-supervised-learning-as-a-missing-value-problem"><span class="header-section-number">1.4</span> Semi-Supervised Learning as a Missing Value Problem</h2>
+<section id="semi-supervised-learning-as-a-missing-value-problem" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="semi-supervised-learning-as-a-missing-value-problem"><span class="header-section-number">1.6</span> Semi-Supervised Learning as a Missing Value Problem</h2>
 
 
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">

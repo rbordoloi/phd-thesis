@@ -761,6 +761,7 @@ $$
 <li>Ensemble methods: HyperImpute</li>
 <li>How and why nearest neighbour imputation still outperforms most non-ensemble methods.</li>
 <li>Can nearest neighbour imputation be modified to optimize for downstream tasks like MIWAE, while maintaining alignment with the data?</li>
+<li>Research Gaps addressed in this thesis</li>
 </ul></li>
 <li><a href="kNNTheory.html" class="quarto-xref">Chapter&nbsp;<span>3&nbsp; Error Guarantees for Nearest-Neighbor Imputation</span></a>
 <ul>
@@ -768,6 +769,7 @@ $$
 <li>Argue why it is better than Bayesian methods in maintaing alignment with data, show high probability concentration bounds for imputed values.</li>
 <li>Introduce <a href="#acronyms_F3I">Fast Iterative Improvement for Imputation (F3I)</a> and the novel objective function. Argue why a differentiable function makes it easier to modify and optimise for downstream task.</li>
 <li>Present PCGrad<a href="#acronyms_F3I">F3I</a>.</li>
+<li>Result: kNN / Random Forest imputation chained with an MLP outperforms more advanced deep-learning architectures and are more robust.</li>
 <li>Conclusion: reiterate that better imputation does not necessarily mean better downstream task performance. Argue for the need of methods to perform downstream tasks without imputation.</li>
 </ul></li>
 <li><a href="mudra.html" class="quarto-xref">Chapter&nbsp;<span>4&nbsp; Multivariate Functional Linear Discriminant Analysis for Partially-Observed Time Series</span></a>
@@ -777,6 +779,7 @@ $$
 <li>Present <a href="#acronyms_MUDRA">Multivariate Functional Linear Discriminant Analysis (MUDRA)</a> <span class="citation" data-cites="mudra"><a href="../references.html#ref-mudra" role="doc-biblioref">[2]</a></span> to perform dimension reduction and classification without imputation.</li>
 <li>Show how classification performance is improved over LOCF imputation</li>
 <li>Show how imputed values closely align with ground truth</li>
+<li>Results: Downstream tasks performed without imputation outperforms training on simple imputation methods</li>
 <li>Conclusion: We talked about missing values on tables, and missing values on multivariate time series. Now we introduce missing values on graph clustering, a more complicated data structure.</li>
 </ul></li>
 <li><a href="fuse.html" class="quarto-xref">Chapter&nbsp;<span>5&nbsp; Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization</span></a>
@@ -784,12 +787,13 @@ $$
 <li>State the semi-supervised learning problem on graphclustering: learning when labels are missing, which means modularity cannot be directly calculated</li>
 <li>Show how to use the graph structure to generate representations even with missing modularity, by imputing labels so as to increase the modularity of the remaing graph</li>
 <li>Show how the labels can then be reconstructed time-efficiently.</li>
+<li>Results: Semi-super</li>
 </ul></li>
 <li><a href="conclusion.html" class="quarto-xref">Chapter&nbsp;<span>6&nbsp; Conclusion</span></a>
 <ul>
 <li>Conclude that missing values are best dealt with without imputation</li>
 <li>The more complicated the underlying data structure, the more information to be gleaned to bypass imputation.</li>
-<li>MArginal gains in imputation are not worth it, instead imputation should be moderated by downstream task performance in order to get the best results.</li>
+<li>Marginal gains in imputation are not worth it, instead imputation should be moderated by downstream task performance in order to get the best results.</li>
 </ul></li>
 </ul>
 <!-- * [Chapter -@sec-intro] introduces missingness in the literature, the different types of missingnes and contexts in which it may arise. It also introduces how different types of missingness might arise in time series data from different sources and contexts. Additionally, it talk about how semi-supervised learning can be viewed as methods for dealing with label missingness in the training data, and thus can be incorporated into the overall missingness framework.
