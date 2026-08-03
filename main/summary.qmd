@@ -24,11 +24,13 @@
     * Ensemble methods: HyperImpute
     * How and why nearest neighbour imputation still outperforms most non-ensemble methods.
     * Can nearest neighbour imputation be modified to optimize for downstream tasks like MIWAE, while maintaining alignment with the data?
+    * Research Gaps addressed in this thesis
 * [Chapter -@sec-knnTheory]
     * Reintroduce nearest neighbour imputation, and state objective to modify it for downstream task
     * Argue why it is better than Bayesian methods in maintaing alignment with data, show high probability concentration bounds for imputed values.
     * Introduce \acr{F3I} and the novel objective function. Argue why a differentiable function makes it easier to modify and optimise for downstream task.
     * Present PCGrad\acr{F3I}.
+    * Result: kNN / Random Forest imputation chained with an MLP outperforms more advanced deep-learning architectures and are more robust.
     * Conclusion: reiterate that better imputation does not necessarily mean better downstream task performance. Argue for the need of methods to perform downstream tasks without imputation.
 * [Chapter -@sec-mudra]
     * Restate problem with imputation according to @imputationDimRet
@@ -36,15 +38,17 @@
     * Present \acr{MUDRA} [@mudra] to perform dimension reduction and classification without imputation.
     * Show how classification performance is improved over LOCF imputation
     * Show how imputed values closely align with ground truth
+    * Results: Downstream tasks performed without imputation outperforms training on simple imputation methods
     * Conclusion: We talked about missing values on tables, and missing values on multivariate time series. Now we introduce missing values on graph clustering, a more complicated data structure.
 * [Chapter -@sec-fuse]
     * State the semi-supervised learning problem on graphclustering: learning when labels are missing, which means modularity cannot be directly calculated
     * Show how to use the graph structure to generate representations even with missing modularity, by imputing labels so as to increase the modularity of the remaing graph
     * Show how the labels can then be reconstructed time-efficiently.
+    * Results: Semi-super
 * [Chapter -@sec-conclusion]
     * Conclude that missing values are best dealt with without imputation
     * The more complicated the underlying data structure, the more information to be gleaned to bypass imputation.
-    * MArginal gains in imputation are not worth it, instead imputation should be moderated by downstream task performance in order to get the best results.
+    * Marginal gains in imputation are not worth it, instead imputation should be moderated by downstream task performance in order to get the best results.
 
 <!-- * [Chapter -@sec-intro] introduces missingness in the literature, the different types of missingnes and contexts in which it may arise. It also introduces how different types of missingness might arise in time series data from different sources and contexts. Additionally, it talk about how semi-supervised learning can be viewed as methods for dealing with label missingness in the training data, and thus can be incorporated into the overall missingness framework.
 * [Chapter -@sec-background] introduces the standard models in the literature and the types of missingness that they were developed to address. It makes a distinction between independent imputation, and imputation with a downstream task in mind, and makes an argument for why the latter is more useful in realistic scenarios. It also introduces multi-task learning, and how its methods can be used to desing imputation methods that optimise a downstream task.
