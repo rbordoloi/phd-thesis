@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Challenges with Missing Data – Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</title>
+<title>1&nbsp; Challenges with Missing Data – Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-343830dee7e81009abd9657442190b55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5a449598f5b2f9ea585a527eb148b506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -617,7 +617,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</a> 
+      <a href="../">Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -734,11 +734,11 @@ window.Quarto = {
   <ul>
   <li><a href="#motivation-for-dealing-with-missingness" id="toc-motivation-for-dealing-with-missingness" class="nav-link active" data-scroll-target="#motivation-for-dealing-with-missingness"><span class="header-section-number">1.1</span> Motivation for dealing with missingness</a>
   <ul class="collapse">
-  <li><a href="#missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" id="toc-missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" class="nav-link" data-scroll-target="#missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes, privacy issues</a></li>
+  <li><a href="#missing-data-in-biomedical-settings-and-challenges---missing-attributes" id="toc-missing-data-in-biomedical-settings-and-challenges---missing-attributes" class="nav-link" data-scroll-target="#missing-data-in-biomedical-settings-and-challenges---missing-attributes"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction--></a></li>
   <li><a href="#history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." id="toc-history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." class="nav-link" data-scroll-target="#history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc."><span class="header-section-number">1.1.2</span> History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.</a></li>
   <li><a href="#imputation-controversies-iq-and-the-wealth-of-nations-2005" id="toc-imputation-controversies-iq-and-the-wealth-of-nations-2005" class="nav-link" data-scroll-target="#imputation-controversies-iq-and-the-wealth-of-nations-2005"><span class="header-section-number">1.1.3</span> Imputation controversies (IQ and the Wealth of Nations, 2005)</a></li>
   <li><a href="#longitudinal-data-and-missing-data" id="toc-longitudinal-data-and-missing-data" class="nav-link" data-scroll-target="#longitudinal-data-and-missing-data"><span class="header-section-number">1.1.4</span> Longitudinal data and missing data</a></li>
-  <li><a href="#focus-on-small-high-dimensional-datasets-heterogenous-sampling" id="toc-focus-on-small-high-dimensional-datasets-heterogenous-sampling" class="nav-link" data-scroll-target="#focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling</a></li>
+  <li><a href="#focus-on-small-high-dimensional-datasets-heterogenous-sampling" id="toc-focus-on-small-high-dimensional-datasets-heterogenous-sampling" class="nav-link" data-scroll-target="#focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction--></a></li>
   </ul></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="header-section-number">1.2</span> Notation</a>
   <ul class="collapse">
@@ -779,12 +779,12 @@ window.Quarto = {
 </header>
 
 
-<p>In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.</p>
+<p>In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented <!--Introduce time-series data, so that you can define the terms 'irregular' and 'fragmented' in relation to that, in layman's terms. Add the biological example of patients to explain and define these words-->. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.</p>
 <p>In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.</p>
 <section id="motivation-for-dealing-with-missingness" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="motivation-for-dealing-with-missingness"><span class="header-section-number">1.1</span> Motivation for dealing with missingness</h2>
-<section id="missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="missing-data-in-biomedical-settings-and-challenges---missing-attributes-privacy-issues"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes, privacy issues</h3>
+<section id="missing-data-in-biomedical-settings-and-challenges---missing-attributes" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="missing-data-in-biomedical-settings-and-challenges---missing-attributes"><span class="header-section-number">1.1.1</span> Missing data in biomedical settings and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction--></h3>
 </section>
 <section id="history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc." class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="history-of-simple-unsupervised-imputation---constants-measures-of-central-tendency-extremums-etc."><span class="header-section-number">1.1.2</span> History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.</h3>
@@ -796,7 +796,7 @@ window.Quarto = {
 <h3 data-number="1.1.4" class="anchored" data-anchor-id="longitudinal-data-and-missing-data"><span class="header-section-number">1.1.4</span> Longitudinal data and missing data</h3>
 </section>
 <section id="focus-on-small-high-dimensional-datasets-heterogenous-sampling" class="level3" data-number="1.1.5">
-<h3 data-number="1.1.5" class="anchored" data-anchor-id="focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling</h3>
+<h3 data-number="1.1.5" class="anchored" data-anchor-id="focus-on-small-high-dimensional-datasets-heterogenous-sampling"><span class="header-section-number">1.1.5</span> Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction--></h3>
 </section>
 </section>
 <section id="notation" class="level2" data-number="1.2">
@@ -825,7 +825,7 @@ window.Quarto = {
 </section>
 <section id="problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="problem-formulation-add-more-discussion-about-the-definitions-to-motivate-to-non-experts"><span class="header-section-number">1.3</span> Problem Formulation (Add more discussion about the definitions, to motivate to non-experts)</h2>
-<p>I will adopt notation similar to <span class="citation" data-cites="hyperimpute"><a href="../references.html#ref-hyperimpute" role="doc-biblioref">[4]</a></span> for the problem formulation and denote missing values as <code>NaN</code>. Let <span class="math inline">\(\rvx\in \sX=(\sX_1\times\ldots\sX_D)\)</span> be a D-dimensional random vector. The entries of this random vector can be continuous (<span class="math inline">\(\sX_d=\R\)</span>) or categorical (<span class="math inline">\(\sX_d=\{1,\ldots,K_d\}\)</span>) random variables, for <span class="math inline">\(d\in\{1,\ldots,D\}\)</span>. We do not have complete observational access to <span class="math inline">\(\rvx\)</span>; instead our observation is mediated by a random masking vector <span class="math inline">\(\rvm\in\{0,1\}^D\)</span>. If <span class="math inline">\(\ervm_d=1\)</span>, then <span class="math inline">\(\ervx_d\)</span> is observed. Assume that <span class="math inline">\(\rvm\)</span> follows a distribution <span class="math inline">\(\pmask\)</span>, and the data <span class="math inline">\(\rvx\)</span> follows a distribution <span class="math inline">\(\pdata\)</span>.</p>
+<p>I will adopt notation similar to <span class="citation" data-cites="hyperimpute"><a href="../references.html#ref-hyperimpute" role="doc-biblioref">[4]</a></span> for the problem formulation and denote missing values as <code>NaN</code>. Let <span class="math inline">\(\rvx\in \sX=(\sX_1\times\ldots\sX_D)\)</span> be a D-dimensional random vector. The entries of this random vector can be continuous (<span class="math inline">\(\sX_d=\R\)</span>) or categorical (<span class="math inline">\(\sX_d=\{1,\ldots,K_d\}\)</span>) random variables, for <span class="math inline">\(d\in\{1,\ldots,D\}\)</span>. We do not have complete observational access to <span class="math inline">\(\rvx\)</span>; instead our observation is mediated by a random masking vector <span class="math inline">\(\rvm\in\{0,1\}^D\)</span>. If <span class="math inline">\(\ervm_d=1\)</span>, then <span class="math inline">\(\ervx_d\)</span> is observed. Assume that <span class="math inline">\(\rvm\)</span> follows a distribution <span class="math inline">\(\pmask\)</span>, and the data <span class="math inline">\(\rvx\)</span> follows a distribution <span class="math inline">\(\pdata\)</span>. <!--Say there are $N$ samples, and index everything by $i$, where $i$ is the index of the sample--></p>
 </section>
 <section id="types-of-missingness" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="types-of-missingness"><span class="header-section-number">1.4</span> Types of missingness</h2>

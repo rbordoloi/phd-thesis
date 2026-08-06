@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks",
+    "title": "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data",
     "section": "",
     "text": "Acknowledgements\nThese are the acknowledgements.",
     "crumbs": [
@@ -14,7 +14,7 @@
     "href": "preface/abstract.html",
     "title": "Abstract",
     "section": "",
-    "text": "Missingness shows up in many real-life scenarios, arising fro different sources like improper data collection, malfunctioning equipment, or operational data loss. In all these scenarios, imputation is a well-accepted standard technique to regularise available data in order to perform conventional machine learning or deep-learning analyses. However, it is well-known that all types of imputation induce biases in the data that can negatively impact the downstream task, and improvements in the quality of imputation do not necessarily result in improvement in downstream task performance. In this thesis, I will argue that approaches to performing downstream tasks without imputation can outperform imputation methods. In cases where this is not possible, I will argue that adapting simple imputation methods to also keep the downstream task in mind can result in better imputation than a separated impute-then-classify type procedure. Finally, I will extend these arguments to more complex structures than simple tabular data or time-series data, with an example of networks with missing node labels.",
+    "text": "Data missingness shows up in many real-life scenarios, arising from different sources like improper data collection, malfunctioning equipment, or operational data loss. In all these scenarios, imputation, which is the process of filling data gaps with values estimated from the dataset, is a widely accepted approach to complete missing data for machine learning and deep-learning tasks such as classification and regression. For instance, biomedical data frequently suffers from extensive missingness due to patient behavior, poor data management, and biased sampling, which complicates downstream analyses like patient stratification. \nHowever, it is well-known that all types of imputation induce biases in the data that can negatively impact the downstream task, and recent work has shown that improvements in the quality of imputation do not necessarily result in improvement in downstream task performance. \nIn this thesis, I will argue that approaches to performing downstream tasks without imputation can outperform imputation methods. In cases where this is not possible, I will argue that adapting simple imputation methods to also keep the downstream task in mind can result in better imputation than a separated impute-then-classify type procedure. Finally, I will extend these arguments to more complex structures than simple tabular data or time-series data, with an example of networks with missing node labels. \nThese approaches together point towards a general principle of handling missing data with respect to a downstream task, by learning latent representations without imputation tailored to the downstream task where possible, and adapting imputation methods to be differntiable so that they can be performed in conjuction with a downstream task where not.",
     "crumbs": [
       "Abstract"
     ]
@@ -74,7 +74,7 @@
     "href": "main/introduction.html",
     "title": "1  Challenges with Missing Data",
     "section": "",
-    "text": "1.1 Motivation for dealing with missingness\nIn most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.\nIn this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.",
+    "text": "1.1 Motivation for dealing with missingness\nIn most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented . This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.\nIn this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Challenges with Missing Data</span>"
     ]
@@ -84,7 +84,7 @@
     "href": "main/introduction.html#motivation-for-dealing-with-missingness",
     "title": "1  Challenges with Missing Data",
     "section": "",
-    "text": "1.1.1 Missing data in biomedical settings and Challenges - Missing attributes, privacy issues\n\n\n1.1.2 History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.\n\n\n1.1.3 Imputation controversies (IQ and the Wealth of Nations, 2005)\n\n\n1.1.4 Longitudinal data and missing data\n\n\n1.1.5 Focus on small / high-dimensional datasets, heterogenous sampling",
+    "text": "1.1.1 Missing data in biomedical settings and Challenges - Missing attributes \n\n\n1.1.2 History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.\n\n\n1.1.3 Imputation controversies (IQ and the Wealth of Nations, 2005)\n\n\n1.1.4 Longitudinal data and missing data\n\n\n1.1.5 Focus on small / high-dimensional datasets, heterogenous sampling",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Challenges with Missing Data</span>"
     ]

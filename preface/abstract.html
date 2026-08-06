@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Abstract – Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</title>
+<title>Abstract – Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-343830dee7e81009abd9657442190b55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5a449598f5b2f9ea585a527eb148b506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -568,7 +568,7 @@ $$
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks</a> 
+      <a href="../">Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -703,7 +703,10 @@ $$
 </header>
 
 
-<p>Missingness shows up in many real-life scenarios, arising fro different sources like improper data collection, malfunctioning equipment, or operational data loss. In all these scenarios, imputation is a well-accepted standard technique to regularise available data in order to perform conventional machine learning or deep-learning analyses. However, it is well-known that all types of imputation induce biases in the data that can negatively impact the downstream task, and improvements in the quality of imputation do not necessarily result in improvement in downstream task performance. In this thesis, I will argue that approaches to performing downstream tasks without imputation can outperform imputation methods. In cases where this is not possible, I will argue that adapting simple imputation methods to also keep the downstream task in mind can result in better imputation than a separated impute-then-classify type procedure. Finally, I will extend these arguments to more complex structures than simple tabular data or time-series data, with an example of networks with missing node labels.</p>
+<p>Data missingness shows up in many real-life scenarios, arising from different sources like improper data collection, malfunctioning equipment, or operational data loss. In all these scenarios, imputation, which is the process of filling data gaps with values estimated from the dataset, is a widely accepted approach to complete missing data for machine learning and deep-learning tasks such as classification and regression. For instance, biomedical data frequently suffers from extensive missingness due to patient behavior, poor data management, and biased sampling, which complicates downstream analyses like patient stratification. <!-- imputation is the process of replacing values with estimated values, make connection between missiing data in real life and known techniques in ML. Be more explicit about what kind of downstream task --></p>
+<p>However, it is well-known that all types of imputation induce biases in the data that can negatively impact the downstream task, and recent work has shown that improvements in the quality of imputation do not necessarily result in improvement in downstream task performance. <!--Write about focus on small heterogenous data, for example genomic data.--></p>
+<p>In this thesis, I will argue that approaches to performing downstream tasks without imputation can outperform imputation methods. In cases where this is not possible, I will argue that adapting simple imputation methods to also keep the downstream task in mind can result in better imputation than a separated impute-then-classify type procedure. Finally, I will extend these arguments to more complex structures than simple tabular data or time-series data, with an example of networks with missing node labels. <!-- Be more specific in your contribution. Be more specific about exactly what I did. Add the main conclusion of each chapter, both here and in the "theses" chapter. How to do it: methodology-result-methodology-result for each chapter. Make it clear that we're both looking at tabular and time series data--></p>
+<p>These approaches together point towards a general principle of handling missing data with respect to a downstream task, by learning latent representations without imputation tailored to the downstream task where possible, and adapting imputation methods to be differntiable so that they can be performed in conjuction with a downstream task where not.</p>
 
 
 
