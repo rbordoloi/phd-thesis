@@ -1,16 +1,16 @@
 # Challenges with Missing Data {#sec-intro}
 
-In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.
+In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented <!--Introduce time-series data, so that you can define the terms 'irregular' and 'fragmented' in relation to that, in layman's terms. Add the biological example of patients to explain and define these words-->. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.
 
 In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.
 
 ## Motivation for dealing with missingness
 
-### Missing data in biomedical settings and Challenges - Missing attributes, privacy issues
+### Missing data in biomedical settings and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction-->
 ### History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.
 ### Imputation controversies (IQ and the Wealth of Nations, 2005)
 ### Longitudinal data and missing data
-### Focus on small / high-dimensional datasets, heterogenous sampling
+### Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction-->
 
 ## Notation
 
@@ -46,7 +46,7 @@ The Cartesian product of two sets $\sA$ and $\sB$ will be denoted by $\sA\times\
 
 ## Problem Formulation (Add more discussion about the definitions, to motivate to non-experts)
 
-I will adopt notation similar to @hyperimpute for the problem formulation and denote missing values as `NaN`. Let $\rvx\in \sX=(\sX_1\times\ldots\sX_D)$ be a D-dimensional random vector. The entries of this random vector can be continuous ($\sX_d=\R$) or categorical ($\sX_d=\{1,\ldots,K_d\}$) random variables, for $d\in\{1,\ldots,D\}$. We do not have complete observational access to $\rvx$; instead our observation is mediated by a random masking vector $\rvm\in\{0,1\}^D$. If $\ervm_d=1$, then $\ervx_d$ is observed. Assume that $\rvm$ follows a distribution $\pmask$, and the data $\rvx$ follows a distribution $\pdata$.
+I will adopt notation similar to @hyperimpute for the problem formulation and denote missing values as `NaN`. Let $\rvx\in \sX=(\sX_1\times\ldots\sX_D)$ be a D-dimensional random vector. The entries of this random vector can be continuous ($\sX_d=\R$) or categorical ($\sX_d=\{1,\ldots,K_d\}$) random variables, for $d\in\{1,\ldots,D\}$. We do not have complete observational access to $\rvx$; instead our observation is mediated by a random masking vector $\rvm\in\{0,1\}^D$. If $\ervm_d=1$, then $\ervx_d$ is observed. Assume that $\rvm$ follows a distribution $\pmask$, and the data $\rvx$ follows a distribution $\pdata$. <!--Say there are $N$ samples, and index everything by $i$, where $i$ is the index of the sample-->
 
 ## Types of missingness
 

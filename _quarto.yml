@@ -24,7 +24,7 @@ acronyms:
       longname: K-Nearest Neighbours
 
 book:
-  title: "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks"
+  title: "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
   author: "Rahul Bordoloi"
   date: "4/10/2026"
   chapters:
@@ -51,7 +51,7 @@ csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
 format:
   pdf:
     documentclass: MastersDoctoralThesis
-    classoption: 
+    classoption:
       - openany
       - 11pt
       - english
@@ -63,7 +63,7 @@ format:
     biblatexoptions:
       - style=authoryear
       - backend=biber
-    include-in-header: 
+    include-in-header:
       - preamble.tex
       # - mathCommands.tex
     include-before-body: titlepage.tex
