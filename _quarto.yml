@@ -24,7 +24,7 @@ acronyms:
       longname: K-Nearest Neighbours
 
 book:
-  title: "Imputation and Beyond: Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
+  title: "Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
   author: "Rahul Bordoloi"
   date: "4/10/2026"
   chapters:
