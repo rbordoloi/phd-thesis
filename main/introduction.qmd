@@ -1,24 +1,34 @@
 # Challenges with Missing Data {#sec-intro}
 
-In most statistical and machine learning literature, datasets are assumed to be complete, regular, and unfragmented. In short, most models assume complete data for processing. However, in the real domain, a lot of datasets are incomplete, irregular, and fragmented <!--Introduce time-series data, so that you can define the terms 'irregular' and 'fragmented' in relation to that, in layman's terms. Add the biological example of patients to explain and define these words-->. This is particularly evident in the medical and biomedical domain, where collection of datasets are dependent on the availability of patients and the robustness of wet lab experiments, which are not always 100% reliable.
+In most statistical and machine learning literature, datasets are assumed to be complete. For instance, in case of tabular data, it is assumed that all features are observed for each sample. Similarly, in the case of multivariate time-series data, it is often assumed that all features for each sample are measured at the same time points. In practice however, datasets are often *incomplete*, with some features unobserved for certain samples, or *fragmented* in case of time-series data, with observations or features missing at different timepoints across samples.
+<!--Introduce time-series data, so that you can define the terms 'irregular' and 'fragmented' in relation to that, in layman's terms. Add the biological example of patients to explain and define these words-->
+<!--More details - heterogenous samples at different timepoints, missing labels, etc.Summarise all the motivations. don't go into concrete examples here, put it in the motivation-->
+
+A similar issue is label missignesss, which has given rise to the field of semi-supervised learning. Label missingness refers to the scenario where only some samples in the dataset are labelled. However, approaches to semi-supervised learning often assume similar distribution of the missing labels as the available labels, which is often not reflected in real world scenarios. An example for this is the task of anomaly detection, where often only some positive samples are labelled, and the unlablled part of the dataset consists overwhelmingly of non-anomalous samples.
 
 In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.
 
 ## Motivation for dealing with missingness
 
-### Missing data in biomedical settings and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction-->
+### Missing data in the real-world setting and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction-->
+
+A common scenario in which this type of missingness is encountered is biomedical data and electronic health records. Patients usually have different lengths of stay in a hospital, and are prescribed different medical tests depending on their symptoms. Consolidating this data into a singular structure usually results in extensive missingness across features and timepoints, resulting in a incomplete, fragmented and sparse data structure. For example, in @boneDensityData the collected dataset records bone density of children across ages. Although in aggregate the dataset covers age-ranges from 9 to 26 years old, each individual only has 2-4 measurements, typically measured over not more than 5 years.
+
 ### History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.
-### Imputation controversies (IQ and the Wealth of Nations, 2005)
+### Limitations and Pitfalls in Imputation
+(IQ and the Wealth of Nations, 2005)
+
 ### Longitudinal data and missing data
+### Missing labels in graph-structured data
 ### Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction-->
 
 ## Notation
 
-### Terminology - Augmentation, Generative AI, Missing value imputation, etc.
+<!--### Terminology - Augmentation, Generative AI, Missing value imputation, etc. Put this in SoTA Chapter 2, not here-->
 
 ### Mathematical formulation
 
-Throughout this thesis, I will use the standardised notation encouraged by most machine learning conference. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
+Throughout this thesis, I will use the standardised notation encouraged by most machine learning conferences. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$) (with the exception of $\E$ and $\P$ which are defined below). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
 
 When two random variables $\rx$ and $\ry$ are independent, I will denote that as $\rx\independent\ry$.
 
