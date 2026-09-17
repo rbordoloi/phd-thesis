@@ -38,10 +38,9 @@ A common example of incomplete and fragmented data in the biomedical data is ele
 
 ### Longitudinal data and missing data
 
-Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the most common 
+Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the simplest and most widely used imputation method for time-series data is \acr{LOCF}, which involves simply copying over the most recently observed value for each feature to fill in the missing values. The assumptions here is that systems evolve slowly and are strongly autocorrelated with the recent past, so the current value for a feature should not diverge significantly from the last observed value. However, these assumptions can be violated in cases where there is a change in the data distribution between the current missing time point and the last observed time point (also known as concept drift[@conceptDrift] in continual learning).
 
-### Missing labels in graph-structured data
-### Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction-->
+A slightly more advanced approach to imputation in longitudinal data is matrix/tensor factorization or completion. The idea is to find values for the missing entries such that the rank of the filled in matrix/tensor is minimized. In the case of matrix completion, @matrixCompletionProof showed that if the number of sampled entries was high enough, then most matrices can be perfectly recovered by solving a simple convex optimization problem.
 
 ## Notation
 

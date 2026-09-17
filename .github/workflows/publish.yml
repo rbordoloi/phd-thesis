@@ -21,7 +21,9 @@ jobs:
         uses: quarto-dev/quarto-actions/render@v2
         with:
           to: html
-          
+        env:
+          QUARTO_PROFILE: prod
+
       - name: Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:

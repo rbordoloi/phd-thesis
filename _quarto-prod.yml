@@ -1,5 +1,11 @@
 project:
   type: book
+  post-render:
+    - rm -r site_libs
+    - mv Missingness-Aware-Learning-for-Downstream-Tasks-in-Tabular-and-Time-series-Data.tex overleaf/main.tex
+    - cp -r images overleaf/
+    - cp references.bib overleaf/references.bib
+    - cp MastersDoctoralThesis.cls overleaf/MastersDoctoralThesis.cls
 
 
 filters:
@@ -52,6 +58,25 @@ bibliography: references.bib
 csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
 
 format:
+  pdf:
+    documentclass: MastersDoctoralThesis
+    classoption:
+      - openany
+      - 11pt
+      - english
+      - singlespacing
+      - headsepline
+    title-page: false
+    toc: false
+    cite-method: biblatex
+    biblatexoptions:
+      - style=authoryear
+      - backend=biber
+    include-in-header:
+      - preamble.tex
+      # - mathCommands.tex
+    include-before-body: titlepage.tex
+    keep-tex: true
   html:
     include-in-header:
       - text: "<script>window.MathJax = {tex: {macros: {symbf: ['\\\\boldsymbol{#1}', 1]}}}</script>"
