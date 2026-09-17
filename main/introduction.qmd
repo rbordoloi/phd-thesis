@@ -21,23 +21,25 @@ A common example of incomplete and fragmented data in the biomedical data is ele
 *Imputation* is defined as the procedure of filling in missing or null values in a dataset with substituted values. Some simple structured approaches to imputation are:
 
 * Constant - Also known as *padding*, this method of imputation simply fills in the missing values with a constant, often 0.
-* Statistical measures of central tendency - Measures of central tendency like the mean, median, or mode are often used to fill in missing values in tabular data in order to preserve the marginal statistical properties of the features. However, this method disregards the interdependecies between the features.
+* Statistical measures of central tendency - Measures of central tendency like the mean, median, or mode are often used to fill in missing values in tabular data in order to preserve the marginal statistical properties of the features. However, this method disregards the interdependencies between the features.
 * Last Observation Carried Forward - Another simple imputation method that's usually applied to time series data is to simply fill in the missing values with the last observed value for that particular feature. This however assumes that regime change and concept drift have not occurred in the timesteps between that last observed value and the current missing values, as well as the aforementioned ignoring of inter-variable statistical dependencies.
 * Variance Minimization - Consider a set of samples for different groups. Using the classical ANOVA structure, data can be imputed by minimizing the group-wise variances, which conditions the imputed values on the targets in order to preserve group-wise statistical properties.
 * Nearest Neighbor Imputation - If group-wise labels are unavailable, another approach is to impute the values using the top-K nearest neighbors with available features for each sample with missing features.
 * Iterative Imputation[@mice] - This approach models imputation as a round-robin regression problem. At each step, one feature with missing values is selected as the target, and the rest of the variables are selected as regressors. The model fits a regression model on the available values as uses its predictions to fill in the missing values. This is done for each feature over several steps until all the missing feature values have been filled out.
-* Generative models - Generative models can be modified to also perform imputation by conditioning the generated values upon the observed values for each feature and each sample. This usually involves masking some of the observed values and training a model to generate them based on the unmasked values. This model is then used to also generate the missing values. Some examples of this include GAN based models
+* Generative models - Generative models can be modified to also perform imputation by conditioning the generated values upon the observed values for each feature and each sample. This usually involves masking some of the observed values and training a model to generate them based on the unmasked values. This model is then used to also generate the missing values. Some examples of this include GAN based models (GAIN [@gain]), diffusion-based models (CSDI [@csdi]).
+<!--Distinguish between imputation for tabular and time series data. Remove bullet points and make it a table-->
 
 <!--One of the earliest structured approaches to imputation comes from agricultural data [@agriImputation]. The problem here is the analysis of the effect of various fertilisation treatments on different plots of land, where data for the effect of some treatments on some plots is not available. Under the classical single factor ANOVA framework, the missing values are imputed by minimizing the variance of the yield conditioned on the general, block-specific and treatment-specific means. In general, the approach to imputation advocated here is to find the value which minimizes the squared sum of the errors between the true and estimated yields.-->
 
 <!--Focus on methods rather than datasets. Paragraphs for each simple unsupervised imputation method, from the simplest to the most complex, then just cite the papers where it was used. Use bone density dataset as a core example.-->
 
-One of the first structured analyzes of different types of imputation approached comes from the discipline of survey methodology [@surveyImputation]. This work looks at the statistical properties of imputed values for nine different types of imputation, for three different scenarios in which data can be missing [@typesOfMissingness]. This includes a form of \acr{kNN} imputation, which is described as "distance function matching" here. 
-
-### Limitations and Pitfalls in Imputation
-(IQ and the Wealth of Nations, 2005)
+<!--### Limitations and Pitfalls in Imputation
+(IQ and the Wealth of Nations, 2005)-->
 
 ### Longitudinal data and missing data
+
+Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the most common 
+
 ### Missing labels in graph-structured data
 ### Focus on small / high-dimensional datasets, heterogenous sampling <!-- This should be in the abstract itself, and the theses, rather than in the introduction-->
 
