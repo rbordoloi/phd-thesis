@@ -40,7 +40,7 @@ A common example of incomplete and fragmented data in the biomedical data is ele
 
 Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the simplest and most widely used imputation method for time-series data is \acr{LOCF}, which involves simply copying over the most recently observed value for each feature to fill in the missing values. The assumptions here is that systems evolve slowly and are strongly autocorrelated with the recent past, so the current value for a feature should not diverge significantly from the last observed value. However, these assumptions can be violated in cases where there is a change in the data distribution between the current missing time point and the last observed time point (also known as concept drift[@conceptDrift] in continual learning).
 
-A slightly more advanced approach to imputation in longitudinal data is matrix/tensor factorization or completion. The idea is to find values for the missing entries such that the rank of the filled in matrix/tensor is minimized. In the case of matrix completion, @matrixCompletionProof showed that if the number of sampled entries was high enough, then most matrices can be perfectly recovered by solving a simple convex optimization problem.
+A slightly more advanced approach to imputation in longitudinal data is matrix/tensor factorization or completion. The idea is to find values for the missing entries such that the rank of the filled in matrix/tensor is minimized. In the case of matrix completion, @matrixCompletionProof showed that if the number of sampled entries was high enough, then most matrices can be perfectly recovered by solving a simple convex optimization problem. Recent work has extended these results to a certain decomposition of 3-way tensors[@tensorCompletionProof], but these results are not as strong as there are many different definitions of the rank of a tensor. @btf shows an example of this type of approach.
 
 ## Notation
 
@@ -48,7 +48,7 @@ A slightly more advanced approach to imputation in longitudinal data is matrix/t
 
 ### Mathematical formulation
 
-Throughout this thesis, I will use the standardised notation encouraged by most machine learning conferences. Italicized letters will indicate deterministic quatities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$) (with the exception of $\E$ and $\P$ which are defined below). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
+Throughout this thesis, I will use the standardized notation encouraged by most machine learning conferences. Italicized letters will indicate deterministic quantities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$) (with the exception of $\E$ and $\P$ which are defined below). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
 
 When two random variables $\rx$ and $\ry$ are independent, I will denote that as $\rx\independent\ry$.
 
@@ -86,19 +86,34 @@ Classical literature mainly distinguishes three main missingness mechanisms depe
 
 \acr{MCAR} is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data. This is equivalent to the statement that $\rvx\independent\rvm$. This also indicates that each component of $\vm, m_i$, is an independent Bernoulli random variable with probability $p_i$ independent of $\vx$.
 
-::: {exm-MCAR}
-## Missing Completely at Random
+::: {#exm-MCAR}
 
+@mcarExample presents an example of a \acr{MCAR} dataset collected via a questionaire. Some data is missing due to non-response to some questions, and Little's \acr{MCAR} test[@littleMCARTest] shows that the choice to not answer certain questions is taken completely at random.
 :::
 
 ### \acr{MAR}
 
-The missigness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more techinicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$. A simple model of this, and one I will use to demonstrate and evaluate imputation methods on the \acr{MAR} scenario, is
+The missingness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more technicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$.
+
+::: {#rem-logisticMAR}
+
+# Logistic Model for MAR
+
+A simple model of \acr{MAR} data, and one I will use in this thesis to demonstrate and evaluate imputation methods on the \acr{MAR} scenario, is
 $$
 \pmask(\rvm_2\mid\rvx_1)=\frac{1}{1+\exp(-\rmW\rvx_1)},
 $${#eq-MAR}
 where $\rmW$ is a random matrix.
 
+:::
+
+::: {#exm-MAR}
+
+@marExample illustrates a scenario in which missing data in \acr{EHRs} follow the \acr{MAR} mechanism. Using data from the Flatiron Health database, the authors investigate the effect of \acr{Hgb} levels on real-world overall survival across several tumor types. They first apply Little's \acr{MCAR} test and, when the null hypothesis is rejected, train a random-forest classifier to predict \acr{Hgb} missingness from the other observed covariates, evaluating its performance using \acr{AUROC}. For patients with multiple myeloma, functional status (ECOG performance score at the index date) was found to be a strong predictor of \acr{Hgb} missingness. This is consistent with the clinical practice of drawing blood less frequently from highly functional patients without signs of illness. Thus, the probability of \acr{Hgb} missingness depends on observed variables, consistent with an \acr{MAR} mechanism.
+
+<!--@marExample show a scenario where missing data in \acr{EHRs} follows the \acr{MAR} mechanism. Data is derived from the Flatiron Health database, the impact of \acr{Hgb} levels on real-world overall survival across several tumor types is analyzed. In order to test for the missigness mechanism, the authors first perform Little's \acr{MCAR} test. If the null hypothesis is rejected, they fit a random-forest based classifier model to predict missingness of \acr{Hgb} values based on the other covariates, and compute the \acr{AUROC} score of the trained model. In the case of patiens diagnosed with multiple myeloma, it was seen that functional activity levels (ECOG performance scores at index date) are a strong predictor of the missingness of \acr{Hgb} values, which can be explained by the fact that medical practitioners are unlikely to draw blood if patient is highly functional and shows no signs of illness. This means that the probability of missingness of \acr{Hgb} values is only dependent on the observed variables, which makes it an \acr{MAR} missingness mechanism.-->
+
+:::
 
 ### \acr{MNAR}
 
@@ -109,9 +124,14 @@ $$
 where $\tilde{\mu}_i$ and $\tilde{\sigma}_i^2$ are the mean and variance of the observed values of the $i^\text{th}$ components of $\rvx$, and $0<K_i\leq 1$ is a scaling factor.
 
 ::: {#rem-gaussianSelfMasking}
-## Gaussian Self-Masking
-This model encodes dependence only on the (possibly) missing value. However, dependence on the observed values is covered under the \acr{MAR} scenario, so I chose to model the \acr{MNAR} scenario by only explicitly encoding dependence on the missing values.
-<!--(Explain this more, say "I chose this because the other case is covered in MNAR")-->
+# Gaussian Self-Masking
+This model encodes dependence only on the (possibly) missing value. However, the case where missingness depends on the observed values is already considered under the \acr{MAR} mechanism, so in this thesis, Gaussian self-masking will be the primary model for \acr{MNAR} data.
+:::
+
+::: {#exm-MNAR}
+
+
+
 :::
 
 ## Semi-Supervised Learning as a Missing Value Problem

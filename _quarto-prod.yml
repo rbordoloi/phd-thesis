@@ -31,6 +31,14 @@ acronyms:
       longname: K-Nearest Neighbours
     - shortname: LOCF
       longname: Last Observation Carried Forward
+    - shortname: EHRs
+      longname: Electronic Health Records
+    - shortname: AUROC
+      longname: Area Under the Receiver-Operating Characteristic Curve
+    - shortname: AUPRC
+      longname: Area Under the Precision-Recall Curve
+    - shortname: Hgb
+      longname: Haemoglobin
 
 book:
   title: "Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
