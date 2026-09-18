@@ -17,8 +17,10 @@ A common example of incomplete and fragmented data in the biomedical data is ele
 <!--Smoother transition here-->
 
 ### History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.
+<!--mention in title that it's tabular data-->
 
 *Imputation* is defined as the procedure of filling in missing or null values in a dataset with substituted values. Some simple structured approaches to imputation are:
+
 
 * Constant - Also known as *padding*, this method of imputation simply fills in the missing values with a constant, often 0.
 * Statistical measures of central tendency - Measures of central tendency like the mean, median, or mode are often used to fill in missing values in tabular data in order to preserve the marginal statistical properties of the features. However, this method disregards the interdependencies between the features.
@@ -41,6 +43,8 @@ A common example of incomplete and fragmented data in the biomedical data is ele
 Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the simplest and most widely used imputation method for time-series data is \acr{LOCF}, which involves simply copying over the most recently observed value for each feature to fill in the missing values. The assumptions here is that systems evolve slowly and are strongly autocorrelated with the recent past, so the current value for a feature should not diverge significantly from the last observed value. However, these assumptions can be violated in cases where there is a change in the data distribution between the current missing time point and the last observed time point (also known as concept drift[@conceptDrift] in continual learning).
 
 A slightly more advanced approach to imputation in longitudinal data is matrix/tensor factorization or completion. The idea is to find values for the missing entries such that the rank of the filled in matrix/tensor is minimized. In the case of matrix completion, @matrixCompletionProof showed that if the number of sampled entries was high enough, then most matrices can be perfectly recovered by solving a simple convex optimization problem. Recent work has extended these results to a certain decomposition of 3-way tensors[@tensorCompletionProof], but these results are not as strong as there are many different definitions of the rank of a tensor. @btf shows an example of this type of approach.
+
+Modern approaches to time-series imputation uses generative models. One of the most well-known modern methods is known as CSDI[@csdi], where some of the observed values are masked and a diffusion model is trained to predict the masked values. The same model can then be used to predict the missing values. Similar approaches can be designed for other generative models like \acr{VAE} models[@gpVae] or \acr{GAN} models[@gain]
 
 ## Notation
 
@@ -130,8 +134,10 @@ This model encodes dependence only on the (possibly) missing value. However, the
 
 ::: {#exm-MNAR}
 
-
+@mnarExample presents a questionnaire dataset shown to exhibit \acr{MNAR} missingness. Participants who left certain questions unanswered received reminders, recovering approximately 50% of the missing responses. A logistic regression model was then used to assess whether the observed covariates and the recovered responses predicted missingness. Since the recovered responses were statistically significant predictors, the missingness mechanism was concluded to be \acr{MNAR}.
 
 :::
 
 ## Semi-Supervised Learning as a Missing Value Problem
+
+Semi-supervised learning is a learning task where only some of the samples are labeled with target values. Let the samples $\mX:=\{\vx_i\}_{i\in[n]}$ be divided into two parts: $\mX_l:=(\vx_i)_{i\in[l]}$, for which labels $\vy=(y_i)_\{y_i\}_{i\in[l]}$ are available, and $\mX_u:=\{y_i\}_{i\in\{[n]\setminus[l]\}}$, for which labels are unavailable.

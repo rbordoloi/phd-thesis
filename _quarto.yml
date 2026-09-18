@@ -5,34 +5,8 @@ project:
 filters:
   - acronyms
 
-acronyms:
-  loa_title: ""
-  insert_loa: false
-  keys:
-    - shortname: MUDRA
-      longname: Multivariate Functional Linear Discriminant Analysis
-    - shortname: F3I
-      longname: Fast Iterative Improvement for Imputation
-    - shortname: FUSE
-      longname: Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization
-    - shortname: MCAR
-      longname: Missing Completely at Random
-    - shortname: MAR
-      longname: Missing At Random
-    - shortname: MNAR
-      longname: Missing Not at Random
-    - shortname: kNN
-      longname: K-Nearest Neighbours
-    - shortname: LOCF
-      longname: Last Observation Carried Forward
-    - shortname: EHRs
-      longname: Electronic Health Records
-    - shortname: AUROC
-      longname: Area Under the Receiver-Operating Characteristic Curve
-    - shortname: AUPRC
-      longname: Area Under the Precision-Recall Curve
-    - shortname: Hgb
-      longname: Haemoglobin
+metadata-files:
+  - _acronyms.yml
 
 
 book:
