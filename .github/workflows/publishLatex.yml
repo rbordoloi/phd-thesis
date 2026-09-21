@@ -72,3 +72,10 @@ jobs:
             git commit -m "Commit from Github Actions: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
 
             git push "https://git:${OVERLEAF_TOKEN}@overleaf.uni-rostock.de/git/6aabb919fbb3a1416b5a7bd0" HEAD:main
+
+      - name: Upload LaTeX Log File
+        if: always() # Runs even if the previous steps failed
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-compilation-log
+          path: /home/runner/work/phd-thesis/phd-thesis/index.log
