@@ -1,0 +1,6 @@
+_book/
+# _extensions/
+.quarto/
+/.quarto/
+**/*.quarto_ipynb
+.harper-dictionary.txt

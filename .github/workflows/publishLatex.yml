@@ -1,0 +1,74 @@
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Quarto Publish Latex
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup TeXLive Action 2
+        # You may pin to the exact commit or the version.
+        # uses: TeX-Live/setup-texlive-action@eb78d21f41941476d9121e3a0abcab73265c876f
+        uses: TeX-Live/setup-texlive-action@v4.1.1
+        with:
+          # # Enable caching for `TEXDIR`.
+          # cache: # optional, default is true
+          # # Glob patterns for specifying files containing the names of TeX packages to be installed. The file format should be the same as the syntax for the `packages` input. The `DEPENDS.txt` format is also supported.
+          # package-file: # optional, default is
+          # # Specify the names of TeX packages to install, separated by whitespaces. Schemes and collections are also acceptable. Everything after `#` will be treated as a comment.
+          packages: |
+            scheme-basic
+            luatex
+            latexmk
+            collection-luatex
+            collection-fontsrecommended
+          # # optional, default is
+          # # TeX Live installation prefix. This has the same effect as `TEXLIVE_INSTALL_PREFIX`. Defaults to `$RUNNER_TEMP/setup-texlive-action`.
+          # prefix: # optional
+          # # Specify the package repository to be used as the main repository. Currently only http(s) repositories are supported.
+          # repository: # optional
+          # # TeX Live system installation directory. This has the same effect as the installer's `-texdir` option and takes precedence over the `prefix` input and related environment variables.
+          # texdir: # optional
+          # # Set up TLContrib as an additional TeX package repository. This input will be ignored for older versions.
+          # tlcontrib: # optional, default is false
+          # # Update all TeX packages when cache restored. The default is `false` and the action will update only `tlmgr`.
+          # update-all-packages: # optional, default is false
+          # # TeX Live version to install. Supported values are `2008` to `2026`, and `latest`.
+          # version: # optional
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Debug file structure
+        run: ls -R images/titlepage/
+
+      - name: Render
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: pdf
+        env:
+          QUARTO_PROFILE: prod
+
+      - name: Commit to Overleaf
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: |
+            cd overleaf/
+
+            git checkout main
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            git stage -A
+
+            git commit -m "Commit from Github Actions: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+
+            git push "https://git:${OVERLEAF_TOKEN}@overleaf.uni-rostock.de/git/6aabb919fbb3a1416b5a7bd0" HEAD:main

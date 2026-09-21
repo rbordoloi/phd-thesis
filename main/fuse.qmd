@@ -1,0 +1,1 @@
+# Fast Semi-Supervised Node Embedding via Structural and Label-Aware Optimization {#sec-fuse}

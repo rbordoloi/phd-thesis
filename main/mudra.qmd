@@ -1,0 +1,1 @@
+# Multivariate Functional Linear Discriminant Analysis for Partially-Observed Time Series {#sec-mudra}

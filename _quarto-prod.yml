@@ -1,0 +1,68 @@
+project:
+  type: book
+  post-render:
+    # - rm -r site_libs
+    - mv Missingness-Aware-Learning-for-Downstream-Tasks-in-Tabular-and-Time-series-Data.tex overleaf/main.tex
+    - cp -r images overleaf/
+    - cp references.bib overleaf/references.bib
+    - cp MastersDoctoralThesis.cls overleaf/MastersDoctoralThesis.cls
+
+
+filters:
+  - acronyms
+
+metadata-files:
+  - _acronyms.yml
+
+book:
+  title: "Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
+  author: "Rahul Bordoloi"
+  date: "4/10/2026"
+  chapters:
+    - index.qmd
+    # - mathCommands.qmd
+    - preface/abstract.qmd
+    - preface/zusammenfassung.qmd
+    - preface/theses.qmd
+    - preface/loa.qmd
+    - main/summary.qmd
+    - main/introduction.qmd
+    - main/background.qmd
+    - main/kNNTheory.qmd
+    - main/mudra.qmd
+    - main/fuse.qmd
+    - main/conclusion.qmd
+    - references.qmd
+  appendices:
+    - appendix/technicalProofs.qmd
+
+bibliography: references.bib
+csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
+
+format:
+  pdf:
+    documentclass: MastersDoctoralThesis
+    classoption:
+      - openany
+      - 11pt
+      - english
+      - singlespacing
+      - headsepline
+    title-page: false
+    toc: false
+    cite-method: biblatex
+    biblatexoptions:
+      - style=authoryear
+      - backend=biber
+    include-in-header:
+      - preamble.tex
+      # - mathCommands.tex
+    include-before-body: titlepage.tex
+    keep-tex: true
+  html:
+    include-in-header:
+      - text: "<script>window.MathJax = {tex: {macros: {symbf: ['\\\\boldsymbol{#1}', 1]}}}</script>"
+      - mathCommands.html
+    theme:
+      - cosmo
+      - brand

@@ -1,0 +1,139 @@
+# Challenges with Missing Data {#sec-intro}
+
+In most statistical and machine learning literature, datasets are assumed to be complete. For instance, in case of tabular data, it is assumed that all features are observed for each sample. Similarly, in the case of multivariate time-series data, it is often assumed that all features for each sample are measured at the same time points. In practice however, datasets are often *incomplete*, with some features unobserved for certain samples, or *fragmented* in case of time-series data, with observations or features missing at different time points across samples.
+<!--Introduce time-series data, so that you can define the terms 'irregular' and 'fragmented' in relation to that, in layman's terms. Add the biological example of patients to explain and define these words-->
+<!--More details - heterogenous samples at different timepoints, missing labels, etc.Summarise all the motivations. don't go into concrete examples here, put it in the motivation-->
+
+A similar issue is label missingness, which has given rise to the field of semi-supervised learning. Label missingness refers to the scenario where only some samples in the dataset are labeled. However, approaches to semi-supervised learning often assume similar distribution of the missing labels as the available labels, which is often not reflected in real world scenarios. An example for this is the task of anomaly detection, where often only some positive samples are labeled and the unlabeled part of the dataset consists overwhelmingly of non-anomalous samples.
+
+In this chapter, I will introduce the different types of missingness that has been proposed in the literature, as well as propose a new classification of missingness based on a different perspective. I will also discuss how the semi-supervised setting can be viewed as a special case of missing data, and how it can be incorporated into the overall missingness framework.
+
+## Motivation for dealing with missingness
+
+### Missing data in the real-world setting and Challenges - Missing attributes <!-- mention 'privacy issues' in the conclusion of thesis instead of the introduction-->
+
+A common example of incomplete and fragmented data in the biomedical data is electronic health records. Patients usually have different lengths of stay in a hospital, and are prescribed different medical tests depending on their symptoms. Compiling this data into a single dataset usually results in extensive missingness across features and time points, resulting in an incomplete, fragmented and sparse data structure. For example, in @boneDensityData the collected dataset records longitudinal bone density data of 423 individuals from 9-26 years of age. Although measurements for all individuals span almost 18 years of age, measurements were actually made for each individual at most four times, typically across less than 5 years. This causes the dataset to be highly fragmented in the time domain. Similarly, a prominent real-life benchmark in multivariate time series research is the Beijing Multi-Site Air Quality dataset [@airQualityData], which exhibits sporadic missing features and irregular temporal alignment across monitoring locations.
+
+<!--Smoother transition here-->
+
+### History of simple unsupervised imputation - constants, measures of central tendency, extremums, etc.
+<!--mention in title that it's tabular data-->
+
+*Imputation* is defined as the procedure of filling in missing or null values in a dataset with substituted values. The simplest approach to imputation, also known as *padding*, simply fills in the missing values with a constant, often 0. This is sufficient for many modern big data scenarios where the percentage of missing value is small enough, but as the proportion of missing values in a dataset increases, this can cause significant bias[@paddingProblems].
+
+A slightly smarter strategy is to fill in the missing values with statistical summaries of that particular feature, usually measures of central tendency like the mean, median, or mode. This can preserve marginal distributions, but often violate feature correlations or label dependencies in the data[@meanImputationProblems]. A trivial example of this is a dataset where the labels are also present in the samples as a feature. When some of those features are missing, a much better way to fill them is to simply copy in the label values, rather than impute them with the feature's statistical summary. When class labels or other grouping context is available, variance minimization[@agriImputation] is an approach to imputation that also takes into account the grouping context. The objective is to find values to impute with, such that the within-group variance is minimized. In the classical single-factor ANOVA setting, this usually simplifies to the group-wise means, but similar loss functions can also be designed for more complex grouping scenarios.
+
+When grouping context is not available, another approach is to impute values using the top-K nearest neighbors with available features for each sample with missing features. The assumption here is that samples with similar values in other features will also have similar values for the missing feature. So, filling in the missing feature by a consensus of samples with similar values for the observed features is assumed to maintain covariance structures.
+
+Imputation can also be seen as a regression problem, where the missing values are the regression labels to be predicted and the observed features are the regressors. Under this perspective, iterative methods for multivariate imputation, such as MICE[@mice] were developed, which models imputation as a round-robin regression problem. At each step, one feature with missing values is selected as the target, and the rest of the observed features are selected as regressors. The model fits a regression model on the available values as uses its predictions to fill in the missing values. This is done for each feature over several steps until all the missing feature values have been filled out.
+
+In the last few years, generative models have also been used to perform imputation. Generative models were initially designed to learn the underlying data distribution given a set of samples, so that one can draw synthetic samples from the learned distribution at will. A simple modification of this conditions the learned distribution on the observed values of each sample to fill in the missing values. An example of this is given by @gain, which uses a \acr{GAN}-based architecture to impute the missing values by sampling from a known random distribution, and modifying the sample until it resembles the target distribution conditioned on the observed values.
+
+### Longitudinal data and missing data
+
+Time-series data needs to consider an additional dimension. Not only do the imputed values need to preserve feature-wise interdependencies to remain unbiased, they also have to consider correlations across time. For this reason, the simplest and most widely used imputation method for time-series data is \acr{LOCF}, which involves simply copying over the most recently observed value for each feature to fill in the missing values. The assumptions here is that systems evolve slowly and are strongly autocorrelated with the recent past, so the current value for a feature should not diverge significantly from the last observed value. However, these assumptions can be violated in cases where there is a change in the data distribution between the current missing time point and the last observed time point (also known as concept drift[@conceptDrift] in continual learning).
+
+A slightly more advanced approach to imputation in longitudinal data is matrix/tensor factorization or completion. The idea is to find values for the missing entries such that the rank of the filled in matrix/tensor is minimized. In the case of matrix completion, @matrixCompletionProof showed that if the number of sampled entries was high enough, then most matrices can be perfectly recovered by solving a simple convex optimization problem. Recent work has extended these results to a certain decomposition of 3-way tensors[@tensorCompletionProof], but these results are not as strong as there are many different definitions of the rank of a tensor. @btf shows an example of this type of approach.
+
+Modern approaches to time-series imputation uses generative models. One of the most well-known modern methods is known as CSDI[@csdi], where some of the observed values are masked and a diffusion model is trained to predict the masked values. The same model can then be used to predict the missing values. Similar approaches can be designed for other generative models like \acr{VAE} models[@gpVae] or \acr{GAN} models[@gain].
+
+## Notation
+
+<!--### Terminology - Augmentation, Generative AI, Missing value imputation, etc. Put this in SoTA Chapter 2, not here-->
+
+### Mathematical formulation
+
+Throughout this thesis, I will use the standardized notation encouraged by most machine learning conferences. Italicized letters will indicate deterministic quantities. Normal small letters indicate numbers ($x,y,t$), bold small letters indicate vectors ($\vx,\vy,\vt$), bold capital letters indicate matrices ($\mX,\mY,\mT$), capital letters in sans-serif fonts indicate tensors $(\tX,\tY,\tT)$ and blackboard bold capital letters indicate sets ($\sX,\sY,\sT$) (with the exception of $\E$ and $\P$ which are defined below). The non-italicized versions of these indicate random quatities; random variables are $\rx,\ry,\rt$, random vectors are $\rvx,\rvy,\rvt$ and random matrices are $\rmX,\rmY,\rmT$. Elements of higher order arrays like vectors, matrices, and higher order tensors are denoted by regular versions of the bold letters with subscripts: $\evx_1,\emX_{11},\etX_{111},\ervx_1,\ermX_{11}$, etc. For a matrix $\mX$, $\mX_{i,:}$ and $\mX_{:,i}$ will denote the $i^{th}$ row and column respectively.
+
+<!--Introduce the notation $[\ell]=\{1...\ell\}$-->
+
+When two random variables $\rx$ and $\ry$ are independent, I will denote that as $\rx\independent\ry$.
+
+I will denote the vectorization of a matrix $\mX$, which means stacking the columns of the matrix sequentially, as
+$$\vec(\mX)=[\mX_{:,1}^\trans\quad\mX_{:,2}^\trans\quad\cdots\quad\mX_{:,n}^\trans]^\trans$$
+The joint/augmented matrix formed by stacking 2 matrices $\mA$ and $\mB$ horizontally will be denoted by $[\mA:\mB]$.
+The determinant of a matrix $\mA$ will be denoted by $|\mA|$, and Kronecker product of two matrices $\mA_{m\times n}$ and $\mB_{p\times q}$ is an $mp\times nq$ matrix defined as
+$$
+\mA\kron\mB\deff\begin{bmatrix}
+\emA_{11}\mB &\emA_{12}\mB&\cdots\emA_{1n}\mB\\
+\emA_{21}\mB &\emA_{22}\mB&\cdots\emA_{2n}\mB\\
+\vdots&\vdots&\ddots&\vdots\\
+\emA_{m1}\mB &\emA_{m2}\mB&\cdots\emA_{mn}\mB\\
+\end{bmatrix}
+$$
+The generalized pseudo-inverse [@pseudoinverse, pp. 20] of a matrix $\mA$ will be denoted by $\mA^-$, which simply indicates that $\mA\mA^-\mA=\mA$. It should be clear that the choice of $\mA^-$ is not unique for a singular matrix $\mA$, *i.e.* if $|\mA|=0$. In cases where a unique choice is necessary, I will use the Moore-Penrose pseudo-inverse [@penrosePseudoinverse] $\mA^+$, which is defined by the following properties:
+$$\mA\mA^+\mA=\mA\qquad\mA^+\mA\mA^+=\mA^+\qquad(\mA\mA^+)^*=\mA\mA^+\qquad(\mA^+\mA)^*=\mA^+\mA$$.
+
+I will denote the probability of an event $E$ as $\P(E)$, expectation of a random variable $\rx$ as $\E[\rx]$, its variance as $\Var(\rx)$, and its covariance with another random variable $\ry$ as $\Cov(\rx,\ry)$. I will denote the variance-covariance matrix of a random vector $\rvx$ as $\Var(\rvx)$. For a matrix $\mSigma$, $\norm{\rvx}_\mSigma$ will denote the Mahalanobis norm [@mahalanobisDistance] of $\rvx$ with covariance $\mSigma$, defined as $\norm{\rvx}_\mSigma\deff\rvx^\trans\mSigma^-\rvx$.
+
+I will also denote the KL divergence of 2 distributions $P$ and $Q$ over the support $\sX$ as
+$$\KL(P||Q)\deff\int_{x\in\sX}P(x)\log\frac{P(x)}{Q(x)}dx$$
+The Cartesian product of two sets $\sA$ and $\sB$ will be denoted by $\sA\times\sB$.
+
+* Add table of notation
+
+## Problem Formulation (Add more discussion about the definitions, to motivate to non-experts)
+
+I will adopt notation similar to @hyperimpute for the problem formulation and denote missing values as `NaN`. Let $\rvx\in \sX=(\sX_1\times\ldots\sX_D)$ be a D-dimensional random vector. The entries of this random vector can be continuous ($\sX_d=\R$) or categorical ($\sX_d=\{1,\ldots,K_d\}$) random variables, for $d\in\{1,\ldots,D\}$. We do not have complete observational access to $\rvx$; instead our observation is mediated by a random masking vector $\rvm\in\{0,1\}^D$. If $\ervm_d=1$, then $\ervx_d$ is observed. Assume that $\rvm$ follows a distribution $\pmask$, and the data $\rvx$ follows a distribution $\pdata$. <!--Say there are $N$ samples, and index everything by $i$, where $i$ is the index of the sample-->
+
+## Types of missingness
+
+Classical literature mainly distinguishes three main missingness mechanisms depending on the relationship between the probability of missingness with the observed and unobserved data [@typesOfMissingness]. These can be distinguished based on the form and properties of $\pmask$.
+
+### \acr{MCAR}
+
+\acr{MCAR} is a missingness mechanism where the probability of missingness is independent of the observed and unobserved data. In other words, the missingness is completely random and does not depend on any of the observed or unobserved data. This is equivalent to the statement that $\rvx\independent\rvm$. This also indicates that each component of $\vm, m_i$, is an independent Bernoulli random variable with probability $p_i$ independent of $\vx$.
+
+::: {#exm-MCAR}
+
+@mcarExample presents an example of a \acr{MCAR} dataset collected via a questionaire. Some data is missing due to non-response to some questions, and Little's \acr{MCAR} test[@littleMCARTest] shows that the choice to not answer certain questions is taken completely at random.
+:::
+
+### \acr{MAR}
+
+The missingness mechanism \acr{MAR} indicates that the probability of missingness depends only on the observed values. In more technicality, let $\rvx$ and $\rvm$ be partitoned as $\{\rvx_1,\rvx_2\}$ and $\{\rvm_1,\rvm_2\}$ respectively, such that $\rvx_1$ is always observed, that is, $\rvm_1=\mathbf{1}$. Then, $\rvx$ is said to be \acr{MAR} if $\pmask$ depends only on $\rvx_1$.
+
+::: {#rem-logisticMAR}
+
+# Logistic Model for MAR
+
+A simple model of \acr{MAR} data, and one I will use in this thesis to demonstrate and evaluate imputation methods on the \acr{MAR} scenario, is
+$$
+\pmask(\rvm_2\mid\rvx_1)=\frac{1}{1+\exp(-\rmW\rvx_1)},
+$${#eq-MAR}
+where $\rmW$ is a random matrix.
+
+:::
+
+::: {#exm-MAR}
+
+@marExample illustrates a scenario in which missing data in \acr{EHRs} follow the \acr{MAR} mechanism. Using data from the Flatiron Health database, the authors investigate the effect of \acr{Hgb} levels on real-world overall survival across several tumor types. They first apply Little's \acr{MCAR} test and, when the null hypothesis is rejected, train a random-forest classifier to predict \acr{Hgb} missingness from the other observed covariates, evaluating its performance using \acr{AUROC}. For patients with multiple myeloma, functional status (ECOG performance score at the index date) was found to be a strong predictor of \acr{Hgb} missingness. This is consistent with the clinical practice of drawing blood less frequently from highly functional patients without signs of illness. Thus, the probability of \acr{Hgb} missingness depends on observed variables, consistent with an \acr{MAR} mechanism.
+
+:::
+
+### \acr{MNAR}
+
+If data is missing by the \acr{MNAR} mechanism, the probability of missingness depends both on the observed and the unobserved data. Mathematically, $\pmask$ depends on all elements of $\rvx$. A model similar to @eq-MAR can be developed for this scenario, but a much simpler model that still allows us to evaluate methods and derive theoretical guarantees is Gaussian self-masking
+$$
+\pmask(\ervm_i\mid\ervx_i) = K_i\exp(-\frac{(\ervx_i-\tilde{\mu}_i)^2}{2\tilde{\sigma}_i^2})
+$$
+where $\tilde{\mu}_i$ and $\tilde{\sigma}_i^2$ are the mean and variance of the observed values of the $i^\text{th}$ components of $\rvx$, and $0<K_i\leq 1$ is a scaling factor.
+
+::: {#rem-gaussianSelfMasking}
+# Gaussian Self-Masking
+This model encodes dependence only on the (possibly) missing value. However, the case where missingness depends on the observed values is already considered under the \acr{MAR} mechanism, so in this thesis, Gaussian self-masking will be the primary model for \acr{MNAR} data.
+:::
+
+::: {#exm-MNAR}
+
+@mnarExample presents a questionnaire dataset shown to exhibit \acr{MNAR} missingness. Participants who left certain questions unanswered received reminders, recovering approximately 50% of the missing responses. A logistic regression model was then used to assess whether the observed covariates and the recovered responses predicted missingness. Since the recovered responses were statistically significant predictors, the missingness mechanism was concluded to be \acr{MNAR}.
+
+:::
+
+## Semi-Supervised Learning as a Missing Value Problem
+
+Semi-supervised learning is a learning task where only some of the samples are labeled with target values. Let the samples $\mX:=\{\vx_i\}_{i\in[n]}$ be divided into two parts: $\mX_\ell:=(\vx_i)_{i\in[\ell]}$, for which labels $\vy=(y_i)_{i\in[\ell]}$ are available, and $\mX_u:=\{x_i\}_{i\in\{[n]\setminus[\ell]\}}$, for which labels are unavailable. Very often, the missingness of labels are unbalanced. For instance in the Credit Card Fraud dataset[@creditCard1; @creditCard2; @creditCard3; @creditCard4; @creditCard5; @creditCard6; @creditCard7; @creditCard8; @creditCard9; @creditCard10], the only labels available are the positive "fraud" labels. For the unlabeled data, it is not known whether the samples are "frauds" or not.
+<!--Add the number of positive labels. Make it clear that $\mX$ is complete. Rewrite the next paragraph to remove the assumption that true labels are balanced-->
+
+The semi-supervised learning problem can be seen as a specific case of the missing data problem, where the modified dataset $[\mX:\vy]$ is now an augmentation of the sample matrix with the labels. Missing values are only observed in the label column. Assuming balanced true class proportions, the missingness of the labels can depend on the observed data matrix in various ways: if the labels are missing completely at random (\acr{MCAR}), it constitutes the balanced missing label scenario. If the missingness of the labels only depends on the corresponding sample (\acr{MAR}), or if it depends on the label itself (\acr{MNAR}), it constitutes the imbalanced missing label scenario. @semiSupLabelImbalance recently showed that even in the case of highly imbalanced training data, more unlabeled data is _always_ helpful in making classifiers more accurate.
+<!--Explain the theorem better and more specifically. Introduce the concept that it would not be a good idea to ignore the unlabeled samples, and that is why the theorem is needed.-->
