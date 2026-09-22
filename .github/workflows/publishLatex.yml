@@ -53,9 +53,6 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Debug file structure
-        run: ls -R images/titlepage/
-
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
         with:
