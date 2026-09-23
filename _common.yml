@@ -34,3 +34,18 @@ acronyms:
       longname: Patient Reported Outcome Measure
     - shortname: SotA
       longname: State of the Art
+
+pseudocode:
+  caption-prefix: "Algorithm"
+  reference-prefix: "Algorithm"
+  caption-number: true
+  caption-align: "left"
+
+crossref:
+  custom:
+    - kind: float
+      key: algo
+      reference-prefix: "Algorithm"
+      caption-prefix: "Algorithm"
+      latex-env: alg
+      latex-list-of-description: Algorithm
