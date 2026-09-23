@@ -30,3 +30,7 @@ acronyms:
       longname: Variational AutoEncoder
     - shortname: GAN
       longname: Generative Adversarial Network
+    - shortname: PROM
+      longname: Patient Reported Outcome Measure
+    - shortname: SotA
+      longname: State of the Art
