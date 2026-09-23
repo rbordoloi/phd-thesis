@@ -26,7 +26,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -703,8 +723,34 @@ $$
 </header>
 
 
+<p>Despite the wide methodological diversity of modern approaches to imputation, most real-world settings still use simple imputation techniques like padding, central tendency measures, nearest-neighbor approaches or MICE<span class="citation" data-cites="methodsInPractice"><a href="../references.html#ref-methodsInPractice" role="doc-biblioref">[1]</a></span>. However, many of these machine learning approaches come without any guarantees on the quality of imputation, or often the only guarantees available are in the more straightforward <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> and <a href="#acronyms_MAR">Missing At Random (MAR)</a> settings. As shown in <a href="introduction.html#exm-MNAR" class="quarto-xref">Example&nbsp;<span>1.3</span></a>, in many biomedical settings like <a href="#acronyms_PROM">Patient Reported Outcome Measure (PROM)</a> datasets, the missingness pattern actually follows the <a href="#acronyms_MNAR">Missing Not at Random (MNAR)</a> mechanism.</p>
+<p>Nearest-neighbor imputers<span class="citation" data-cites="knnImputer"><a href="../references.html#ref-knnImputer" role="doc-biblioref">[2]</a></span> are known to have good performance in practice and are relatively fast<span class="citation" data-cites="knnSurvey1 knnSurvey2 knnSurvey3"><a href="../references.html#ref-knnSurvey1" role="doc-biblioref">[3]</a>, <a href="../references.html#ref-knnSurvey2" role="doc-biblioref">[4]</a>, <a href="../references.html#ref-knnSurvey3" role="doc-biblioref">[5]</a></span>. However, this comes at the cost of a drop in performance for classification tasks in high-dimensional datasets<span class="citation" data-cites="knnPerfHighDim"><a href="../references.html#ref-knnPerfHighDim" role="doc-biblioref">[6]</a></span>. This limitation does not necessarily extend to other downstream tasks. In my experiments on the outlier detection task, where additional irrelevant features containing no informative signal were introduced solely to increase the dimensionality, I found that <a href="#acronyms_kNN">K-Nearest Neighbours (kNN)</a>-based methods remained robust to the presence of such irrelevant features<span class="citation" data-cites="msde"><a href="../references.html#ref-msde" role="doc-biblioref">[7]</a></span>.</p>
+<p>In this chapter, I will first propose a general description of iterative <a href="#acronyms_kNN">kNN</a>-based approaches for imputation. I will then describe a general proof strategy for deriving theoretical bounds for imputation quality on this meta-algorithm. After that, I will describe <a href="#acronyms_F3I">Fast Iterative Improvement for Imputation (F3I)</a>, a novel modification of the classical <a href="#acronyms_kNN">kNN</a> imputation algorithm which can automatically be tuned for downstream tasks, and can handle mixed-type variables. Finally, I will empirically show that <a href="#acronyms_kNN">kNN</a>-based approaches are competitive performance-wise to the <a href="#acronyms_SotA">State of the Art (SotA)</a>, while being much faster.</p>
 
 
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-methodsInPractice" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. Afkanpour, E. Hosseinzadeh, and H. Tabesh, <span>“Identify the most appropriate imputation method for handling missing values in clinical structured datasets: A systematic review,”</span> <em>BMC Medical Research Methodology</em>, vol. 24, no. 1, Aug. 2024, doi: <a href="https://doi.org/10.1186/s12874-024-02310-6">10.1186/s12874-024-02310-6</a>.</div>
+</div>
+<div id="ref-knnImputer" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">O. Troyanskaya <em>et al.</em>, <span>“Missing value estimation methods for DNA microarrays,”</span> <em>Bioinformatics</em>, vol. 17, no. 6, pp. 520–525, Jun. 2001, doi: <a href="https://doi.org/10.1093/bioinformatics/17.6.520">10.1093/bioinformatics/17.6.520</a>.</div>
+</div>
+<div id="ref-knnSurvey1" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">T. Emmanuel, T. Maupong, D. Mpoeleng, T. Semong, B. Mphago, and O. Tabona, <span>“A survey on missing data in machine learning,”</span> <em>Journal of Big data</em>, vol. 8, pp. 1–37, 2021.</div>
+</div>
+<div id="ref-knnSurvey2" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">K. Seu, M.-S. Kang, and H. Lee, <span>“An intelligent missing data imputation techniques: A review,”</span> <em>JOIV: International Journal on Informatics Visualization</em>, vol. 6, no. 1–2, pp. 278–283, 2022.</div>
+</div>
+<div id="ref-knnSurvey3" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">L. O. Joel, W. Doorsamy, and B. S. Paul, <span>“On the performance of imputation techniques for missing values on healthcare datasets.”</span> 2024. Available: <a href="https://arxiv.org/abs/2403.14687">https://arxiv.org/abs/2403.14687</a></div>
+</div>
+<div id="ref-knnPerfHighDim" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">L. Beretta and A. Santaniello, <span>“Nearest neighbor imputation algorithms: A critical evaluation,”</span> <em>BMC Medical Informatics and Decision Making</em>, vol. 16, no. S3, Jul. 2016, doi: <a href="https://doi.org/10.1186/s12911-016-0318-z">10.1186/s12911-016-0318-z</a>.</div>
+</div>
+<div id="ref-msde" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">P. Kar, R. Bordoloi, O. Wolkenhauer, and S. Bej, <span>“Anomaly detection via mean shift density enhancement,”</span> <em>Data Mining and Knowledge Discovery</em>, vol. 40, no. 5, Jul. 2026, doi: <a href="https://doi.org/10.1007/s10618-026-01244-5">10.1007/s10618-026-01244-5</a>.</div>
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
