@@ -52,7 +52,9 @@ format:
                 packages: {
                   "[+]": ["boldsymbol"],
                 },
-                macros: {symbf: ['\\boldsymbol{#1}', 1]}
+                macros: {
+                  symbf: ['\\boldsymbol{#1}', 1]
+                },
               },
             };
             </script>
