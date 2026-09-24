@@ -36,6 +36,9 @@ csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
 
 format:
   html:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
     include-in-header:
       - text: |
           <script>
@@ -58,7 +61,7 @@ format:
               },
             };
             </script>
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
       - mathCommands.html
     theme:
       - cosmo
