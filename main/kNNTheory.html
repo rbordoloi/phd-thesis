@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fd0503e23dce65854c81c5baaade3bdf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ed7344add5f1663e434276306a2aa159.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -781,7 +781,7 @@ $$
 <div id="algo-metaKNN" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-algo figure">
 <div aria-describedby="algo-metaKNN-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="pseudocode-container quarto-float" data-line-number-punc=":" data-comment-delimiter="#" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-no-end="false" data-line-number="true" data-pseudocode-number="1" data-indent-lines="false">
+<div id="algo-metaKNN" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-line-number-punc=":" data-no-end="false" data-comment-delimiter="#" data-indent-size="1.2em" data-line-number="true" data-indent-lines="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{General weighted nearest-neighbor (NN) imputation meta-algorithm.} \begin{algorithmic} \State {\bfseries Input:} Data $X \in (\mathbb{R}\cup\{\texttt{N/A}\})^{N \times F}$ \State {\bfseries Parameters:} Number of neighbors $K \geq 2$, Weight update function $f_{w} : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \triangle_K$, Stopping criterion $s : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \{\text{True},\text{False}\}$, Nearest-neighbor search algorithm $\mathcal{A}$ \State {\bfseries Output:} Imputed data $\widehat{X} \in \mathbb{R}^{N \times F}$ \State Initialize $\mathcal{A}$ with $Z = \{\symbf{x}_1,\symbf{x}_2, \dots, \symbf{x}_N\}$ and $\widehat{X} \gets X$\Comment{Initialize NN search} \State $\symbf{\alpha} \gets 1/K\textbf{1}_K \triangleq \{1/K, 1/K, \dots, 1/K\}$\Comment{Initialize the K neighbor-dependent weights} \State $t \gets 0$ \State {\bfseries return} $\widehat{X}$ \While{{\bfseries not} $s(\symbf{\alpha}, \widehat{X}, t)$} \State $\symbf{\alpha} \gets f_{w}(\symbf{\alpha}, \widehat{X})$\Comment{Update the K neighbor-dependent weights} \For{$i \leq N$ and $f \leq F$} \State $(\symbf{z}^{i,f})_1, (\symbf{z}^{i,f})_2, \dots, (\symbf{z}^{i,f})_K \gets \mathcal{A}(\widehat{\symbf{x}}_i)$ \EndFor \State $t \gets t +1 $ \EndWhile \end{algorithmic} \end{algorithm}
 </div>
@@ -792,7 +792,7 @@ Algorithm&nbsp;3.1
 </figcaption>
 </figure>
 </div>
-<p>This is a test of <a href="#algo-metaKNN" class="quarto-xref">Algorithm&nbsp;<span>3.1</span></a></p>
+<p>This is a test of <a href="#algo-metaKNN" class="quarto-xref">Algorithm 1</a></p>
 
 
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
