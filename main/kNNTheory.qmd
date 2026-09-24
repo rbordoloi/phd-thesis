@@ -7,7 +7,7 @@ Nearest-neighbor imputers[@knnImputer] are known to have good performance in pra
 
 In this chapter, I will first propose a general description of iterative \acr{kNN}-based approaches for imputation. I will then describe a general proof strategy for deriving theoretical bounds for imputation quality on this meta-algorithm. After that, I will describe \acr{F3I}, a novel modification of the classical \acr{kNN} imputation algorithm which can automatically be tuned for downstream tasks, and can handle mixed-type variables. I will also use the general proof strategy to derive theoretical bounds for this method. Finally, I will empirically show that \acr{kNN}-based approaches are competitive performance-wise to the \acr{SotA}, while being much faster.
 
-<!--Throughout this chapter, we will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension K.-->
+Throughout this chapter, we will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension K.
 
 ## Meta-algorithm for \acr{kNN}
 
