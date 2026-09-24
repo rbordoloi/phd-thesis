@@ -34,6 +34,10 @@ acronyms:
       longname: Patient Reported Outcome Measure
     - shortname: SotA
       longname: State of the Art
+    - shortname: MSE
+      longname: Mean Squared Error
+    - shortname: RMSE
+      longname: Root Mean Squared Error
 
 pseudocode:
   caption-prefix: "Algorithm"

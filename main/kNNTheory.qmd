@@ -7,9 +7,21 @@ Nearest-neighbor imputers[@knnImputer] are known to have good performance in pra
 
 In this chapter, I will first propose a general description of iterative \acr{kNN}-based approaches for imputation. I will then describe a general proof strategy for deriving theoretical bounds for imputation quality on this meta-algorithm. After that, I will describe \acr{F3I}, a novel modification of the classical \acr{kNN} imputation algorithm which can automatically be tuned for downstream tasks, and can handle mixed-type variables. I will also use the general proof strategy to derive theoretical bounds for this method. Finally, I will empirically show that \acr{kNN}-based approaches are competitive performance-wise to the \acr{SotA}, while being much faster.
 
-Throughout this chapter, we will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension K.
 
-## Meta-algorithm for \acr{kNN}
+
+Throughout this chapter, I will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension K. For a dataset with missing values, the initial data matrix with missing values will be called $\mX\in(\sR\cup$`NaN`$)^{N\times F}$, and the full unobserved matrix will be denoted by $\mX^\star\in\sR^{N\times F}$.
+
+One of the most common metrics to evaluate the imputation quality is the \acr{MSE}.
+
+::: {#def-mse}
+# Mean Squared Error (MSE)
+
+_We define the \acr{MSE} as $\text{MSE}(\widehat{\vx}, \vx^\star) = \frac{1}{F} \sum_{f \leq F} (\widehat{\evx}^f_i-(\evx^\star)^f_i)^2$ and the associated loss as_
+$$\mathcal{L}^\text{MSE}(\widehat{\mX}, \mX^\star)\triangleq\frac{1}{N} \sum_{i \leq N} \text{MSE}(\widehat{\mX}_{i,:}, \mX^\star_{i,:})$$
+The \acr{RMSE} is then defined as $\mathcal{L}^\text{RMSE}(\widehat{\mX}, \mX^\star) \triangleq \sqrt{\mathcal{L}^\text{MSE}(\widehat{\mX}, \mX^\star)}$.
+:::
+
+## Meta-algorithm for \acr{kNN} and analysis
 
 ::: {#algo-metaKNN}
 
@@ -31,7 +43,7 @@ Throughout this chapter, we will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \
   \State {\bfseries Parameters:} Number of neighbors $K \geq 2$, Weight update function $f_{w} : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \triangle_K$, Stopping criterion $s : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \{\text{True},\text{False}\}$, Nearest-neighbor search algorithm $\mathcal{A}$
   \State {\bfseries Output:} Imputed data $\widehat{X} \in \mathbb{R}^{N \times F}$
   \State Initialize $\mathcal{A}$ with $Z = \{\symbf{x}_1,\symbf{x}_2, \dots, \symbf{x}_N\}$ and $\widehat{X} \gets X$\Comment{Initialize NN search}
-  \State $\symbf{\alpha} \gets 1/K,\;\textbf{1}_K \triangleq \{1/K, 1/K, \dots, 1/K\}$\Comment{Initialize the K neighbor-dependent weights}
+  \State $\symbf{\alpha} \gets 1/K\symbf{1}_K \triangleq \{1/K, 1/K, \dots, 1/K\}$\Comment{Initialize the K neighbor-dependent weights}
   \State $t \gets 0$
   \State {\bfseries return} $\widehat{X}$
   \While{{\bfseries not} $s(\symbf{\alpha}, \widehat{X}, t)$} 
@@ -46,5 +58,4 @@ Throughout this chapter, we will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \
 ```
 :::
 
-@algo-metaKNN defines the broad structure of an iterative convex-weighted nearest-neighbor approach to imputation.
-$\alpha, \beta$
+@algo-metaKNN defines the broad structure of an iterative convex-weighted nearest-neighbor approach to imputation. Given any weight update function returning a vector of $K$ convex weights in $\triangle_K$, and a stopping criterion, this meta-algorithm iteratively retrieves the $K$ nearest neighbors of each data point, and imputes missing values with the convex combinations of corresponding non-missing feature values from nearest-neighbors. This structure retrieves known NN-based imputation approaches[@knnImputer]. For instance, the classical \acr{kNN} imputation algorithm with uniform weights just stops after one iteration, and the weight function produces the K-sized vector $1/K\symbf{1}_K$.
