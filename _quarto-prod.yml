@@ -62,7 +62,26 @@ format:
     keep-tex: true
   html:
     include-in-header:
-      - text: "<script>window.MathJax = {tex: {macros: {symbf: ['\\\\boldsymbol{#1}', 1]}}}</script>"
+      - text: |
+          <script>
+            MathJax = {
+              loader: {
+                load: ["[tex]/boldsymbol"],
+              },
+              tex: {
+                tags: "all",
+                inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+                processEscapes: true,
+                processEnvironments: true,
+                packages: {
+                  "[+]": ["boldsymbol"],
+                },
+                macros: {symbf: ['\\boldsymbol{#1}', 1]}
+              },
+            };
+            </script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
       - mathCommands.html
     theme:
       - cosmo

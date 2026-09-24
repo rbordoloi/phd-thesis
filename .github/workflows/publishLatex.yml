@@ -56,7 +56,7 @@ jobs:
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          to: pdf
+          to: pdf,html
         env:
           QUARTO_PROFILE: prod
 

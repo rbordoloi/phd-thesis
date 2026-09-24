@@ -38,7 +38,7 @@ acronyms:
 pseudocode:
   caption-prefix: "Algorithm"
   reference-prefix: "Algorithm"
-  caption-number: true
+  caption-number: false
   caption-align: "left"
 
 crossref:

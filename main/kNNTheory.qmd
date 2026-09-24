@@ -20,6 +20,7 @@ In this chapter, I will first propose a general description of iterative \acr{kN
 #| pdf-line-number: true
 #| pdf-comment-delimiter: "\#"
 #| pdf-right-comment: true
+#| label: algo-metaKNN
 
 \begin{algorithm}
 \caption{General weighted nearest-neighbor (NN) imputation meta-algorithm.}
