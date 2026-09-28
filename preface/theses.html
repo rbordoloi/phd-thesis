@@ -669,7 +669,7 @@ $$
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../main/background.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">State-of-the Art in Imputation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">State of the Art in Missingness-Aware Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -749,7 +749,14 @@ $$
 </header>
 
 
-<p>These are the theses.</p>
+<ul>
+<li>Improvement in the quality of imputation does not necessarily result in improvement in downstream task performance.</li>
+<li>Nearest neighbor-based imputation methods can outperform advanced deep neural network-based and generative approaches.</li>
+<li>Incorporating downstream task objectives into the imputation objective can improve the quality of imputation for downstream tasks.</li>
+<li>If the missingness is structurally regular, like short multivariate time series with missing time points or missing features, missingness-aware feature extraction without imputation is a better strategy than simple imputation followed by feature extraction.</li>
+<li>Semi-supervised learning problems can be seen as a special case of missingness-aware learning, and should be evaluated based on different patterns of label missingness than the simple <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> setting.</li>
+<li>In more complex structured data like graphs, the inherent structure of the data should be used to handle missing features and labels in semi-supervised learning.</li>
+</ul>
 
 
 
