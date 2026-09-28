@@ -1,6 +1,11 @@
 # Theses {.unnumbered}
 
-These are the theses.
+* Improvement in the quality of imputation does not necessarily result in improvement in downstream task performance.
+* Nearest neighbor-based imputation methods can outperform advanced deep neural network-based and generative approaches.
+* Incorporating downstream task objectives into the imputation objective can improve the quality of imputation for downstream tasks.
+* If the missingness is structurally regular, like short multivariate time series with missing time points or missing features, missingness-aware feature extraction without imputation is a better strategy than simple imputation followed by feature extraction.
+* Semi-supervised learning problems can be seen as a special case of missingness-aware learning, and should be evaluated based on different patterns of label missingness than the simple \acr{MCAR} setting.
+* In more complex structured data like graphs, the inherent structure of the data should be used to handle missing features and labels in semi-supervised learning.
 
 ```{=latex}
 \tableofcontents

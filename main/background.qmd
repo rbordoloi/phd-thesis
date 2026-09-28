@@ -1,4 +1,4 @@
-# State-of-the Art in Imputation {#sec-background}
+# State of the Art in Missingness-Aware Learning {#sec-background}
 
 * Multivariate Imputation by Chained Equations and its variants
 * Ensemble methods - HyperImpute, RF-GAP
@@ -9,3 +9,7 @@
 * Models for joint imputation-downstream task: NeuMiss, GRAPE, etc. (Relate to [Chapter -@sec-knnTheory])
 * Models that perform downstream tasks without imputation - FLDA (Relate to [Chapter -@sec-mudra])
 * Models that perform imputation in more complex structures, eg. graphs (Relate to [Chapter -@sec-fuse])
+
+One of the earliest major advancements in multivariate imputation was by @mice. 
+
+<!--Be careful not to mix up the research gaps and this chapter. This should only have the SotA-->
