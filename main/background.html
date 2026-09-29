@@ -744,8 +744,15 @@ $$
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#iterative-imputation" id="toc-iterative-imputation" class="nav-link active" data-scroll-target="#iterative-imputation"><span class="header-section-number">2.1</span> Iterative Imputation</a></li>
+  <li><a href="#generative-imputation" id="toc-generative-imputation" class="nav-link" data-scroll-target="#generative-imputation"><span class="header-section-number">2.2</span> Generative Imputation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -780,7 +787,14 @@ $$
 <li>Models that perform downstream tasks without imputation - FLDA (Relate to <a href="mudra.html" class="quarto-xref">Chapter&nbsp;<span>4</span></a>)</li>
 <li>Models that perform imputation in more complex structures, eg. graphs (Relate to <a href="fuse.html" class="quarto-xref">Chapter&nbsp;<span>5</span></a>)</li>
 </ul>
-<p>One of the earliest major advancements in multivariate imputation was by <span class="citation" data-cites="mice"><a href="../references.html#ref-mice" role="doc-biblioref">[1]</a></span>.</p>
+<section id="iterative-imputation" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="iterative-imputation"><span class="header-section-number">2.1</span> Iterative Imputation</h2>
+<p>One of the earliest major advancements in multivariate imputation was by <span class="citation" data-cites="mice"><a href="../references.html#ref-mice" role="doc-biblioref">[1]</a></span>, called MICE. MICE is a general approach that starts off from a naive imputation, and then iteratively fits a univariate regression model on each feature to impute the missing feature values. It is computationally efficient, highly adaptable as it can be used with any regression model. It can also specify different regression models for each features, and this can be used for all types of tabular data, be it numeric, categorical, or mixed. Because of this flexibility and computational efficiency, MICE remains one of the most widely adopted imputation methods in the literature.</p>
+<p>Another highly successful approach to imputation has been ensemble methods, such as HyperImpute<span class="citation" data-cites="hyperimpute"><a href="../references.html#ref-hyperimpute" role="doc-biblioref">[2]</a></span> and RF-GAP<span class="citation" data-cites="rfgap"><a href="../references.html#ref-rfgap" role="doc-biblioref">[3]</a></span>. HyperImpute attempts to make the iterative imputation process more flexible, by allowing a model search using AutoML<span class="citation" data-cites="automl"><a href="../references.html#ref-automl" role="doc-biblioref">[4]</a></span> methods over multiple regression models for each feature. On the other hand, RF-GAP defines a novel proximity measure on an ensemble of binary recursive trees, and computes a proximity-based sum to impute missing values.</p>
+</section>
+<section id="generative-imputation" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="generative-imputation"><span class="header-section-number">2.2</span> Generative Imputation</h2>
+<p>Another line of research view imputation as a</p>
 <!--Be careful not to mix up the research gaps and this chapter. This should only have the SotA-->
 
 
@@ -788,7 +802,17 @@ $$
 <div id="ref-mice" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">S. van Buuren and K. Groothuis-Oudshoorn, <span>“Mice: Multivariate imputation by chained equations in r,”</span> <em>Journal of Statistical Software</em>, vol. 45, no. 3, pp. 1–67, 2011, doi: <a href="https://doi.org/10.18637/jss.v045.i03">10.18637/jss.v045.i03</a>.</div>
 </div>
+<div id="ref-hyperimpute" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">D. Jarrett, B. C. Cebere, T. Liu, A. Curth, and M. van der Schaar, <span>“<span>H</span>yper<span>I</span>mpute: Generalized iterative imputation with automatic model selection,”</span> in <em>Proceedings of the 39th international conference on machine learning</em>, K. Chaudhuri, S. Jegelka, L. Song, C. Szepesvari, G. Niu, and S. Sabato, Eds., in Proceedings of machine learning research, vol. 162. PMLR, Jun. 2022, pp. 9916–9937. Available: <a href="https://proceedings.mlr.press/v162/jarrett22a.html">https://proceedings.mlr.press/v162/jarrett22a.html</a></div>
 </div>
+<div id="ref-rfgap" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">J. S. Rhodes, A. Cutler, and K. R. Moon, <span>“<span class="nocase">Geometry- and Accuracy-Preserving Random Forest Proximities </span>,”</span> <em>IEEE Transactions on Pattern Analysis &amp; Machine Intelligence</em>, vol. 45, no. 9, pp. 10947–10959, Sep. 2023, doi: <a href="https://doi.org/10.1109/TPAMI.2023.3263774">10.1109/TPAMI.2023.3263774</a>.</div>
+</div>
+<div id="ref-automl" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">X. He, K. Zhao, and X. Chu, <span>“AutoML: A survey of the state-of-the-art,”</span> <em>Knowledge-Based Systems</em>, vol. 212, p. 106622, 2021, doi: <a href="https://doi.org/10.1016/j.knosys.2020.106622">https://doi.org/10.1016/j.knosys.2020.106622</a>.</div>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
