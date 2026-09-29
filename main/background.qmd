@@ -10,6 +10,14 @@
 * Models that perform downstream tasks without imputation - FLDA (Relate to [Chapter -@sec-mudra])
 * Models that perform imputation in more complex structures, eg. graphs (Relate to [Chapter -@sec-fuse])
 
-One of the earliest major advancements in multivariate imputation was by @mice. 
+## Iterative Imputation
+
+One of the earliest major advancements in multivariate imputation was by @mice, called MICE. MICE is a general approach that starts off from a naive imputation, and then iteratively fits a univariate regression model on each feature to impute the missing feature values. It is computationally efficient, highly adaptable as it can be used with any regression model. It can also specify different regression models for each features, and this can be used for all types of tabular data, be it numeric, categorical, or mixed. Because of this flexibility and computational efficiency, MICE remains one of the most widely adopted imputation methods in the literature.
+
+Another highly successful approach to imputation has been ensemble methods, such as HyperImpute[@hyperimpute] and RF-GAP[@rfgap]. HyperImpute attempts to make the iterative imputation process more flexible, by allowing a model search using AutoML[@automl] methods over multiple regression models for each feature. On the other hand, RF-GAP defines a novel proximity measure on an ensemble of binary recursive trees, and computes a proximity-based sum to impute missing values.
+
+## Generative Imputation
+
+Another line of research view imputation as a 
 
 <!--Be careful not to mix up the research gaps and this chapter. This should only have the SotA-->

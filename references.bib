@@ -602,3 +602,33 @@ note={}
  volume = {34},
  year = {2021}
 }
+@ARTICLE{rfgap,
+author={Rhodes, Jake S. and Cutler, Adele and Moon, Kevin R.},
+journal={ IEEE Transactions on Pattern Analysis \& Machine Intelligence },
+title={{ Geometry- and Accuracy-Preserving Random Forest Proximities }},
+year={2023},
+volume={45},
+number={09},
+ISSN={1939-3539},
+pages={10947-10959},
+abstract={ Random forests are considered one of the best out-of-the-box classification and regression algorithms due to their high level of predictive performance with relatively little tuning. Pairwise proximities can be computed from a trained random forest and measure the similarity between data points relative to the supervised task. Random forest proximities have been used in many applications including the identification of variable importance, data imputation, outlier detection, and data visualization. However, existing definitions of random forest proximities do not accurately reflect the data geometry learned by the random forest. In this paper, we introduce a novel definition of random forest proximities called Random Forest-Geometry- and Accuracy-Preserving proximities (RF-GAP). We prove that the proximity-weighted sum (regression) or majority vote (classification) using RF-GAP exactly matches the out-of-bag random forest prediction, thus capturing the data geometry learned by the random forest. We empirically show that this improved geometric representation outperforms traditional random forest proximities in tasks such as data imputation and provides outlier detection and visualization results consistent with the learned data geometry. },
+keywords={Random forests;Forestry;Geometry;Data visualization;Decision trees;Task analysis;Anomaly detection},
+doi={10.1109/TPAMI.2023.3263774},
+url = {https://doi.ieeecomputersociety.org/10.1109/TPAMI.2023.3263774},
+publisher={IEEE Computer Society},
+address={Los Alamitos, CA, USA},
+month={09}
+}
+@article{automl,
+title = {AutoML: A survey of the state-of-the-art},
+journal = {Knowledge-Based Systems},
+volume = {212},
+pages = {106622},
+year = {2021},
+issn = {0950-7051},
+doi = {https://doi.org/10.1016/j.knosys.2020.106622},
+url = {https://www.sciencedirect.com/science/article/pii/S0950705120307516},
+author = {Xin He and Kaiyong Zhao and Xiaowen Chu},
+keywords = {Deep learning, Automated machine learning (autoML), Neural architecture search (NAS), Hyperparameter optimization (HPO)},
+abstract = {Deep learning (DL) techniques have obtained remarkable achievements on various tasks, such as image recognition, object detection, and language modeling. However, building a high-quality DL system for a specific task highly relies on human expertise, hindering its wide application. Meanwhile, automated machine learning (AutoML) is a promising solution for building a DL system without human assistance and is being extensively studied. This paper presents a comprehensive and up-to-date review of the state-of-the-art (SOTA) in AutoML. According to the DL pipeline, we introduce AutoML methods – covering data preparation, feature engineering, hyperparameter optimization, and neural architecture search (NAS) – with a particular focus on NAS, as it is currently a hot sub-topic of AutoML. We summarize the representative NAS algorithms’ performance on the CIFAR-10 and ImageNet datasets and further discuss the following subjects of NAS methods: one/two-stage NAS, one-shot NAS, joint hyperparameter and architecture optimization, and resource-aware NAS. Finally, we discuss some open problems related to the existing AutoML methods for future research.}
+}
