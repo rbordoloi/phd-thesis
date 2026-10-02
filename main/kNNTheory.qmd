@@ -3,20 +3,25 @@
 
 Despite the wide methodological diversity of modern approaches to imputation, most real-world settings still use simple imputation techniques like padding, central tendency measures, nearest-neighbor approaches or MICE[@methodsInPractice]. However, many of these machine learning approaches come without any guarantees on the quality of imputation, or often the only guarantees available are in the more straightforward \acr{MCAR} and \acr{MAR} settings. For instance, it was recently shown that for almost all imputation methods, it is always possible to find a downstream regressor that is Bayes consistent[@NeuMissMLP]. However, this analysis is also done on fixed missingness patterns, and does not account for the scenario where missingness depends on the observed and missing values. As shown in @exm-MNAR, in many biomedical settings like \acr{PROM} datasets, the missingness pattern actually follows the \acr{MNAR} mechanism.
 
-<!--Remove that commented out line because it's not strictly true, as shown in https://proceedings.neurips.cc/paper/2021/file/5fe8fdc79ce292c39c5f209d734b7206-Paper.pdf and https://openreview.net/forum?id=4CDnIACCQG.-->
+<!--Concrete use cases for paddingg, mean imputation and nn. Describe why it is good to have a Bayes consistent regressor. Basically, describe Bayes consistency. Remove the last line.-->
 
-Nearest-neighbor imputers[@knnImputer] are known to have good performance in practice and are relatively fast[@knnSurvey1; @knnSurvey2; @knnSurvey3]. However, this comes at the cost of a drop in performance for classification tasks in higch-dimensional datasets[@knnPerfHighDim]. This limitation does not necessarily extend to other downstream tasks. In my experiments on the outlier detection task, where additional irrelevant features containing no informative signal were introduced solely to increase the dimensionality, I found that \acr{kNN}-based methods remained robust to the presence of such irrelevant features[@msde].
+Nearest-neighbor imputers[@knnImputer] are known to have good performance in practice and are relatively fast[@knnSurvey1; @knnSurvey2; @knnSurvey3]. However, this comes at the cost of a drop in performance for classification tasks in high-dimensional datasets[@knnPerfHighDim]. This limitation does not necessarily extend to other downstream tasks. In my experiments on the outlier detection task, where additional irrelevant features containing no informative signal were introduced solely to increase the dimensionality, I found that \acr{kNN}-based methods remained robust to the presence of such irrelevant features[@msde].
 
-The main focus of this chapter will be analysis of the quality of \acr{kNN}-imputation under all three missingness scenarios. For this, I will describe a meta-algorithm for iterative \acr{kNN}-imputation that encompasses several variations of \acr{kNN} imputation. I will then describe a general proof strategy for deriving theoretical results on imputation quality for this meta-algorithm. I will show how this strategy can be used to derive theoretical bounds for some \acr{kNN} variations. After that, I will describe \acr{F3I}, a novel modification of the classical \acr{kNN} imputation algorithm which can automatically be tuned for downstream tasks, and can handle mixed-type variables. I will also use the general proof strategy to derive theoretical bounds for this method. Finally, I will empirically show that \acr{kNN}-based approaches are competitive performance-wise to the \acr{SotA}, while being much faster.
+<!--Repeat the definition of KNN imputation used in chapter 1-->
 
-Throughout this chapter, I will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension K. For a dataset with missing values, the initial data matrix with missing values will be called $\mX\in(\sR\cup$`NaN`$)^{N\times F}$, and the full unobserved matrix will be denoted by $\mX^\star\in\sR^{N\times F}$.
+The main focus of this chapter will be to give some theoretical guarantees for the quality of \acr{kNN}-imputation under all three missingness scenarios. For this, I will describe a meta-algorithm for iterative weighted \acr{kNN}-imputation that encompasses several variations of \acr{kNN} imputation. I will then describe a general proof strategy for deriving theoretical results on imputation quality for this meta-algorithm. <!--One of these variations is F3I, describe F3I-->After that, I will describe \acr{F3I}, a novel modification of the classical \acr{kNN} imputation algorithm which can automatically be tuned for downstream tasks, and can handle mixed-type variables. I will also use the general proof strategy to derive theoretical guarantees for this method. Finally, I will empirically show that \acr{kNN}-based approaches are competitive performance-wise to the \acr{SotA} for imputation as well as downstream classification, while being much faster.
+
+Throughout this chapter, I will use $\triangle_K\deff \{\symbf{p} \in [0,1]^K \mid \sum_{k \leq K} p_k = 1 \}$ as the simplex of dimension $K$. The convex weights for \acr{kNN} imputation will lie in $\triangle_K$. For a dataset with missing values, the initial data matrix with missing values will be called $\mX\in(\sR\cup\{$`NaN`$\})^{N\times F}$, and the full unobserved matrix will be denoted by $\mX^\star\in\sR^{N\times F}$.
+
+<!--Move this simplex definition to the place where it will be first used.-->
 
 One of the most common metrics to evaluate the imputation quality is the \acr{MSE}.
 
 ::: {#def-mse}
 # Mean Squared Error (MSE)
+<!--Remove the round brackets-->
 
-_We define the \acr{MSE} as $\text{MSE}(\widehat{\vx}, \vx^\star) = \frac{1}{F} \sum_{f \leq F} (\widehat{\evx}^f_i-(\evx^\star)^f_i)^2$ and the associated loss as_
+_We define the \acr{MSE} as $\text{MSE}(\vx, \vy) = \frac{1}{F} \sum_{f \leq F} (\evx^f_i-\evy^f_i)^2$ and the associated loss as_
 $$\mathcal{L}^\text{MSE}(\widehat{\mX}, \mX^\star)\triangleq\frac{1}{N} \sum_{i \leq N} \text{MSE}(\widehat{\mX}_{i,:}, \mX^\star_{i,:})$$
 The \acr{RMSE} is then defined as $\mathcal{L}^\text{RMSE}(\widehat{\mX}, \mX^\star) \triangleq \sqrt{\mathcal{L}^\text{MSE}(\widehat{\mX}, \mX^\star)}$.
 :::
@@ -26,6 +31,7 @@ The \acr{RMSE} is then defined as $\mathcal{L}^\text{RMSE}(\widehat{\mX}, \mX^\s
 \acr{kNN}-based imputation algorithms have been analysed theoretically in only very limited settings. For instance a recent analysis of a stochastic hot-deck version of \acr{kNN}-imputation[@kNNSampler] only establishes guarantees for univariate imputation in the \acr{MAR} setting. 
 
 ## Meta-algorithm for \acr{kNN} and analysis
+<!--Introduce what A is, and all choices of A-->
 
 ::: {#algo-metaKNN}
 

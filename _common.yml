@@ -38,6 +38,8 @@ acronyms:
       longname: Mean Squared Error
     - shortname: RMSE
       longname: Root Mean Squared Error
+    - shortname: DLVM
+      longname: Deep Latent Variable Model
 
 pseudocode:
   caption-prefix: "Algorithm"
