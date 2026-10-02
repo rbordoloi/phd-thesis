@@ -750,12 +750,12 @@ $$
 
 
 <ul>
-<li>Improvement in the quality of imputation does not necessarily result in improvement in downstream task performance.</li>
+<li>More accurate imputation methods w.r.t. <a href="#acronyms_MSE">Mean Squared Error (MSE)</a> from the true unobserved values, do not necessarily result in improvement in downstream task performance. <!--Define 'quality of imputation'--></li>
 <li>Nearest neighbor-based imputation methods can outperform advanced deep neural network-based and generative approaches.</li>
-<li>Incorporating downstream task objectives into the imputation objective can improve the quality of imputation for downstream tasks.</li>
-<li>If the missingness is structurally regular, like short multivariate time series with missing time points or missing features, missingness-aware feature extraction without imputation is a better strategy than simple imputation followed by feature extraction.</li>
-<li>Semi-supervised learning problems can be seen as a special case of missingness-aware learning, and should be evaluated based on different patterns of label missingness than the simple <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> setting.</li>
-<li>In more complex structured data like graphs, the inherent structure of the data should be used to handle missing features and labels in semi-supervised learning.</li>
+<li>Incorporating downstream task objectives into the imputation objective can improve the quality of imputation for downstream tasks. <!--Rephrase this sentence--></li>
+<li>If the missingness is structurally regular, like short multivariate time series with missing time points or missing features, missingness-aware feature extraction without imputation is a better strategy than simple imputation followed by feature extraction.<!--Specify how the regularity works--></li>
+<li>Semi-supervised learning problems can be seen as a special case of missingness-aware learning, and should be evaluated based on different patterns of label missingness than the simple <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> setting. <!--Mention that methods which are robust to MCAR need not necessarily be robust to other missingness patterns.--></li>
+<li>In more complex structured data like graphs, the inherent structure of the data should be used to handle missing features and labels in semi-supervised learning. <!--Describe what other methods do that don't consider the 'inherent structure'--></li>
 </ul>
 
 
