@@ -40,6 +40,8 @@ acronyms:
       longname: Root Mean Squared Error
     - shortname: DLVM
       longname: Deep Latent Variable Model
+    - shortname: CSDI
+      longname: Conditional Score-Based Diffusion
 
 pseudocode:
   caption-prefix: "Algorithm"
