@@ -42,6 +42,12 @@ acronyms:
       longname: Deep Latent Variable Model
     - shortname: CSDI
       longname: Conditional Score-Based Diffusion
+    - shortname: ODE
+      longname: Ordinary Differential Equation
+    - shortname: SDE
+      longname: Stochastic Differential Equation
+    - shortname: FLDA
+      longname: Functional Linear Discriminant Analysis
 
 pseudocode:
   caption-prefix: "Algorithm"
