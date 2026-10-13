@@ -8,6 +8,9 @@ project:
     - cp MastersDoctoralThesis.cls overleaf/MastersDoctoralThesis.cls
     - cp glossary.tex overleaf/glossary.tex
     - rm glossary.tex
+    - rm -r site_libs/
+    - rm index.glo
+    - rm index.ist
 
 
 filters:

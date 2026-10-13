@@ -40,7 +40,7 @@ def convert_glossary_tags(directories):
                 if matches:
                     # \1 refers to the captured term inside the quotes
                     # We use double backslashes to output a literal \gls
-                    new_content = pattern.sub(r'\\gls{\1}', content)
+                    new_content = pattern.sub(lambda m: f"\\gls{{{m.group(1).lower().replace(' ', '_')}}}", content)
                     qmd_file.write_text(new_content, encoding="utf-8")
 
                     match_count = len(matches)
