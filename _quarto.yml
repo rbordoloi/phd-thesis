@@ -9,6 +9,12 @@ filters:
 metadata-files:
   - _common.yml
 
+glossary:
+  path: glossary.yml
+  popup: hover
+  show: true
+  table: true
+
 book:
   title: "Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
   author: "Rahul Bordoloi"

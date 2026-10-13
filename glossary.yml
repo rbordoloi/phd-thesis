@@ -1,0 +1,2 @@
+Sinkhorn Divergence: |
+    The Sinkhorn divergence is a computationally efficient estimator of the entropy regularized version of the Wasserstein Optimal Transport distance.

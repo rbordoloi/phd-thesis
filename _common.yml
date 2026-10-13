@@ -48,6 +48,8 @@ acronyms:
       longname: Stochastic Differential Equation
     - shortname: FLDA
       longname: Functional Linear Discriminant Analysis
+    - shortname: SBP
+      longname: Schrödinger Bridge Problem
 
 pseudocode:
   caption-prefix: "Algorithm"

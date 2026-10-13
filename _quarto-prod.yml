@@ -1,7 +1,6 @@
 project:
   type: book
   post-render:
-    # - rm -r site_libs
     - mv Missingness-Aware-Learning-for-Downstream-Tasks-in-Tabular-and-Time-series-Data.tex overleaf/main.tex
     - cp -r images overleaf/
     - cp references.bib overleaf/references.bib
