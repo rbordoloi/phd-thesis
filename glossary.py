@@ -53,7 +53,7 @@ def convert_glossary_tags(directories):
             except Exception as e:
                 print(f"Error processing {qmd_file}: {e}", file=sys.stderr)
 
-    print(f"\nFinished: Reverted {total_replacements} tags across {files_modified} files.")
+    print(f"\nFinished: Converted {total_replacements} tags across {files_modified} files.")
 
 
 if __name__ == "__main__":
