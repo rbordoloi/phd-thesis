@@ -10,9 +10,8 @@ metadata-files:
 
 glossary:
   path: glossary.yml
-  popup: hover
+  popup: none
   show: true
-  table: true
 
 book:
   title: "Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data"
@@ -33,6 +32,7 @@ book:
     - main/fuse.qmd
     - main/conclusion.qmd
     - references.qmd
+    - glossary.qmd
   appendices:
     - appendix/technicalProofs.qmd
 

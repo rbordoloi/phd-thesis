@@ -808,6 +808,19 @@ url={https://openreview.net/forum?id=xpR25Tsem9C}
   month = {11},
   pages = {1–16}
 }
+@article{sinkhornComp,
+AUTHOR = {Ramdas, Aaditya and Trillos, Nicolás García and Cuturi, Marco},
+TITLE = {On Wasserstein Two-Sample Testing and Related Families of Nonparametric Tests},
+JOURNAL = {Entropy},
+VOLUME = {19},
+YEAR = {2017},
+NUMBER = {2},
+ARTICLE-NUMBER = {47},
+URL = {https://www.mdpi.com/1099-4300/19/2/47},
+ISSN = {1099-4300},
+ABSTRACT = {Nonparametric two-sample or homogeneity testing is a decision theoretic problem that involves identifying differences between two random variables without making parametric assumptions about their underlying distributions. The literature is old and rich, with a wide variety of statistics having being designed and analyzed, both for the unidimensional and the multivariate setting. In this short survey, we focus on test statistics that involve the Wasserstein distance. Using an entropic smoothing of the Wasserstein distance, we connect these to very different tests including multivariate methods involving energy statistics and kernel based maximum mean discrepancy and univariate methods like the Kolmogorov–Smirnov test, probability or quantile (PP/QQ) plots and receiver operating characteristic or ordinal dominance (ROC/ODC) curves. Some observations are implicit in the literature, while others seem to have not been noticed thus far. Given nonparametric two-sample testing’s classical and continued importance, we aim to provide useful connections for theorists and practitioners familiar with one subset of methods but not others.},
+DOI = {10.3390/e19020047}
+}
 @inproceedings{sinkhorn,
  author = {Chizat, L\'{e}na\"{\i}c and Roussillon, Pierre and L\'{e}ger, Flavien and Vialard, Fran\c{c}ois-Xavier and Peyr\'{e}, Gabriel},
  booktitle = {Advances in Neural Information Processing Systems},
@@ -818,4 +831,19 @@ url={https://openreview.net/forum?id=xpR25Tsem9C}
  url = {https://proceedings.neurips.cc/paper_files/paper/2020/file/17f98ddf040204eda0af36a108cbdea4-Paper.pdf},
  volume = {33},
  year = {2020}
+}
+@InProceedings{tdm,
+  title = 	 {Transformed Distribution Matching for Missing Value Imputation},
+  author =       {Zhao, He and Sun, Ke and Dezfouli, Amir and Bonilla, Edwin V.},
+  booktitle = 	 {Proceedings of the 40th International Conference on Machine Learning},
+  pages = 	 {42159--42186},
+  year = 	 {2023},
+  editor = 	 {Krause, Andreas and Brunskill, Emma and Cho, Kyunghyun and Engelhardt, Barbara and Sabato, Sivan and Scarlett, Jonathan},
+  volume = 	 {202},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {23--29 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v202/zhao23h/zhao23h.pdf},
+  url = 	 {https://proceedings.mlr.press/v202/zhao23h.html},
+  abstract = 	 {We study the problem of imputing missing values in a dataset, which has important applications in many domains. The key to missing value imputation is to capture the data distribution with incomplete samples and impute the missing values accordingly. In this paper, by leveraging the fact that any two batches of data with missing values come from the same data distribution, we propose to impute the missing values of two batches of samples by transforming them into a latent space through deep invertible functions and matching them distributionally. To learn the transformations and impute the missing values simultaneously, a simple and well-motivated algorithm is proposed. Our algorithm has fewer hyperparameters to fine-tune and generates high-quality imputations regardless of how missing values are generated. Extensive experiments over a large number of datasets and competing benchmark algorithms show that our method achieves state-of-the-art performance.}
 }

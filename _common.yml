@@ -50,6 +50,8 @@ acronyms:
       longname: Functional Linear Discriminant Analysis
     - shortname: SBP
       longname: Schrödinger Bridge Problem
+    - shortname: OT
+      longname: Optimal Transport
 
 pseudocode:
   caption-prefix: "Algorithm"
