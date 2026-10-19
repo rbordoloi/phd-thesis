@@ -534,9 +534,6 @@ breaklinks=true,
 \pdfstringdefDisableCommands{% If there is an explicit linebreak in a section heading (or anything printed to the pdf-bookmarks), it is replaced by a space
 	\let\\\space%
 }
-\RequirePackage[toc]{glossaries}
-\makeglossaries
-\loadglsentries{glossary.tex}
 }
 }{%nothing
 }

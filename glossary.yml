@@ -1,9 +1,0 @@
-Wasserstein: |
-    The Wasserstein $p$-distance is defined on the space of probability measures over a metric space $M$ as:
-    $$\mathcal{W}_p(\mu, \nu)=\inf{\gamma\in\Gamma(\mu, \nu)}\E_{(x,y)\in\gamma d(x,y)^p}^\frac{1}{p}$$
-    where $\Gamma$ is the set of all couplings of $\mu$ and $\nu$.
-transformer: |
-    Transformers are a class of neural networks architectures that model sequences by contextualizing each token of the sequence with the other tokens.
-# Mutual Information: |
-#     The mutual information between two random variables $\rx$ and $\ry$ with joint distribution $P_(\rx,\ry)$ and marginal distributions $P_\rx$ and $P_\ry$ is a measure of the mutual dependence between $\rx$ and $\ry$, defined as:
-#     $$I(\rx,\ry)=\KL(\P_(\rx,\ry) || \P_\ry\otimes\P_\ry)$$

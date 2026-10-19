@@ -1,15 +1,10 @@
 project:
   type: book
-  pre-render: python glossary.py
   post-render:
     - mv Missingness-Aware-Learning-for-Downstream-Tasks-in-Tabular-and-Time-series-Data.tex overleaf/main.tex
     - cp -r images overleaf/
     - cp references.bib overleaf/references.bib
     - cp MastersDoctoralThesis.cls overleaf/MastersDoctoralThesis.cls
-    - cp glossary.tex overleaf/glossary.tex
-    - rm glossary.tex
-    - rm index.glo
-    - rm index.ist
 
 
 filters:
