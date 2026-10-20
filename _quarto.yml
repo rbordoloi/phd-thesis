@@ -27,15 +27,16 @@ book:
     - main/fuse.qmd
     - main/conclusion.qmd
     - references.qmd
-    - glossary.qmd
   appendices:
     - appendix/technicalProofs.qmd
+    - appendix/glossary.qmd
 
 bibliography: references.bib
 csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
 
 format:
   html:
+    mermaid-format: png
     html-math-method:
       method: mathjax
       url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
@@ -64,5 +65,5 @@ format:
             <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
       - mathCommands.html
     theme:
-      - cosmo
-      - brand
+      dark: darkly
+      light: cosmo

@@ -1,5 +1,0 @@
-# Glossary {.unnumbered}
-
-## Optimal Transport
-
-Divergence functions are often used to quantify the difference between probability distributions. However, divergence functions lack several properties that make them hard to work with mathematically, for example not satisfying the properties of a metric. For instance, one of the most commonly used divergences, \acr{KL}-divergence, is undefined when the supports of the two distributions do not intersect completely. An alternative method to compare two distributions on the same metric space is to ask the question, what is the minimum amount one distribution must be transformed to be identical to the second distribution. This problem was first formalized by @otMonge as follows: consider two distributions $\mu$ and $\nu$ on the same metric space.

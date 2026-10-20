@@ -52,6 +52,12 @@ acronyms:
       longname: Schrödinger Bridge Problem
     - shortname: OT
       longname: Optimal Transport
+    - shortname: KL
+      longname: Kullback-Leibler
+    - shortname: GNN
+      longname: Graph Neural Network
+    - shortname: MICE
+      longname: Multiple Iterative Chained Equations
 
 pseudocode:
   caption-prefix: "Algorithm"

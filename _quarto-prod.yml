@@ -35,6 +35,7 @@ book:
     - references.qmd
   appendices:
     - appendix/technicalProofs.qmd
+    - appendix/glossary.qmd
 
 bibliography: references.bib
 csl: ieee-transactions-on-pattern-analysis-and-machine-intelligence.csl
@@ -62,5 +63,5 @@ format:
       text: |
         \backmatter
         \clearpage
-        \printglossary[title={Glossary}]
     keep-tex: true
+    mermaid-format: png
