@@ -64,10 +64,12 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fd0503e23dce65854c81c5baaade3bdf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7b41b65cdd4b030162f185184962183e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-3850394d83a2ced4a805246eaba46e10.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -97,7 +99,167 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-</head><body class="nav-sidebar floating quarto-light"><div style="display: none">
+</head><body class="nav-sidebar floating quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script><div style="display: none">
     $$
 \def\ceil#1{\lceil #1 \rceil}
 \def\floor#1{\lfloor #1 \rfloor}
@@ -664,6 +826,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Missingness-Aware Learning for Downstream Tasks in Tabular and Time-series Data</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -751,12 +916,6 @@ window.Quarto = {
  <span class="menu-text">References</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Glossary</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -770,6 +929,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../appendix/technicalProofs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Technical Proofs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
       </ul>
@@ -793,6 +958,7 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -824,6 +990,16 @@ window.Quarto = {
 <li>Models that perform downstream tasks without imputation - FLDA (Relate to <a href="mudra.html" class="quarto-xref">Chapter&nbsp;<span>4</span></a>)</li>
 <li>Models that perform imputation in more complex structures, eg. graphs (Relate to <a href="fuse.html" class="quarto-xref">Chapter&nbsp;<span>5</span></a>)</li>
 </ul>
+<div id="fig-taxonomy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/background/taxonomy.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-taxonomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Taxonomy
+</figcaption>
+</figure>
+</div>
 <section id="sec-iterativeImp" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-iterativeImp"><span class="header-section-number">2.1</span> Iterative Imputation</h2>
 <p>One of the earliest major advancements in multivariate imputation was by <span class="citation" data-cites="mice"><a href="../references.html#ref-mice" role="doc-biblioref">[1]</a></span>, called <code>MICE</code>. <code>MICE</code> is a general approach that starts off from a naive imputation, and then iteratively fits a univariate regression model on each feature to impute the missing feature values. It is computationally efficient, highly adaptable as it can be used with any regression model. It can also specify different regression models for each feature, and this can be used for all types of tabular data, be it numeric, categorical, or mixed. Because of this flexibility and computational efficiency, <code>MICE</code> remains one of the most widely adopted imputation methods in the literature. However, <code>MICE</code> starts being computationally inefficient when the datasets have large numbers of features, because it requires multiple independent models to be fit for each feature iteratively.</p>
@@ -833,28 +1009,25 @@ window.Quarto = {
 <section id="generative-imputation" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="generative-imputation"><span class="header-section-number">2.2</span> Generative Imputation</h2>
 <p>Another line of research views imputation as a generative process. The idea is to estimate the conditional distribution of the missing values given the observed ones, and sample from this distribution to impute missing values. Generative models usually sample from a simple, known distribution, like a multivariate normal distribution, and transform these samples to match the required conditional distribution. The mechanism of transformation and the assumed form of the conditional distribution separates these models.</p>
-<p>One of the simplest methods to do this is to adapt a <a href="#acronyms_DLVM">Deep Latent Variable Model (DLVM)</a> to generate imputations for missing values. <a href="#acronyms_DLVM">DLVM</a>s draw samples (known as the latent variable) from a simple known prior distribution, usually a Gaussian. They then attempt to approximate the posterior distribution of the observed values over this latent variable by fitting a parameterized family of distributions conditioned on it. This family is usually parameterized as a simple family (like a Gaussian), over a parameterized transformation of the latent variable, usually via a neural network. Sampling from this posterior is often either intractable or has an impractical convergence rate, so amortized variational inference is used to estimate another parameterized proposal distribution that is as close as possible to the posterior. These approaches have been explored in works like <span class="citation" data-cites="miwae"><a href="../references.html#ref-miwae" role="doc-biblioref">[5]</a></span> and <span class="citation" data-cites="notmiwae"><a href="../references.html#ref-notmiwae" role="doc-biblioref">[6]</a></span>, for different assumptions on the missingness mechanism.</p>
-<p>Another early approach was to modify a <a href="#acronyms_GAN">Generative Adversarial Network (GAN)</a> to generate imputations for missing values. The missing values are initially imputed by draws from a simple distribution like a Gaussian, and then the generator network is used to transform these samples to match the required conditional distribution. An adversarial discriminator network is then trained to estimate the corresponding missingness mask, and then the generator and discriminator are adversarially trained iteratively. This results in imputed that values that the discriminator is unable to discern as imputed.</p>
-<p>Another class of generative models that have been found to be very successful in image tasks are diffusion models. Diffusion models generate data by iteratively corrupting data samples with noise from a simple known distribution, usually Gaussian, and learning a noise function to predict the amount of noise in a given corrupted sample. The diffusion model then takes as input a sample that is purely noise, and runs this corruption process in reverse using the learned noise function, to generate a sample from the data distribution. Due their impressive generative modeling capacity, many imputation approaches based on them have been developed in recent years. One of the first approaches in this direction was <a href="#acronyms_CSDI">Conditional Score-Based Diffusion (CSDI)</a> models<span class="citation" data-cites="csdi"><a href="../references.html#ref-csdi" role="doc-biblioref">[7]</a></span>, which attempt to impute values at missing time points in multivariate time-series data by conditioning the diffusion model on the observed time points and then denoising from white noise using the conditional diffusion model. Another similar approach (Conditional Schrödinger Bridge for Imputation)<span class="citation" data-cites="csbi"><a href="../references.html#ref-csbi" role="doc-biblioref">[8]</a></span> constructs and solves a <a href="#acronyms_SBP">Schrödinger Bridge Problem (SBP)</a> with conditional constraints to impute missing values in time-series data, where the conditional constraints are derived from the observed values. The <a href="#acronyms_SBP">SBP</a> constructs a simple marginal prior on the distribution of time-series trajectories, usually Brownian motion or an Ornstein-Uhlenbeck process, and tries to find the minimum optimal transport path between the marginal distribution of the observed samples and this marginal prior. Similar to diffusion models, one then samples form this simple marginal prior and transforms the samples in reverse through this path to resemble the observed sample distribution and impute the missing values. However, both these approaches are only available for imputation in multivariate time-series data.</p>
-<p>An interesting approach for tabular data (CSDI_T)<span class="citation" data-cites="csdi_t"><a href="../references.html#ref-csdi_t" role="doc-biblioref">[9]</a></span> consists of removing the temporal transformer layers from <a href="#acronyms_CSDI">CSDI</a><span class="citation" data-cites="csdi"><a href="../references.html#ref-csdi" role="doc-biblioref">[7]</a></span> and constructing embeddings for categorical variables, after which the same diffusion procedure as <a href="#acronyms_CSDI">CSDI</a> is applied. Another diffusion-based approach(Forest Diffusion)<span class="citation" data-cites="forestDiffusion"><a href="../references.html#ref-forestDiffusion" role="doc-biblioref">[10]</a></span> constructs multiple copies of the dataset with different noise samples added, on which gradient-boosted trees are trained to perform the reverse diffusion process to reconstruct the missing data values. The NewImp<span class="citation" data-cites="NewImp"><a href="../references.html#ref-NewImp" role="doc-biblioref">[11]</a></span> model, on the other hand, attempts to learn the missing value distribution by learning the score function of the joint distribution using a Denoising Score Matching approach and then by stepwise reconstructing the missing values using an <a href="#acronyms_ODE">Ordinary Differential Equation (ODE)</a> simulation of the joint distribution based on these learned scores. Another similar approach, MissDiff<span class="citation" data-cites="MissDiff"><a href="../references.html#ref-MissDiff" role="doc-biblioref">[12]</a></span>, attempts to learn a score-based model by modifying the loss in a conventional Variance Preserving <a href="#acronyms_SDE">Stochastic Differential Equation (SDE)</a> for diffusion models to only consider the observed values. However, diffusion-based approaches require continuity of features for the Gaussian noising and denoising mechanism, so these models are not available for mixed-type data without appropriate tokenization/embedding, and they cannot work on spaces with arbitrary distance metrics.</p>
-<!--Mention what cannot be applied to which chapter, to state why my work is novel-->
-<!--Add figures. Eg, describe a diffusion model with a figure-->
-<!--Add model names everywhere-->
-<!--Break long complex sentences into different steps. Mention at each point what's the input and output-->
+<p>One of the simplest methods to do this is to adapt a <a href="#acronyms_DLVM">Deep Latent Variable Model (DLVM)</a> to generate imputations for missing values. <a href="#acronyms_DLVM">DLVM</a>s draw samples (known as the latent variable) from a simple known prior distribution, usually a Gaussian. They then attempt to approximate the posterior distribution of the observed values over this latent variable by fitting a parameterized family of distributions conditioned on it. This family is usually parameterized as a simple family (like a Gaussian), over a parameterized transformation of the latent variable, usually via a neural network. Sampling from this posterior is often either intractable or has an impractical convergence rate, so amortized variational inference is used to estimate another parameterized proposal distribution that is as close as possible to the posterior. These approaches have been explored in works like <span class="citation" data-cites="miwae"><a href="../references.html#ref-miwae" role="doc-biblioref">[5]</a></span> and <span class="citation" data-cites="notmiwae"><a href="../references.html#ref-notmiwae" role="doc-biblioref">[6]</a></span>, for different assumptions on the missingness mechanism. <span class="citation" data-cites="mae"><a href="../references.html#ref-mae" role="doc-biblioref">[7]</a></span> explore a hierarchical variational autoencoder-based approach (<code>HH-VAEM</code>) to generate the missing data by training multiple separate variational autoencoders that encode the latent space of each feature and the dependencies among them. This type of model is helpful in the presence of diverse feature types.</p>
+<p>Another early approach called GAIN<span class="citation" data-cites="gain"><a href="../references.html#ref-gain" role="doc-biblioref">[8]</a></span> was to modify a <a href="#acronyms_GAN">Generative Adversarial Network (GAN)</a> to generate imputations for missing values. The missing values are initially imputed by draws from a simple distribution like a Gaussian, and then the generator network is used to transform these samples to match the required conditional distribution. An adversarial discriminator network is then trained to estimate the corresponding missingness mask, and then the generator and discriminator are adversarially trained iteratively. This results in imputed that values that the discriminator is unable to discern as imputed.</p>
+<p>Another class of generative models that have been found to be very successful in image tasks are diffusion models. Diffusion models generate data by iteratively corrupting data samples with noise from a simple known distribution, usually Gaussian, and learning a noise function to predict the amount of noise in a given corrupted sample. The diffusion model then takes as input a sample that is purely noise, and runs this corruption process in reverse using the learned noise function, to generate a sample from the data distribution. Due their impressive generative modeling capacity, many imputation approaches based on them have been developed in recent years. One of the first approaches in this direction was <a href="#acronyms_CSDI">Conditional Score-Based Diffusion (CSDI)</a> models<span class="citation" data-cites="csdi"><a href="../references.html#ref-csdi" role="doc-biblioref">[9]</a></span>, which attempt to impute values at missing time points in multivariate time-series data by conditioning the diffusion model on the observed time points and then denoising from white noise using the conditional diffusion model. Another similar approach (Conditional Schrödinger Bridge for Imputation)<span class="citation" data-cites="csbi"><a href="../references.html#ref-csbi" role="doc-biblioref">[10]</a></span> constructs and solves a <a href="#acronyms_SBP">Schrödinger Bridge Problem (SBP)</a> with conditional constraints to impute missing values in time-series data, where the conditional constraints are derived from the observed values. The <a href="#acronyms_SBP">SBP</a> constructs a simple marginal prior on the distribution of time-series trajectories, usually Brownian motion or an Ornstein-Uhlenbeck process (for more details see Appendix <a href="../appendix/glossary.html#sec-glossaryBrownian" class="quarto-xref"><span>Section B.1</span></a>), and tries to find the minimum <a href="#acronyms_OT">Optimal Transport (OT)</a> (for a brief introudction to <a href="#acronyms_OT">OT</a> theory, see Appendix <a href="../appendix/glossary.html#sec-glossaryOT" class="quarto-xref"><span>Section B.2</span></a>) path between the marginal distribution of the observed samples and this marginal prior. Similar to diffusion models, one then samples form this simple marginal prior and transforms the samples in reverse through this path to resemble the observed sample distribution and impute the missing values. However, both these approaches are only available for imputation in multivariate time-series data.</p>
+<p>An interesting approach for tabular data (CSDI_T)<span class="citation" data-cites="csdi_t"><a href="../references.html#ref-csdi_t" role="doc-biblioref">[11]</a></span> consists of removing the temporal transformer layers from <a href="#acronyms_CSDI">CSDI</a><span class="citation" data-cites="csdi"><a href="../references.html#ref-csdi" role="doc-biblioref">[9]</a></span> and constructing embeddings for categorical variables, after which the same diffusion procedure as <a href="#acronyms_CSDI">CSDI</a> is applied. Another diffusion-based approach(Forest Diffusion)<span class="citation" data-cites="forestDiffusion"><a href="../references.html#ref-forestDiffusion" role="doc-biblioref">[12]</a></span> constructs multiple copies of the dataset with different noise samples added, on which gradient-boosted trees are trained to perform the reverse diffusion process to reconstruct the missing data values. The NewImp<span class="citation" data-cites="NewImp"><a href="../references.html#ref-NewImp" role="doc-biblioref">[13]</a></span> model, on the other hand, attempts to learn the missing value distribution by learning the score function of the joint distribution using a Denoising Score Matching approach and then by stepwise reconstructing the missing values using an <a href="#acronyms_ODE">Ordinary Differential Equation (ODE)</a> simulation of the joint distribution based on these learned scores. Another similar approach, MissDiff<span class="citation" data-cites="MissDiff"><a href="../references.html#ref-MissDiff" role="doc-biblioref">[14]</a></span>, attempts to learn a score-based model by modifying the loss in a conventional Variance Preserving <a href="#acronyms_SDE">Stochastic Differential Equation (SDE)</a> for diffusion models to only consider the observed values. However, diffusion-based approaches require continuity of features for the Gaussian noising and denoising mechanism, so these models are not available for mixed-type data without appropriate tokenization/embedding, and they cannot work on spaces with arbitrary distance metrics. <!--Add model names everywhere--> <!--Break long complex sentences into different steps. Mention at each point what's the input and output--></p>
 </section>
 <section id="other-loss-based-methods-for-imputation" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="other-loss-based-methods-for-imputation"><span class="header-section-number">2.3</span> Other Loss-based Methods for Imputation</h2>
 <!--Use a different word than deep learning. Have a reference to the architecture in the first sentence.-->
 <p>Loss-based methods for imputation often involve optimizing for a cleverly constructed loss function that attempts to approximate the imputation error. A major challenge in these approaches is that very often in imputation tasks, the ground truth values are unavailable, and thus cannot be used in the loss function. One simple solution to this is to synthetically mask an additional section of the observed values, and compute the loss using those synthetically masked values as the ground truth.</p>
-<p>For instance, one class of approaches is based on minimizing differentiable and computationally-efficient versions of <a href="#acronyms_OT">Optimal Transport (OT)</a> losses. <a href="#acronyms_OT">OT</a> losses, like the Wasserstein loss, measures the minimum amount of probability mass that needs to be moved to transform one distribution to another. Regularized versions of linear <a href="#acronyms_OT">OT</a> losses, like the Sinkhorn<span class="citation" data-cites="sinkhorn"><a href="../references.html#ref-sinkhorn" role="doc-biblioref">[13]</a></span> Divergence, can be computed and differentiated through very efficiently<span class="citation" data-cites="sinkhornComp"><a href="../references.html#ref-sinkhornComp" role="doc-biblioref">[14]</a></span>. <a href="#acronyms_OT">OT</a>-based imputation methods attempt to fit an imputer to minimize the Sinkhorn Divergence under the Euclidean metric between the distributions of two randomly-smapled mini-batches of the imputed dataset. The first work in this direction is OTImputer<span class="citation" data-cites="otimputer"><a href="../references.html#ref-otimputer" role="doc-biblioref">[15]</a></span>, which uses this technique in the general paradigm of Iterative Imputation as in <a href="#sec-iterativeImp" class="quarto-xref"><span>Section 2.1</span></a>. However, the Euclidean metric is sometimes not sufficient to capture complex data geometries, which is why <span class="citation" data-cites="tdm"><a href="../references.html#ref-tdm" role="doc-biblioref">[16]</a></span> developed TDM. TDM uses an autoencoder structure to project the data into a space where the Euclidean metric is hopefully more representative of the data geometry.</p>
-<p>Other models include a hierarchical variational autoencoder-based approach (<code>HH-VAEM</code>)<span class="citation" data-cites="mae"><a href="../references.html#ref-mae" role="doc-biblioref">[17]</a></span> to generate the missing data by training multiple separate variational autoencoders that encode the latent space of each feature and the dependencies among them. This training is helpful in the presence of diverse feature types. <code>ReMasker</code><span class="citation" data-cites="remasker"><a href="../references.html#ref-remasker" role="doc-biblioref">[18]</a></span> presents a transformer-based encoder-decoder network that attempts to reconstruct the synthetically masked values, using the <a href="#acronyms_MSE">Mean Squared Error (MSE)</a> loss. Similarly, <code>MIRACLE</code><span class="citation" data-cites="miracle"><a href="../references.html#ref-miracle" role="doc-biblioref">[19]</a></span> uses a simple feed-forward neural network to improve naively imputed values. Its loss function is a sum of three terms: a reconstruction term which attempts to reconstruct both the missing values and the missingness mask, and two causal terms which ensure that the inter-variable dependencies form a causal structure as represented by a directed acyclic graph.</p>
-<p><code>GRAPE</code> is a somewhat more novel approach<span class="citation" data-cites="grape"><a href="../references.html#ref-grape" role="doc-biblioref">[20]</a></span>, which consists of representing the data set as a labeled bipartite graph, with the two node types representing the samples and the features, and each edge label representing the value of the particular feature for that sample. Missing feature values are represented by unavailable edge labels. During training, a subset of the observed edge labels are randomly masked, and a GraphSAGE<span class="citation" data-cites="graphsage"><a href="../references.html#ref-graphsage" role="doc-biblioref">[21]</a></span>-inspired Graph Neural Network is trained to predict these masked values. The trained network is then used to predict the labels of edges corresponding to missing feature values, thereby imputing the missing entries.</p>
+<p>For instance, one class of approaches is based on minimizing differentiable and computationally-efficient versions of <a href="#acronyms_OT">OT</a> losses. <a href="#acronyms_OT">OT</a> losses, like the Wasserstein loss, measures the minimum amount of probability mass that needs to be moved to transform one distribution to another. Regularized versions of linear <a href="#acronyms_OT">OT</a> losses, like the Sinkhorn<span class="citation" data-cites="sinkhorn"><a href="../references.html#ref-sinkhorn" role="doc-biblioref">[15]</a></span> Divergence, can be computed and differentiated through very efficiently<span class="citation" data-cites="sinkhornComp"><a href="../references.html#ref-sinkhornComp" role="doc-biblioref">[16]</a></span>. <a href="#acronyms_OT">OT</a>-based imputation methods attempt to fit an imputer to minimize the Sinkhorn Divergence under the Euclidean metric between the distributions of two randomly-smapled mini-batches of the imputed dataset. The first work in this direction is OTImputer<span class="citation" data-cites="otimputer"><a href="../references.html#ref-otimputer" role="doc-biblioref">[17]</a></span>, which uses this technique in the general paradigm of Iterative Imputation as in <a href="#sec-iterativeImp" class="quarto-xref"><span>Section 2.1</span></a>. However, the Euclidean metric is sometimes not sufficient to capture complex data geometries, which is why <span class="citation" data-cites="tdm"><a href="../references.html#ref-tdm" role="doc-biblioref">[18]</a></span> developed TDM. TDM uses an autoencoder structure to project the data into a space where the Euclidean metric is hopefully more representative of the data geometry.</p>
+<p>Other models include <code>ReMasker</code><span class="citation" data-cites="remasker"><a href="../references.html#ref-remasker" role="doc-biblioref">[19]</a></span>, which presents a transformer-based encoder-decoder network that attempts to reconstruct the synthetically masked values, using the <a href="#acronyms_MSE">Mean Squared Error (MSE)</a> loss. Similarly, <code>MIRACLE</code><span class="citation" data-cites="miracle"><a href="../references.html#ref-miracle" role="doc-biblioref">[20]</a></span> uses a simple feed-forward neural network to improve naively imputed values. Its loss function is a sum of three terms: a reconstruction term which attempts to reconstruct both the missing values and the missingness mask, and two causal terms which ensure that the inter-variable dependencies form a causal structure as represented by a directed acyclic graph.</p>
+<p><code>GRAPE</code> is a somewhat more novel approach<span class="citation" data-cites="grape"><a href="../references.html#ref-grape" role="doc-biblioref">[21]</a></span>, which consists of representing the data set as a labeled bipartite graph, with the two node types representing the samples and the features, and each edge label representing the value of the particular feature for that sample. Missing feature values are represented by unavailable edge labels. During training, a subset of the observed edge labels are randomly masked, and a GraphSAGE<span class="citation" data-cites="graphsage"><a href="../references.html#ref-graphsage" role="doc-biblioref">[22]</a></span>-inspired <a href="#acronyms_GNN">Graph Neural Network (GNN)</a> is trained to predict these masked values (for a more detailed exposition of <a href="#acronyms_GNN">GNN</a>s, see Appendix <a href="../appendix/glossary.html#sec-glossaryGNN" class="quarto-xref"><span>Section B.5</span></a>). The trained network is then used to predict the labels of edges corresponding to missing feature values, thereby imputing the missing entries.</p>
+<p>Most of these loss-based models have a nonlinear black-box dependence on the input data at inference time, which makes theoretical analysis of the impute values difficult. Analysis of theoretical properties is very important in biomedical and bioinformatics datasets, as they allow us to quantify worst-case scenario model performance and confidence, which is essential for high-stakes decision making, such as diagnostics in hospital labs.</p>
 </section>
 <section id="impact-of-imputation-on-downstream-task-performance" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="impact-of-imputation-on-downstream-task-performance"><span class="header-section-number">2.4</span> Impact of Imputation on Downstream Task Performance</h2>
-<p><span class="citation" data-cites="imputationDimRet"><a href="../references.html#ref-imputationDimRet" role="doc-biblioref">[22]</a></span> shows that simply improving imputation often offers limited benefits for downstream predictive performance. Their study of the impact of four different imputation methods on 3 different classifiers across 19 datasets under the <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> mechanism showed that good imputations matter very little for more expressive predictors. In particular, they found that gains in prediction <span class="math inline">\(R^2\)</span> is at most <span class="math inline">\(10\%\)</span> of the gains in imputation <span class="math inline">\(R^2\)</span>. Moreover, they also found that adding the missingness indicator as a feature makes the quality of imputation matter less. Additionally, a similar effect is also observed when the response is non-linearly dependent on the input. However, imputation becomes more important when the missingness mechanism is more complicated, like the self-masking model of <a href="#acronyms_MNAR">Missing Not at Random (MNAR)</a>, as described in <a href="introduction.html#rem-gaussianSelfMasking" class="quarto-xref">Remark&nbsp;<span>1.2</span></a>.</p>
-<p>Because of this, some lines of research focus on developing methods that perform classification or regression without explicitly imputing the missing values. An example of this is NeuMiss networks<span class="citation" data-cites="neumiss"><a href="../references.html#ref-neumiss" role="doc-biblioref">[23]</a></span>, which works by unrolling an iterative approximation of the covariance matrix using a cleverly designed neural network. This network can then be composed with any loss-based downstream objective, such that the overall model learns without imputation.</p>
-<p>Methods in short-time series analysis usually attempt to learn complete features from fragmented or missing data, that can then be used by classical machine learning algorithms for downstream tasks. A prominent example is <a href="#acronyms_FLDA">Functional Linear Discriminant Analysis (FLDA)</a><span class="citation" data-cites="flda"><a href="../references.html#ref-flda" role="doc-biblioref">[24]</a></span>, which projects the observed univariate time series trajectories onto a functional basis, and performs linear discriminant analysis on these basis coefficients to compute representation vectors. This method is discretization-invariant with respect to the time variable and only learns from the observed values. Some extensions of this method exist for multivariate time-series as well <span class="citation" data-cites="GardnerLubbe2020 Fukuda2023"><a href="../references.html#ref-GardnerLubbe2020" role="doc-biblioref">[25]</a>, <a href="../references.html#ref-Fukuda2023" role="doc-biblioref">[26]</a></span>, but they do not consider missingness in the feature dimension, only in the temporal dimension like <span class="citation" data-cites="flda"><a href="../references.html#ref-flda" role="doc-biblioref">[24]</a></span>.</p>
+<p><span class="citation" data-cites="imputationDimRet"><a href="../references.html#ref-imputationDimRet" role="doc-biblioref">[23]</a></span> shows that simply improving imputation often offers limited benefits for downstream predictive performance. Their study of the impact of four different imputation methods on 3 different classifiers across 19 datasets under the <a href="#acronyms_MCAR">Missing Completely at Random (MCAR)</a> mechanism showed that good imputations matter very little for more expressive predictors. In particular, they found that gains in prediction <span class="math inline">\(R^2\)</span> is at most <span class="math inline">\(10\%\)</span> of the gains in imputation <span class="math inline">\(R^2\)</span>. Moreover, they also found that adding the missingness indicator as a feature makes the quality of imputation matter less. Additionally, a similar effect is also observed when the response is non-linearly dependent on the input. However, imputation becomes more important when the missingness mechanism is more complicated, like the self-masking model of <a href="#acronyms_MNAR">Missing Not at Random (MNAR)</a>, as described in <a href="introduction.html#rem-gaussianSelfMasking" class="quarto-xref">Remark&nbsp;<span>1.2</span></a>.</p>
+<p>Because of this, some lines of research focus on developing methods that perform classification or regression without explicitly imputing the missing values. An example of this is NeuMiss networks<span class="citation" data-cites="neumiss"><a href="../references.html#ref-neumiss" role="doc-biblioref">[24]</a></span>, which works by unrolling an iterative approximation of the covariance matrix using a cleverly designed neural network. This network can then be composed with any loss-based downstream objective, such that the overall model learns without imputation.</p>
+<p>Methods in short-time series analysis usually attempt to learn complete features from fragmented or missing data, that can then be used by classical machine learning algorithms for downstream tasks. A prominent example is <a href="#acronyms_FLDA">Functional Linear Discriminant Analysis (FLDA)</a><span class="citation" data-cites="flda"><a href="../references.html#ref-flda" role="doc-biblioref">[25]</a></span>, which projects the observed univariate time series trajectories onto a functional basis, and performs linear discriminant analysis on these basis coefficients to compute representation vectors. This method is discretization-invariant with respect to the time variable and only learns from the observed values. Some extensions of this method exist for multivariate time-series as well <span class="citation" data-cites="GardnerLubbe2020 Fukuda2023"><a href="../references.html#ref-GardnerLubbe2020" role="doc-biblioref">[26]</a>, <a href="../references.html#ref-Fukuda2023" role="doc-biblioref">[27]</a></span>, but they do not consider missingness in the feature dimension, only in the temporal dimension like <span class="citation" data-cites="flda"><a href="../references.html#ref-flda" role="doc-biblioref">[25]</a></span>.</p>
 <!--Be careful not to mix up the research gaps and this chapter. This should only have the SotA-->
 
 
@@ -877,65 +1050,68 @@ window.Quarto = {
 <div id="ref-notmiwae" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[6] </div><div class="csl-right-inline">N. B. Ipsen, P.-A. Mattei, and J. Frellsen, <span>“Not-<span>{</span>MIWAE<span>}</span>: Deep generative modelling with missing not at random data,”</span> in <em>International conference on learning representations</em>, 2021. Available: <a href="https://openreview.net/forum?id=tu29GQT0JFy">https://openreview.net/forum?id=tu29GQT0JFy</a></div>
 </div>
+<div id="ref-mae" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">I. Peis, C. Ma, and J. M. Hernández-Lobato, <span>“Missing data imputation and acquisition with deep hierarchical models and hamiltonian monte carlo,”</span> in <em>Advances in neural information processing systems</em>, A. H. Oh, A. Agarwal, D. Belgrave, and K. Cho, Eds., 2022. Available: <a href="https://openreview.net/forum?id=xpR25Tsem9C">https://openreview.net/forum?id=xpR25Tsem9C</a></div>
+</div>
+<div id="ref-gain" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">J. Yoon, J. Jordon, and M. van der Schaar, <span>“<span>GAIN</span>: Missing data imputation using generative adversarial nets,”</span> in <em>Proceedings of the 35th international conference on machine learning</em>, J. Dy and A. Krause, Eds., in Proceedings of machine learning research, vol. 80. PMLR, Jul. 2018, pp. 5689–5698. Available: <a href="https://proceedings.mlr.press/v80/yoon18a.html">https://proceedings.mlr.press/v80/yoon18a.html</a></div>
+</div>
 <div id="ref-csdi" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Y. Tashiro, J. Song, Y. Song, and S. Ermon, <span>“CSDI: Conditional score-based diffusion models for probabilistic time series imputation,”</span> in <em>Advances in neural information processing systems</em>, M. Ranzato, A. Beygelzimer, Y. Dauphin, P. S. Liang, and J. W. Vaughan, Eds., Curran Associates, Inc., 2021, pp. 24804–24816. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/cfe8504bda37b575c70ee1a8276f3486-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2021/file/cfe8504bda37b575c70ee1a8276f3486-Paper.pdf</a></div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Y. Tashiro, J. Song, Y. Song, and S. Ermon, <span>“CSDI: Conditional score-based diffusion models for probabilistic time series imputation,”</span> in <em>Advances in neural information processing systems</em>, M. Ranzato, A. Beygelzimer, Y. Dauphin, P. S. Liang, and J. W. Vaughan, Eds., Curran Associates, Inc., 2021, pp. 24804–24816. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2021/file/cfe8504bda37b575c70ee1a8276f3486-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2021/file/cfe8504bda37b575c70ee1a8276f3486-Paper.pdf</a></div>
 </div>
 <div id="ref-csbi" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Y. Chen <em>et al.</em>, <span>“Provably convergent schr<span>ö</span>dinger bridge with applications to probabilistic time series imputation,”</span> in <em>International conference on machine learning</em>, PMLR, 2023, pp. 4485–4513.</div>
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Y. Chen <em>et al.</em>, <span>“Provably convergent schr<span>ö</span>dinger bridge with applications to probabilistic time series imputation,”</span> in <em>International conference on machine learning</em>, PMLR, 2023, pp. 4485–4513.</div>
 </div>
 <div id="ref-csdi_t" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[9] </div><div class="csl-right-inline">S. Zheng and N. Charoenphakdee, <span>“Diffusion models for missing value imputation in tabular data,”</span> in <em>NeurIPS 2022 first table representation workshop</em>, 2022. Available: <a href="https://openreview.net/forum?id=4q9kFrXC2Ae">https://openreview.net/forum?id=4q9kFrXC2Ae</a></div>
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">S. Zheng and N. Charoenphakdee, <span>“Diffusion models for missing value imputation in tabular data,”</span> in <em>NeurIPS 2022 first table representation workshop</em>, 2022. Available: <a href="https://openreview.net/forum?id=4q9kFrXC2Ae">https://openreview.net/forum?id=4q9kFrXC2Ae</a></div>
 </div>
 <div id="ref-forestDiffusion" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[10] </div><div class="csl-right-inline">A. Jolicoeur-Martineau, K. Fatras, and T. Kachman, <span>“Generating and imputing tabular data via diffusion and flow-based gradient-boosted trees,”</span> in <em>Proceedings of the 27th international conference on artificial intelligence and statistics</em>, S. Dasgupta, S. Mandt, and Y. Li, Eds., in Proceedings of machine learning research, vol. 238. PMLR, May 2024, pp. 1288–1296. Available: <a href="https://proceedings.mlr.press/v238/jolicoeur-martineau24a.html">https://proceedings.mlr.press/v238/jolicoeur-martineau24a.html</a></div>
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">A. Jolicoeur-Martineau, K. Fatras, and T. Kachman, <span>“Generating and imputing tabular data via diffusion and flow-based gradient-boosted trees,”</span> in <em>Proceedings of the 27th international conference on artificial intelligence and statistics</em>, S. Dasgupta, S. Mandt, and Y. Li, Eds., in Proceedings of machine learning research, vol. 238. PMLR, May 2024, pp. 1288–1296. Available: <a href="https://proceedings.mlr.press/v238/jolicoeur-martineau24a.html">https://proceedings.mlr.press/v238/jolicoeur-martineau24a.html</a></div>
 </div>
 <div id="ref-NewImp" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Z. Chen <em>et al.</em>, <span>“Rethinking the diffusion models for missing data imputation: A gradient flow perspective,”</span> in <em>The thirty-eighth annual conference on neural information processing systems</em>, 2024. Available: <a href="https://openreview.net/forum?id=fIz8K4DJ7w">https://openreview.net/forum?id=fIz8K4DJ7w</a></div>
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">Z. Chen <em>et al.</em>, <span>“Rethinking the diffusion models for missing data imputation: A gradient flow perspective,”</span> in <em>The thirty-eighth annual conference on neural information processing systems</em>, 2024. Available: <a href="https://openreview.net/forum?id=fIz8K4DJ7w">https://openreview.net/forum?id=fIz8K4DJ7w</a></div>
 </div>
 <div id="ref-MissDiff" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[12] </div><div class="csl-right-inline">Y. Ouyang, L. Xie, C. Li, and G. Cheng, <span>“MissDiff: Training diffusion models on tabular data with missing values.”</span> 2025. Available: <a href="https://openreview.net/forum?id=PyyoSwPaSa">https://openreview.net/forum?id=PyyoSwPaSa</a></div>
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">Y. Ouyang, L. Xie, C. Li, and G. Cheng, <span>“MissDiff: Training diffusion models on tabular data with missing values.”</span> 2025. Available: <a href="https://openreview.net/forum?id=PyyoSwPaSa">https://openreview.net/forum?id=PyyoSwPaSa</a></div>
 </div>
 <div id="ref-sinkhorn" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[13] </div><div class="csl-right-inline">L. Chizat, P. Roussillon, F. Léger, F.-X. Vialard, and G. Peyré, <span>“Faster wasserstein distance estimation with the sinkhorn divergence,”</span> in <em>Advances in neural information processing systems</em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 2257–2269. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/17f98ddf040204eda0af36a108cbdea4-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/17f98ddf040204eda0af36a108cbdea4-Paper.pdf</a></div>
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">L. Chizat, P. Roussillon, F. Léger, F.-X. Vialard, and G. Peyré, <span>“Faster wasserstein distance estimation with the sinkhorn divergence,”</span> in <em>Advances in neural information processing systems</em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 2257–2269. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/17f98ddf040204eda0af36a108cbdea4-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/17f98ddf040204eda0af36a108cbdea4-Paper.pdf</a></div>
 </div>
 <div id="ref-sinkhornComp" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[14] </div><div class="csl-right-inline">A. Ramdas, N. G. Trillos, and M. Cuturi, <span>“On wasserstein two-sample testing and related families of nonparametric tests,”</span> <em>Entropy</em>, vol. 19, no. 2, 2017, doi: <a href="https://doi.org/10.3390/e19020047">10.3390/e19020047</a>.</div>
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">A. Ramdas, N. G. Trillos, and M. Cuturi, <span>“On wasserstein two-sample testing and related families of nonparametric tests,”</span> <em>Entropy</em>, vol. 19, no. 2, 2017, doi: <a href="https://doi.org/10.3390/e19020047">10.3390/e19020047</a>.</div>
 </div>
 <div id="ref-otimputer" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[15] </div><div class="csl-right-inline">B. Muzellec, J. Josse, C. Boyer, and M. Cuturi, <span>“Missing data imputation using optimal transport,”</span> in <em>International conference on machine learning</em>, PMLR, 2020, pp. 7130–7140.</div>
+<div class="csl-left-margin">[17] </div><div class="csl-right-inline">B. Muzellec, J. Josse, C. Boyer, and M. Cuturi, <span>“Missing data imputation using optimal transport,”</span> in <em>International conference on machine learning</em>, PMLR, 2020, pp. 7130–7140.</div>
 </div>
 <div id="ref-tdm" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[16] </div><div class="csl-right-inline">H. Zhao, K. Sun, A. Dezfouli, and E. V. Bonilla, <span>“Transformed distribution matching for missing value imputation,”</span> in <em>Proceedings of the 40th international conference on machine learning</em>, A. Krause, E. Brunskill, K. Cho, B. Engelhardt, S. Sabato, and J. Scarlett, Eds., in Proceedings of machine learning research, vol. 202. PMLR, 2023, pp. 42159–42186. Available: <a href="https://proceedings.mlr.press/v202/zhao23h.html">https://proceedings.mlr.press/v202/zhao23h.html</a></div>
-</div>
-<div id="ref-mae" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[17] </div><div class="csl-right-inline">I. Peis, C. Ma, and J. M. Hernández-Lobato, <span>“Missing data imputation and acquisition with deep hierarchical models and hamiltonian monte carlo,”</span> in <em>Advances in neural information processing systems</em>, A. H. Oh, A. Agarwal, D. Belgrave, and K. Cho, Eds., 2022. Available: <a href="https://openreview.net/forum?id=xpR25Tsem9C">https://openreview.net/forum?id=xpR25Tsem9C</a></div>
+<div class="csl-left-margin">[18] </div><div class="csl-right-inline">H. Zhao, K. Sun, A. Dezfouli, and E. V. Bonilla, <span>“Transformed distribution matching for missing value imputation,”</span> in <em>Proceedings of the 40th international conference on machine learning</em>, A. Krause, E. Brunskill, K. Cho, B. Engelhardt, S. Sabato, and J. Scarlett, Eds., in Proceedings of machine learning research, vol. 202. PMLR, Jul. 2023, pp. 42159–42186. Available: <a href="https://proceedings.mlr.press/v202/zhao23h.html">https://proceedings.mlr.press/v202/zhao23h.html</a></div>
 </div>
 <div id="ref-remasker" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[18] </div><div class="csl-right-inline">T. Du, L. Melis, and T. Wang, <span>“ReMasker: Imputing tabular data with masked autoencoding,”</span> in <em>The twelfth international conference on learning representations</em>, 2024. Available: <a href="https://openreview.net/forum?id=KI9NqjLVDT">https://openreview.net/forum?id=KI9NqjLVDT</a></div>
+<div class="csl-left-margin">[19] </div><div class="csl-right-inline">T. Du, L. Melis, and T. Wang, <span>“ReMasker: Imputing tabular data with masked autoencoding,”</span> in <em>The twelfth international conference on learning representations</em>, 2024. Available: <a href="https://openreview.net/forum?id=KI9NqjLVDT">https://openreview.net/forum?id=KI9NqjLVDT</a></div>
 </div>
 <div id="ref-miracle" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[19] </div><div class="csl-right-inline">T. Kyono, Y. Zhang, A. Bellot, and M. van der Schaar, <span>“<span>MIRACLE</span>: Causally-aware imputation via learning missing data mechanisms,”</span> in <em>Advances in neural information processing systems</em>, A. Beygelzimer, Y. Dauphin, P. Liang, and J. W. Vaughan, Eds., 2021. Available: <a href="https://openreview.net/forum?id=GzeqcAUFGl0">https://openreview.net/forum?id=GzeqcAUFGl0</a></div>
+<div class="csl-left-margin">[20] </div><div class="csl-right-inline">T. Kyono, Y. Zhang, A. Bellot, and M. van der Schaar, <span>“<span>MIRACLE</span>: Causally-aware imputation via learning missing data mechanisms,”</span> in <em>Advances in neural information processing systems</em>, A. Beygelzimer, Y. Dauphin, P. Liang, and J. W. Vaughan, Eds., 2021. Available: <a href="https://openreview.net/forum?id=GzeqcAUFGl0">https://openreview.net/forum?id=GzeqcAUFGl0</a></div>
 </div>
 <div id="ref-grape" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[20] </div><div class="csl-right-inline">J. You, X. Ma, Y. Ding, M. J. Kochenderfer, and J. Leskovec, <span>“Handling <span>Missing</span> <span>Data</span> with <span>Graph</span> <span>Representation</span> <span>Learning</span>,”</span> in <em>Advances in <span>Neural</span> <span>Information</span> <span>Processing</span> <span>Systems</span></em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 19075–19087. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/dc36f18a9a0a776671d4879cae69b551-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/dc36f18a9a0a776671d4879cae69b551-Paper.pdf</a></div>
+<div class="csl-left-margin">[21] </div><div class="csl-right-inline">J. You, X. Ma, Y. Ding, M. J. Kochenderfer, and J. Leskovec, <span>“Handling <span>Missing</span> <span>Data</span> with <span>Graph</span> <span>Representation</span> <span>Learning</span>,”</span> in <em>Advances in <span>Neural</span> <span>Information</span> <span>Processing</span> <span>Systems</span></em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 19075–19087. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/dc36f18a9a0a776671d4879cae69b551-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/dc36f18a9a0a776671d4879cae69b551-Paper.pdf</a></div>
 </div>
 <div id="ref-graphsage" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[21] </div><div class="csl-right-inline">W. L. Hamilton, R. Ying, and J. Leskovec, <span>“Inductive representation learning on large graphs,”</span> <em>CoRR</em>, vol. abs/1706.02216, 2017, Available: <a href="http://arxiv.org/abs/1706.02216">http://arxiv.org/abs/1706.02216</a></div>
+<div class="csl-left-margin">[22] </div><div class="csl-right-inline">W. L. Hamilton, R. Ying, and J. Leskovec, <span>“Inductive representation learning on large graphs,”</span> <em>CoRR</em>, vol. abs/1706.02216, 2017, Available: <a href="http://arxiv.org/abs/1706.02216">http://arxiv.org/abs/1706.02216</a></div>
 </div>
 <div id="ref-imputationDimRet" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[22] </div><div class="csl-right-inline">M. L. Morvan and G. Varoquaux, <span>“Imputation for prediction: Beware of diminishing returns.”</span> in <em>The thirteenth international conference on learning representations</em>, 2025. Available: <a href="https://openreview.net/forum?id=D1Y2XFgsPI">https://openreview.net/forum?id=D1Y2XFgsPI</a></div>
+<div class="csl-left-margin">[23] </div><div class="csl-right-inline">M. L. Morvan and G. Varoquaux, <span>“Imputation for prediction: Beware of diminishing returns.”</span> in <em>The thirteenth international conference on learning representations</em>, 2025. Available: <a href="https://openreview.net/forum?id=D1Y2XFgsPI">https://openreview.net/forum?id=D1Y2XFgsPI</a></div>
 </div>
 <div id="ref-neumiss" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[23] </div><div class="csl-right-inline">M. Le Morvan, J. Josse, T. Moreau, E. Scornet, and G. Varoquaux, <span>“NeuMiss networks: Differentiable programming for supervised learning with missing values.”</span> in <em>Advances in neural information processing systems</em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 5980–5990. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/42ae1544956fbe6e09242e6cd752444c-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/42ae1544956fbe6e09242e6cd752444c-Paper.pdf</a></div>
+<div class="csl-left-margin">[24] </div><div class="csl-right-inline">M. Le Morvan, J. Josse, T. Moreau, E. Scornet, and G. Varoquaux, <span>“NeuMiss networks: Differentiable programming for supervised learning with missing values.”</span> in <em>Advances in neural information processing systems</em>, H. Larochelle, M. Ranzato, R. Hadsell, M. F. Balcan, and H. Lin, Eds., Curran Associates, Inc., 2020, pp. 5980–5990. Available: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/42ae1544956fbe6e09242e6cd752444c-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/42ae1544956fbe6e09242e6cd752444c-Paper.pdf</a></div>
 </div>
 <div id="ref-flda" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[24] </div><div class="csl-right-inline">G. M. James and T. J. Hastie, <span>“Functional linear discriminant analysis for irregularly sampled curves,”</span> <em>Journal of the Royal Statistical Society. Series B (Statistical Methodology)</em>, vol. 63, no. 3, pp. 533–550, 2001, Accessed: Oct. 12, 2026. [Online]. Available: <a href="http://www.jstor.org/stable/2680587">http://www.jstor.org/stable/2680587</a></div>
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">G. M. James and T. J. Hastie, <span>“Functional linear discriminant analysis for irregularly sampled curves,”</span> <em>Journal of the Royal Statistical Society. Series B (Statistical Methodology)</em>, vol. 63, no. 3, pp. 533–550, 2001, Accessed: Oct. 12, 2026. [Online]. Available: <a href="http://www.jstor.org/stable/2680587">http://www.jstor.org/stable/2680587</a></div>
 </div>
 <div id="ref-GardnerLubbe2020" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[25] </div><div class="csl-right-inline">S. Gardner-Lubbe, <span>“Linear discriminant analysis for multiple functional data analysis,”</span> <em>Journal of Applied Statistics</em>, vol. 48, no. 11, pp. 1917–1933, Jun. 2020, doi: <a href="https://doi.org/10.1080/02664763.2020.1780569">10.1080/02664763.2020.1780569</a>.</div>
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline">S. Gardner-Lubbe, <span>“Linear discriminant analysis for multiple functional data analysis,”</span> <em>Journal of Applied Statistics</em>, vol. 48, no. 11, pp. 1917–1933, Jun. 2020, doi: <a href="https://doi.org/10.1080/02664763.2020.1780569">10.1080/02664763.2020.1780569</a>.</div>
 </div>
 <div id="ref-Fukuda2023" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[26] </div><div class="csl-right-inline">T. Fukuda, H. Matsui, H. Takada, T. Misumi, and S. Konishi, <span>“Multivariate functional subspace classification for high-dimensional longitudinal data,”</span> <em>Japanese Journal of Statistics and Data Science</em>, vol. 7, no. 1, pp. 1–16, Nov. 2023, doi: <a href="https://doi.org/10.1007/s42081-023-00226-x">10.1007/s42081-023-00226-x</a>.</div>
+<div class="csl-left-margin">[27] </div><div class="csl-right-inline">T. Fukuda, H. Matsui, H. Takada, T. Misumi, and S. Konishi, <span>“Multivariate functional subspace classification for high-dimensional longitudinal data,”</span> <em>Japanese Journal of Statistics and Data Science</em>, vol. 7, no. 1, pp. 1–16, Nov. 2023, doi: <a href="https://doi.org/10.1007/s42081-023-00226-x">10.1007/s42081-023-00226-x</a>.</div>
 </div>
 </div>
 </section>
@@ -943,6 +1119,19 @@ window.Quarto = {
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
