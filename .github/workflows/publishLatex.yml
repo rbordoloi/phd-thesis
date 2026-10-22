@@ -20,6 +20,11 @@ jobs:
           submodules: recursive
           lfs: true
 
+      - name: Install rsvg-convert
+        run: |
+          sudo apt update
+          sudo apt install -y librsvg2-bin
+
       - name: Setup TeXLive Action 2
         # You may pin to the exact commit or the version.
         # uses: TeX-Live/setup-texlive-action@eb78d21f41941476d9121e3a0abcab73265c876f
