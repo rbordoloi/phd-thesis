@@ -10,53 +10,7 @@
 * Models that perform downstream tasks without imputation - FLDA (Relate to [Chapter -@sec-mudra])
 * Models that perform imputation in more complex structures, eg. graphs (Relate to [Chapter -@sec-fuse])
 
-
-```{mermaid}
-%%| label: fig-taxonomy
-%%| fig-cap: "Taxonomy of Missingness-Aware methods"
-%%| fig-width: 6
-
-%%{init: {"flowchart": {"padding": 7, "nodeSpacing": 5, "rankSpacing": 5, "curve": "stepBefore"}}}%%
-graph LR
-    Task["Missingness-Aware Learning"] --> Imputation["Imputation"]
-    Task --> Downstream["Direct Handling"]
-
-    Imputation --> Classical["Classical"]
-    Imputation --> Generative["Generative"]
-    Imputation --> Deep["Loss-based"]
-
-    Downstream --> NeuMiss["NeuMiss network"]
-    Downstream --> FLDA["Functional Linear Discriminant Analysis"]
-
-    Classical --> MICE["MICE"]
-    Classical --> HyperImpute["HyperImpute"]
-    Classical --> RF-GAP["RF-GAP"]
-
-    Generative --> DLVM["Deep Latent Variable Models"]
-    Generative --> GAIN["GAIN"]
-    Generative --> Diffusion["Diffusion models"]
-
-    DLVM --> MIWAE["MIWAE"]
-    DLVM --> nMIWAE["not-MIWAE"]
-    DLVM --> hhvaem["HH-VAEM"]
-
-    Diffusion --> CSDI["CSDI"]
-    Diffusion --> CSDIT["CSDI_T"]
-    Diffusion --> CSBI["CSBI"]
-    Diffusion --> forestDiff["Forest Diffusion"]
-    Diffusion --> missDiff["MissDiff"]
-    Diffusion --> newImp["NewImp"]
-
-    Deep --> OT["Optimal Transport-based"]
-    Deep --> deepLearning["Deep Learning"]
-
-    OT --> otimputer["OTImputer"]
-    OT --> tdm["TDM"]
-    
-    deepLearning --> Remasker["ReMasker"]
-    deepLearning --> miracle["MIRACLE"]
-    deepLearning --> grape["GRAPE"]
-```
+![Taxonomy](../images/background/taxonomy.svg){#fig-taxonomy}
 
 ## Iterative Imputation {#sec-iterativeImp}
 
