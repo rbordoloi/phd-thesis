@@ -3,6 +3,7 @@ project:
   post-render:
     - mv Missingness-Aware-Learning-for-Downstream-Tasks-in-Tabular-and-Time-series-Data.tex overleaf/main.tex
     - cp -r images overleaf/
+    - cp -r index_files overleaf/
     - cp references.bib overleaf/references.bib
     - cp MastersDoctoralThesis.cls overleaf/MastersDoctoralThesis.cls
 
