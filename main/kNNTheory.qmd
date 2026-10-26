@@ -69,3 +69,17 @@ The \acr{RMSE} is then defined as $\mathcal{L}^\text{RMSE}(\widehat{\mX}, \mX^\s
 :::
 
 @algo-metaKNN defines the broad structure of an iterative convex-weighted nearest-neighbor approach to imputation. Given any weight update function returning a vector of $K$ convex weights in $\triangle_K$, and a stopping criterion, this meta-algorithm iteratively retrieves the $K$ nearest neighbors of each data point, and imputes missing values with the convex combinations of corresponding non-missing feature values from nearest-neighbors. This structure retrieves known NN-based imputation approaches[@knnImputer]. For instance, the classical \acr{kNN} imputation algorithm with uniform weights just stops after one iteration, and the weight function produces the K-sized vector $1/K\symbf{1}_K$.
+
+### General Proof Strategy for @algo-metaKNN Imputation Quality
+
+I will first establish some assumptions for our models of missingness. For each observed sample $\rvx^*\in\sR^F$ with observed and missing values, let $\rvx^*$ denote the complete unavailable vector, and $\hat{\rvx}$ be the vector imputed by @algo-metaKNN. In a dataset $\rmX$ with $N$ samples, let the $k^\rm{th}$ nearest neighbor with feature $f$ observed for the $i^\rm{th}$ sample be denoted by $\gN(\rvx_i,f,k)$. With some abuse of notation, I will use $F$ to denote both the full set of features, as well as its cardinality.
+
+::: {#cnj-mcar}
+(\acr{MCAR}) The random indicator variables for missing values $\ermM_{if}$ is drawn *iid* from a Bernoulli distribution with parameter $\pmiss\in(0,1)$.
+:::
+::: {#cnj-mar}
+(\acr{MAR}) We assume a subset $\gF_o$ of size $F_o<F$ features is always observed. We denote $\xobs_i\deff(\ervx^*_i[f])_{f\in\gF_o}$. There there exists a function $\pmiss:\sR^{\gF_o}\rightarrow(0,1)$ such that $\forall \rvx\in\sR^F, \P(\ervm_f=1|\ervx^*_f)=\pmiss(\xobs_i)$
+:::
+::: {#cnj-mnar}
+(\acr{MNAR}) The random indicator variables for missing values $\ermM_{if}$ is defined by the Gaussian self-masking mechanism, as in @rem-gaussianSelfMasking.
+:::

@@ -66,6 +66,8 @@ pseudocode:
   caption-align: "left"
 
 crossref:
+  cnj-title: "Assumption"
+  cnj-prefix: "Assumption"
   custom:
     - kind: float
       key: algo

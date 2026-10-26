@@ -8,7 +8,7 @@
 | $\mX$                 | Matrices                                                               |
 | $\mX_{i,:}$           | $i^{th}$ row of the matrix $X$                                         |
 | $\mX_{:,i}$           | $i^{th}$ column of a matrix                                            |
-| $\emX_{ij}$           | $ij^{th}$ element of a matrix                                          |
+| $\emX_{ij}$           | $(i,j)^{th}$ element of a matrix                                          |
 | $\tX$                 | Multi-way tensors                                                      |
 | $\tX_{i,:,k}$         | Slices of a tensor formed by fixing some modes                         |
 | $\sX$                 | Sets and subsets                                                       |
