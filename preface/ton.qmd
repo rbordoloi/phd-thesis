@@ -1,0 +1,33 @@
+# Table of Notation {.unnumbered}
+
+| Notation              | Description                                                            |
+|-----------------------|------------------------------------------------------------------------|
+| $x$                   | Scalars                                                                |
+| $\vx$                 | Vectors                                                                |
+| $\evx_i$              | $i^{th}$ element of a vector                                           |
+| $\mX$                 | Matrices                                                               |
+| $\mX_{i,:}$           | $i^{th}$ row of the matrix $X$                                         |
+| $\mX_{:,i}$           | $i^{th}$ column of a matrix                                            |
+| $\emX_{ij}$           | $ij^{th}$ element of a matrix                                          |
+| $\tX$                 | Multi-way tensors                                                      |
+| $\tX_{i,:,k}$         | Slices of a tensor formed by fixing some modes                         |
+| $\sX$                 | Sets and subsets                                                       |
+| $\sA\times\sB$        | Cartesian product between two sets                                     |
+| $\rx$                 | Random scalars                                                         |
+| $\rvx$                | Random vectors                                                         |
+| $\rmX$                | Random matrices                                                        |
+| $\mI_d$               | Identity matrix of order d                                             |
+| $\symbf{1}_d$         | $d$-dimensional vector of all $1$'s                                    |
+| $\vec(\mX)$           | Vectorization of a matrix                                              |
+| $[\mA:\mB]$           | Augmentation of two matrices                                           |
+| $\mA\kron\mB$         | Krönecker product of two matrices                                      |
+| $\mA^-$               | Generalized pseudo-inverse of a matrix                                 |
+| $\mA^+$               | Moore-Penrose pseudo-inverse of a matrix                               |
+| $\P(E)$               | Probability of the event $E$                                           |
+| $\rx\independent\ry$  | Independence of two random quantities                                  |
+| $\E[\rvx]$            | Expectation of a random quantity                                       |
+| $\Var(\rvx)$          | Variance of a random quantity                                          |
+| $\Cov(\rx,\ry)$       | Covariance between two random quantities                               |
+| $\norm{\rvx}_\mSigma$ | Mahalanobis norm of a vector with covariance $\mSigma$                 |
+| $\KL(P\|\|Q)$         | Kullback-Leibler divergence between two distributions                  |
+: Table of Notation {#tbl-notation}

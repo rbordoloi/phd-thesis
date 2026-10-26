@@ -19,6 +19,7 @@ book:
     - preface/zusammenfassung.qmd
     - preface/theses.qmd
     - preface/loa.qmd
+    - preface/ton.qmd
     - main/summary.qmd
     - main/introduction.qmd
     - main/background.qmd

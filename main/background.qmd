@@ -10,7 +10,7 @@
 * Models that perform downstream tasks without imputation - FLDA (Relate to [Chapter -@sec-mudra])
 * Models that perform imputation in more complex structures, eg. graphs (Relate to [Chapter -@sec-fuse])
 
-![Taxonomy](../images/background/taxonomy.svg){#fig-taxonomy}
+![Taxonomy](/images/background/taxonomy.svg){#fig-taxonomy}
 
 ## Iterative Imputation {#sec-iterativeImp}
 
@@ -46,7 +46,8 @@ Other models include `ReMasker`[@remasker], which presents a transformer-based e
 
 `GRAPE` is a somewhat more novel approach[@grape], which consists of representing the data set as a labeled bipartite graph, with the two node types representing the samples and the features, and each edge label representing the value of the particular feature for that sample. Missing feature values are represented by unavailable edge labels. During training, a subset of the observed edge labels are randomly masked, and a GraphSAGE[@graphsage]-inspired \acr{GNN} is trained to predict these masked values (for a more detailed exposition of \acr{GNN}s, see Appendix [@sec-glossaryGNN]). The trained network is then used to predict the labels of edges corresponding to missing feature values, thereby imputing the missing entries.
 
-Most of these loss-based models have a nonlinear black-box dependence on the input data at inference time, which makes theoretical analysis of the impute values difficult. Analysis of theoretical properties is very important in biomedical and bioinformatics datasets, as they allow us to quantify worst-case scenario model performance and confidence, which is essential for high-stakes decision making, such as diagnostics in hospital labs.
+Most of these deep-learning and generative models have a nonlinear black-box dependence on the input data, which makes theoretical analysis of the imputed values difficult. Thus, most imputation models do not provide theoretical guarantees for the quality of imputation, which is essential to quantify worst-case scenario model performance and confidence. Theoretical guarantees are very useful for high-stakes decision making, such as diagnostics in the medical field.
+<!-- Remove the word 'dependence'-->
 
 ## Impact of Imputation on Downstream Task Performance
 
