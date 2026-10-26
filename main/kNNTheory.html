@@ -668,9 +668,11 @@ div.csl-indent {
 
 % The true underlying data generating distribution
 \newcommand{\pdata}{p_{\rm{data}}}
+\newcommand{\pmiss}{p^{\rm{miss}}}
+\newcommand{\xobs}{\rvx^{|\rm{obs}}}
 % The empirical distribution defined by the training set
-\newcommand{\ptrain}{\hat{p}_{\rm{data}}}
-\newcommand{\Ptrain}{\hat{P}_{\rm{data}}}
+\newcommand{\ptrain}{\hat{p}_{\rm{train}}}
+\newcommand{\Ptrain}{\hat{P}_{\rm{train}}}
 % The model distribution
 \newcommand{\pmodel}{p_{\rm{model}}}
 \newcommand{\Pmodel}{P_{\rm{model}}}
@@ -956,7 +958,10 @@ window.Quarto = {
    
   <ul>
   <li><a href="#research-gap" id="toc-research-gap" class="nav-link active" data-scroll-target="#research-gap"><span class="header-section-number">3.1</span> Research Gap</a></li>
-  <li><a href="#meta-algorithm-for-and-analysis" id="toc-meta-algorithm-for-and-analysis" class="nav-link" data-scroll-target="#meta-algorithm-for-and-analysis"><span class="header-section-number">3.2</span> Meta-algorithm for kNN and analysis</a></li>
+  <li><a href="#meta-algorithm-for-and-analysis" id="toc-meta-algorithm-for-and-analysis" class="nav-link" data-scroll-target="#meta-algorithm-for-and-analysis"><span class="header-section-number">3.2</span> Meta-algorithm for kNN and analysis</a>
+  <ul class="collapse">
+  <li><a href="#general-proof-strategy-for-algo-metaknn-imputation-quality" id="toc-general-proof-strategy-for-algo-metaknn-imputation-quality" class="nav-link" data-scroll-target="#general-proof-strategy-for-algo-metaknn-imputation-quality"><span class="header-section-number">3.2.1</span> General Proof Strategy for Algorithm 1 Imputation Quality</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1006,7 +1011,7 @@ window.Quarto = {
 <div id="algo-metaKNN" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-algo figure">
 <div aria-describedby="algo-metaKNN-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="algo-metaKNN" class="pseudocode-container quarto-float" data-indent-lines="false" data-line-number="true" data-caption-prefix="Algorithm" data-no-end="false" data-indent-size="1.2em" data-line-number-punc=":" data-comment-delimiter="#">
+<div id="algo-metaKNN" class="pseudocode-container quarto-float" data-line-number-punc=":" data-indent-lines="false" data-no-end="false" data-caption-prefix="Algorithm" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="#">
 <div class="pseudocode">
 \begin{algorithm} \caption{General weighted nearest-neighbor (NN) imputation meta-algorithm.} \begin{algorithmic} \State {\bfseries Input:} Data $X \in (\mathbb{R}\cup\{\texttt{N/A}\})^{N \times F}$ \State {\bfseries Parameters:} Number of neighbors $K \geq 2$, Weight update function $f_{w} : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \triangle_K$, Stopping criterion $s : \triangle_K \times \mathbb{R}^{N \times F} \rightarrow \{\text{True},\text{False}\}$, Nearest-neighbor search algorithm $\mathcal{A}$ \State {\bfseries Output:} Imputed data $\widehat{X} \in \mathbb{R}^{N \times F}$ \State Initialize $\mathcal{A}$ with $Z = \{\symbf{x}_1,\symbf{x}_2, \dots, \symbf{x}_N\}$ and $\widehat{X} \gets X$\Comment{Initialize NN search} \State $\symbf{\alpha} \gets 1/K\symbf{1}_K \triangleq \{1/K, 1/K, \dots, 1/K\}$\Comment{Initialize the K neighbor-dependent weights} \State $t \gets 0$ \State {\bfseries return} $\widehat{X}$ \While{{\bfseries not} $s(\symbf{\alpha}, \widehat{X}, t)$} \State $\symbf{\alpha} \gets f_{w}(\symbf{\alpha}, \widehat{X})$\Comment{Update the K neighbor-dependent weights} \For{$i \leq N$ and $f \leq F$} \State $(\symbf{z}^{i,f})_1, (\symbf{z}^{i,f})_2, \dots, (\symbf{z}^{i,f})_K \gets \mathcal{A}(\widehat{\symbf{x}}_i)$ \EndFor \State $t \gets t +1 $ \EndWhile \end{algorithmic} \end{algorithm}
 </div>
@@ -1018,6 +1023,18 @@ Algorithm&nbsp;3.1
 </figure>
 </div>
 <p><a href="#algo-metaKNN" class="quarto-xref">Algorithm 1</a> defines the broad structure of an iterative convex-weighted nearest-neighbor approach to imputation. Given any weight update function returning a vector of <span class="math inline">\(K\)</span> convex weights in <span class="math inline">\(\triangle_K\)</span>, and a stopping criterion, this meta-algorithm iteratively retrieves the <span class="math inline">\(K\)</span> nearest neighbors of each data point, and imputes missing values with the convex combinations of corresponding non-missing feature values from nearest-neighbors. This structure retrieves known NN-based imputation approaches<span class="citation" data-cites="knnImputer"><a href="../references.html#ref-knnImputer" role="doc-biblioref">[3]</a></span>. For instance, the classical <a href="#acronyms_kNN">kNN</a> imputation algorithm with uniform weights just stops after one iteration, and the weight function produces the K-sized vector <span class="math inline">\(1/K\symbf{1}_K\)</span>.</p>
+<section id="general-proof-strategy-for-algo-metaknn-imputation-quality" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="general-proof-strategy-for-algo-metaknn-imputation-quality"><span class="header-section-number">3.2.1</span> General Proof Strategy for <a href="#algo-metaKNN" class="quarto-xref">Algorithm 1</a> Imputation Quality</h3>
+<p>I will first establish some assumptions for our models of missingness. For each observed sample <span class="math inline">\(\rvx^*\in\sR^F\)</span> with observed and missing values, let <span class="math inline">\(\rvx^*\)</span> denote the complete unavailable vector, and <span class="math inline">\(\hat{\rvx}\)</span> be the vector imputed by <a href="#algo-metaKNN" class="quarto-xref">Algorithm 1</a>. In a dataset <span class="math inline">\(\rmX\)</span> with <span class="math inline">\(N\)</span> samples, let the <span class="math inline">\(k^\rm{th}\)</span> nearest neighbor with feature <span class="math inline">\(f\)</span> observed for the <span class="math inline">\(i^\rm{th}\)</span> sample be denoted by <span class="math inline">\(\gN(\rvx_i,f,k)\)</span>. With some abuse of notation, I will use <span class="math inline">\(F\)</span> to denote both the full set of features, as well as its cardinality.</p>
+<div id="cnj-mcar" class="theorem conjecture">
+<p><span class="theorem-title"><strong>Assumption 3.1</strong></span> (<a href="#acronyms_MCAR">MCAR</a>) The random indicator variables for missing values <span class="math inline">\(\ermM_{if}\)</span> is drawn <em>iid</em> from a Bernoulli distribution with parameter <span class="math inline">\(\pmiss\in(0,1)\)</span>.</p>
+</div>
+<div id="cnj-mar" class="theorem conjecture">
+<p><span class="theorem-title"><strong>Assumption 3.2</strong></span> (<a href="#acronyms_MAR">MAR</a>) We assume a subset <span class="math inline">\(\gF_o\)</span> of size <span class="math inline">\(F_o&lt;F\)</span> features is always observed. We denote <span class="math inline">\(\xobs_i\deff(\ervx^*_i[f])_{f\in\gF_o}\)</span>. There there exists a function <span class="math inline">\(\pmiss:\sR^{\gF_o}\rightarrow(0,1)\)</span> such that <span class="math inline">\(\forall \rvx\in\sR^F, \P(\ervm_f=1|\ervx^*_f)=\pmiss(\xobs_i)\)</span></p>
+</div>
+<div id="cnj-mnar" class="theorem conjecture">
+<p><span class="theorem-title"><strong>Assumption 3.3</strong></span> (<a href="#acronyms_MNAR">MNAR</a>) The random indicator variables for missing values <span class="math inline">\(\ermM_{if}\)</span> is defined by the Gaussian self-masking mechanism, as in <a href="introduction.html#rem-gaussianSelfMasking" class="quarto-xref">Remark&nbsp;<span>1.2</span></a>.</p>
+</div>
 
 
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
@@ -1049,6 +1066,7 @@ Algorithm&nbsp;3.1
 <div class="csl-left-margin">[9] </div><div class="csl-right-inline">P. PASHMCHI, J. Benoit, and M. Kanagawa, <span>“K<span>NNS</span>ampler: Stochastic imputations for recovering missing value distributions,”</span> <em>Transactions on Machine Learning Research</em>, 2025, Available: <a href="https://openreview.net/forum?id=4CDnIACCQG">https://openreview.net/forum?id=4CDnIACCQG</a></div>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
